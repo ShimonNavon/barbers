@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Craft | הבית של קהילת מקצועות היופי</title>
+  <meta name="description" content="The Craft — הבית המקצועי של קהילת היופי והשיער בישראל. ערוץ סגור, מסונן ומפתח. הגישו מועמדות להצטרפות.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg-main: #0d0e12;
+      --card-bg: rgba(33, 35, 44, 0.75);
+      --card-bg-deep: rgba(22, 23, 29, 0.85);
+      --gold: #d4af37;
+      --gold-soft: #e6c96a;
+      --text-primary: #f5f5f7;
+      --text-muted: #a0a0a5;
+      --line: rgba(255, 255, 255, 0.07);
+      --err: #ff6b60;
+      --ok: #6fd68f;
+    }
+
+    body {
+      font-family: 'Heebo', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      background-color: var(--bg-main);
+      /* Luxury atmosphere without external images: layered gold glows on near-black */
+      background-image:
+        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(212, 175, 55, 0.13), transparent 65%),
+        radial-gradient(ellipse 60% 40% at 15% 100%, rgba(90, 70, 120, 0.18), transparent 70%),
+        radial-gradient(ellipse 50% 35% at 90% 60%, rgba(212, 175, 55, 0.05), transparent 70%);
+      background-repeat: no-repeat;
+      color: var(--text-primary);
+      line-height: 1.7;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+    }
+
+    .app-container {
+      width: 100%;
+      max-width: 480px;
+      padding: 28px 20px 40px;
+    }
+
+    /* ── header card ─────────────────────────────── */
+    .card {
+      background: var(--card-bg);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 26px 24px;
+      margin-bottom: 16px;
+    }
+
+    .card-header {
+      background:
+        linear-gradient(160deg, rgba(212, 175, 55, 0.10), rgba(22, 23, 29, 0) 45%),
+        var(--card-bg-deep);
+      text-align: center;
+    }
+
+    .logo-mark {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 54px;
+      height: 54px;
+      border-radius: 16px;
+      border: 1px solid rgba(212, 175, 55, 0.45);
+      background: rgba(212, 175, 55, 0.08);
+      font-size: 1.6rem;
+      margin-bottom: 14px;
+    }
+
+    .card-header h1 {
+      font-size: 28px;
+      font-weight: 900;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+    }
+
+    .card-header h1 span { color: var(--gold); }
+
+    .card-header .tagline {
+      color: var(--gold-soft);
+      font-size: 13px;
+      letter-spacing: 0.12em;
+      margin-bottom: 12px;
+    }
+
+    .card-header p.lead {
+      color: var(--text-muted);
+      font-size: 14.5px;
+      line-height: 1.65;
+    }
+
+    /* ── perks strip ─────────────────────────────── */
+    .perks {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .perk {
+      background: var(--card-bg);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 14px 10px;
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    .perk .icon { display: block; font-size: 1.3rem; margin-bottom: 6px; }
+    .perk strong { display: block; color: var(--text-primary); font-size: 12.5px; margin-bottom: 2px; }
+
+    /* ── form card ───────────────────────────────── */
+    .card-form h2 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--gold);
+      text-align: center;
+      margin-bottom: 6px;
+    }
+
+    .card-form .sub {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 13px;
+      margin-bottom: 20px;
+    }
+
+    .field { margin-bottom: 15px; }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    @media (max-width: 420px) {
+      .two-col { grid-template-columns: 1fr; gap: 0; }
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      margin-bottom: 6px;
+    }
+
+    .req { color: var(--gold); }
+
+    input[type="text"], input[type="tel"], textarea {
+      width: 100%;
+      padding: 12px;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      color: #fff;
+      font-size: 14px;
+      font-family: inherit;
+      transition: border-color 0.2s;
+    }
+
+    textarea { min-height: 84px; resize: vertical; }
+
+    input::placeholder, textarea::placeholder { color: #6c6c72; }
+
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: var(--gold);
+    }
+
+    .sector-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 14px 12px;
+      border-radius: 10px;
+      border: 1px solid var(--line);
+    }
+
+    .sector-option {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 400;
+      margin: 0;
+    }
+
+    .sector-option input {
+      accent-color: var(--gold);
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+    }
+
+    button[type="submit"] {
+      width: 100%;
+      padding: 14px;
+      background: #ffffff;
+      color: #000000;
+      border: none;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      margin-top: 12px;
+      transition: opacity 0.2s;
+    }
+
+    button[type="submit"]:hover { opacity: 0.9; }
+    button[type="submit"]:active { opacity: 0.8; }
+    button[type="submit"]:disabled { opacity: 0.55; cursor: wait; }
+
+    .note {
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 12px;
+    }
+
+    .msg {
+      display: none;
+      border-radius: 10px;
+      padding: 12px 14px;
+      margin-bottom: 16px;
+      font-size: 13.5px;
+      font-weight: 500;
+    }
+
+    .msg.error {
+      display: block;
+      background: rgba(255, 107, 96, 0.12);
+      color: var(--err);
+      border: 1px solid rgba(255, 107, 96, 0.35);
+    }
+
+    .success-card {
+      display: none;
+      text-align: center;
+      padding: 18px 6px;
+    }
+
+    .success-card .icon { font-size: 3rem; display: block; margin-bottom: 10px; }
+    .success-card h2 { font-size: 1.35rem; color: var(--gold); margin-bottom: 8px; }
+    .success-card p { color: var(--text-muted); font-size: 14px; }
+
+    footer {
+      text-align: center;
+      padding: 22px 0 4px;
+      color: var(--text-muted);
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="app-container">
+
+  <div class="card card-header">
+    <span class="logo-mark">✂️</span>
+    <h1>The <span>Craft</span></h1>
+    <div class="tagline">קהילת מקצועות היופי והשיער</div>
+    <p class="lead">
+      הבית המקצועי של קהילת היופי והשיער בישראל.
+      ערוץ חברתי סגור, מסונן ומפתח — נקי מרעש של לקוחות קצה.
+      החברות באישור בלבד.
+    </p>
+  </div>
+
+  <div class="perks">
+    <div class="perk"><span class="icon">🔒</span><strong>קהילה סגורה</strong>אנשי מקצוע בלבד</div>
+    <div class="perk"><span class="icon">🎓</span><strong>מיפוי הסמכה</strong>קהילה מסוננת ואמינה</div>
+    <div class="perk"><span class="icon">🤝</span><strong>צמיחה משותפת</strong>ידע, השראה וחיבורים</div>
+  </div>
+
+  <div class="card card-form">
+    <div id="form-wrap">
+      <h2>הגשת מועמדות ומיפוי הסמכה</h2>
+      <p class="sub">מלאו את הפרטים — כל בקשה נבדקת ומאושרת אישית. שדות עם <span class="req">*</span> הם חובה.</p>
+
+      <div class="msg error" id="error-msg"></div>
+
+      <form id="join-form">
+        <div class="two-col">
+          <div class="field">
+            <label for="owner_name">שם מלא <span class="req">*</span></label>
+            <input type="text" id="owner_name" name="owner_name" required maxlength="120" placeholder="ישראל ישראלי">
+          </div>
+          <div class="field">
+            <label for="business_name">שם העסק / מספרה <span class="req">*</span></label>
+            <input type="text" id="business_name" name="business_name" required maxlength="150" placeholder="בוטיק עיצוב שיער">
+          </div>
+        </div>
+
+        <div class="two-col">
+          <div class="field">
+            <label for="phone">טלפון נייד (לוואטסאפ) <span class="req">*</span></label>
+            <input type="tel" id="phone" name="phone" required maxlength="30" placeholder="050-1234567">
+          </div>
+          <div class="field">
+            <label for="city">עיר <span class="req">*</span></label>
+            <input type="text" id="city" name="city" required maxlength="100" placeholder="תל אביב">
+          </div>
+        </div>
+
+        <div class="field">
+          <label>סטטוס הסמכה מקצועית <span class="req">*</span></label>
+          <div class="sector-group">
+            <label class="sector-option">
+              <input type="radio" name="sector" value="certified" required>
+              סקטור מוסמך (תעודת תמ"ת / אקדמיה מוכרת)
+            </label>
+            <label class="sector-option">
+              <input type="radio" name="sector" value="independent">
+              סקטור עצמאי (בשלבי למידה והשתלמויות)
+            </label>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="education">היכן למדת או אצל מי עברת השתלמויות? <span class="req">*</span></label>
+          <input type="text" id="education" name="education" required maxlength="200" placeholder="שם האקדמיה או המנטור">
+        </div>
+
+        <div class="field">
+          <label for="instagram">אינסטגרם</label>
+          <input type="text" id="instagram" name="instagram" maxlength="150" placeholder="@המשתמש_שלכם">
+        </div>
+
+        <div class="field">
+          <label for="description">כמה מילים עליך ועל העסק</label>
+          <textarea id="description" name="description" placeholder="התמחויות, ניסיון, מה מיוחד אצלך..."></textarea>
+        </div>
+
+        <button type="submit" id="submit-btn">הגש בקשת הצטרפות</button>
+        <p class="note">הפרטים ישמשו לבחינת המועמדות בלבד.</p>
+      </form>
+    </div>
+
+    <div class="success-card" id="success-card">
+      <span class="icon">🥂</span>
+      <h2>הבקשה התקבלה!</h2>
+      <p>תודה על הגשת המועמדות ל-The Craft.<br>נבחן את הפרטים ונחזור אליך בוואטסאפ עם אישור ההצטרפות.</p>
+    </div>
+  </div>
+
+  <footer>The Craft · קהילת מקצועות היופי של ישראל</footer>
+
+</div>
+
+<script>
+  const form = document.getElementById('join-form');
+  const errorMsg = document.getElementById('error-msg');
+  const submitBtn = document.getElementById('submit-btn');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    errorMsg.style.display = 'none';
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'שולחים...';
+
+    const data = Object.fromEntries(new FormData(form).entries());
+
+    try {
+      const res = await fetch('/api/barbershops/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      if (res.ok) {
+        document.getElementById('form-wrap').style.display = 'none';
+        document.getElementById('success-card').style.display = 'block';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else if (res.status === 429) {
+        throw new Error('נשלחו יותר מדי בקשות. נסו שוב מאוחר יותר.');
+      } else {
+        throw new Error('משהו לא הסתדר. בדקו את הפרטים ונסו שוב.');
+      }
+    } catch (err) {
+      errorMsg.textContent = err.message || 'שגיאת רשת. נסו שוב בעוד רגע.';
+      errorMsg.style.display = 'block';
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'הגש בקשת הצטרפות';
+    }
+  });
+</script>
+</body>
+</html>

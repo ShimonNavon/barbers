@@ -1,0 +1,47 @@
+<p align="center"><img src="assets/banner.svg" alt="The Craft" width="100%"></p>
+
+# The Craft — Vetted Community Platform for Beauty Professionals
+
+**Live:** [barbers.navonsimon.com](https://barbers.navonsimon.com) · Hebrew RTL · Mobile-first
+
+An application-and-vetting funnel for a closed professional community of Israeli hair & beauty professionals. Candidates apply through a dark, iOS-glass landing page; each application is reviewed and approved by hand — including a **certification-mapping step** (certified academy track vs. independent track) that keeps the community credible.
+
+## Highlights
+
+- **Full-stack, fully containerized** — static frontend, Django + DRF API, Postgres 16, and Valkey, orchestrated with Docker Compose behind a host nginx + Cloudflare Tunnel edge.
+- **Abuse-resistant public endpoint** — anonymous submissions are rate-limited with DRF throttling backed by a shared Valkey cache (`allkeys-lru`, memory-capped), so limits hold across gunicorn workers and deploys.
+- **Hebrew-first admin** — Django admin localized to Hebrew serves as the vetting dashboard: sector filters, education search, one-click approval.
+- **Design without dependencies** — the luxury dark/gold aesthetic is pure CSS (layered radial gradients, backdrop blur); no external images, no JS framework, ~0 network weight beyond fonts.
+- **Operational hygiene** — nightly `pg_dump` backups with rotation, healthchecked services, secrets in `.env` (never committed), TLS at the edge with `X-Forwarded-Proto` honored.
+
+## Architecture
+
+```mermaid
+flowchart LR
+    U[Visitor] -->|HTTPS| CF[Cloudflare Tunnel] --> N[Host nginx]
+    N -->|/| F[frontend · Node serve]
+    N -->|/api /admin| B[backend · Django + DRF]
+    B --> P[(Postgres 16)]
+    B --> V[(Valkey · throttle cache)]
+```
+
+## Stack
+
+| Layer | Tech |
+|---|---|
+| Frontend | Static HTML/CSS/JS, Heebo, RTL, glassmorphism |
+| API | Django 5 · Django REST Framework · gunicorn |
+| Data | PostgreSQL 16 · Valkey 8 |
+| Infra | Docker Compose · nginx · Cloudflare Tunnel |
+
+## Run it
+
+```bash
+cp .env.example .env   # fill in secrets
+docker compose up -d --build
+# site → :8014 · API/admin → :8015
+```
+
+---
+
+Built by **Simon Navon** — [consulting.navonsimon.com](https://consulting.navonsimon.com)
