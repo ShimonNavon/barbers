@@ -35,7 +35,7 @@ class Barbershop(models.Model):
         default=Sector.INDEPENDENT,
     )
     education = models.CharField(
-        "היכן למדת / השתלמויות", max_length=200, blank=True
+        "היכן למדת / השתלמויות", max_length=1000, blank=True
     )
     created_at = models.DateTimeField("נרשם בתאריך", auto_now_add=True)
     approved = models.BooleanField("אושר", default=False)
