@@ -3,779 +3,591 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Craft | הבית של קהילת מקצועות היופי</title>
-  <meta name="description" content="The Craft — הבית המקצועי של קהילת היופי והשיער בישראל. ערוץ סגור, מסונן ומפתח. הגישו מועמדות להצטרפות.">
-  <meta name="theme-color" content="#1a0a0c">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%231a0a0c'/%3E%3Ctext x='16' y='21.5' font-family='Georgia,serif' font-size='16' font-weight='700' fill='%23f3d8cc' text-anchor='middle'%3EC%3C/text%3E%3C/svg%3E">
+  <title>CUTPOINT | הרשת המקצועית לאנשי השיער והיופי</title>
+  <meta name="description" content="CUTPOINT — קהילה סגורה ומקצועית למעצבי שיער, ברברים, מאפרים ואנשי יופי. חיבורים אמיתיים, הזדמנויות אמיתיות. הצטרפו לרשימת ההמתנה.">
+  <meta name="theme-color" content="#F6F1E8">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%23221C15'/%3E%3Ctext x='15' y='21.5' font-family='Georgia,serif' font-size='15' font-weight='700' fill='%23F6F1E8' text-anchor='middle'%3EC%3C/text%3E%3Ccircle cx='23' cy='10' r='2.6' fill='%23B08A4F'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:ital,wght@0,500;0,600;0,700;1,500&family=Heebo:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --bg-1: #1a0a0c;
-      --bg-2: #2a0e12;
-      --card: #2e1216;
-      --card-2: #3a1519;
-      --border: rgba(232, 130, 118, 0.16);
-      --accent: #e8433f;
-      --accent-soft: #f0645f;
-      --text: #f3d8cc;
-      --text-muted: rgba(243, 216, 204, 0.6);
-      --err: #ff7a8a;
-      --ok: #6fd68f;
-      --font-display: 'Frank Ruhl Libre', serif;
+      --cream:      #F6F1E8;
+      --cream-soft: #FBF8F2;
+      --white:      #FFFFFF;
+      --ink:        #221C15;
+      --ink-soft:   #4A4238;
+      --muted:      #8C8272;
+      --line:       #E9DFCE;
+      --gold:       #B08A4F;
+      --gold-deep:  #96703A;
+      --gold-btn:   #BE9A64;
+      --gold-btn-2: #AD8A54;
+      --err:        #C0392B;
+      --ok:         #4C8C5C;
       --ease: cubic-bezier(0.22, 1, 0.36, 1);
     }
 
-    html { -webkit-tap-highlight-color: transparent; }
+    html { scroll-behavior: smooth; -webkit-tap-highlight-color: transparent; }
 
     body {
-      position: relative;
-      font-family: 'Heebo', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-family: 'Heebo', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       -webkit-font-smoothing: antialiased;
-      background-color: var(--bg-1);
-      background-image:
-        radial-gradient(ellipse 90% 55% at 50% -8%, var(--bg-2), transparent 65%),
-        radial-gradient(ellipse 70% 45% at 100% 100%, rgba(232, 67, 63, 0.07), transparent 70%);
-      background-repeat: no-repeat;
-      color: var(--text);
+      background: var(--cream);
+      color: var(--ink);
       line-height: 1.7;
-      min-height: 100vh;
+    }
+
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+    /* ── top bar ─────────────────────────────────────── */
+    .topbar {
+      direction: ltr; /* logo left, action right — as designed */
       display: flex;
-      justify-content: center;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 28px;
     }
 
-    /* fine film-grain texture — analog, "handmade craft" feel under the digital gloss */
-    body::after {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      opacity: 0.035;
-      mix-blend-mode: overlay;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    .brand { display: flex; flex-direction: column; gap: 2px; }
+    .wordmark {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 30px;
+      letter-spacing: .02em;
+      color: var(--ink);
+      display: inline-flex;
+      align-items: center;
+      line-height: 1;
     }
-
-    .app-container {
+    .wordmark .o {
       position: relative;
-      width: 100%;
-      max-width: 480px;
-      padding: 28px 20px 40px;
+      width: .78em; height: .78em;
+      margin: 0 .045em;
+      border: .09em solid var(--ink);
+      border-radius: 50%;
+      display: inline-block;
     }
-
-    @media (prefers-reduced-motion: no-preference) {
-      @keyframes rise-in {
-        from { opacity: 0; transform: translateY(14px); }
-        to   { opacity: 1; transform: translateY(0); }
-      }
-      .card-header  { animation: rise-in 0.6s var(--ease) both; }
-      .perks        { animation: rise-in 0.6s var(--ease) both; animation-delay: 0.08s; }
-      .card-form    { animation: rise-in 0.6s var(--ease) both; animation-delay: 0.16s; }
-      .perk:nth-child(1) { animation: rise-in 0.5s var(--ease) both 0.16s; }
-      .perk:nth-child(2) { animation: rise-in 0.5s var(--ease) both 0.24s; }
-      .perk:nth-child(3) { animation: rise-in 0.5s var(--ease) both 0.32s; }
-    }
-
-    /* ── cards ────────────────────────────────────── */
-    .card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 24px;
-      margin-bottom: 16px;
-    }
-
-    /* ── header card ─────────────────────────────── */
-    .card-header { overflow: hidden; text-align: center; }
-
-    .hero-photo {
-      position: relative;
-      aspect-ratio: 16 / 9;
-      overflow: hidden;
-    }
-
-    .hero-photo img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .hero-photo::after {
+    .wordmark .o::after { /* the gold point */
       content: "";
       position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, rgba(26, 10, 12, 0) 45%, var(--card) 96%);
+      top: -.12em; inset-inline-end: -.06em;
+      width: .3em; height: .3em;
+      background: var(--gold);
+      border-radius: 50%;
+      border: .07em solid var(--cream);
+    }
+    .tagline {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 500;
+      font-size: 10px;
+      letter-spacing: .34em;
+      color: var(--ink-soft);
+      text-transform: uppercase;
     }
 
-    .card-header-body { padding: 0 24px 26px; }
+    .early-btn {
+      direction: rtl;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font: 600 15px 'Heebo', sans-serif;
+      color: var(--ink);
+      background: var(--white);
+      border: 1px solid #D9CCB4;
+      border-radius: 999px;
+      padding: 11px 24px;
+      text-decoration: none;
+      transition: border-color .2s, box-shadow .2s, transform .2s var(--ease);
+    }
+    .early-btn .arr { color: var(--gold); font-weight: 700; }
+    .early-btn:hover { border-color: var(--gold); box-shadow: 0 6px 18px -8px rgba(34,28,21,.25); transform: translateY(-1px); }
 
-    .logo-fab {
+    /* ── hero ────────────────────────────────────────── */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: clamp(28px, 5vw, 64px);
+      align-items: center;
+      padding: clamp(40px, 7vw, 84px) 0 clamp(48px, 7vw, 88px);
+    }
+    /* RTL grid: first child lands on the right; the design wants text left, photo right */
+    .hero-media { order: 1; }
+    .hero-copy  { order: 2; }
+
+    .hero-copy h1 {
+      font-weight: 800;
+      font-size: clamp(34px, 4.6vw, 52px);
+      line-height: 1.18;
+      letter-spacing: -0.01em;
+    }
+    .hero-rule {
+      width: 58px; height: 3px;
+      background: var(--gold);
+      border-radius: 2px;
+      margin: 22px 0;
+    }
+    .hero-copy p {
+      font-size: clamp(16px, 1.8vw, 19px);
+      font-weight: 400;
+      color: var(--ink-soft);
+      max-width: 26em;
+    }
+
+    .cta-dark {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 30px;
+      font: 700 17px 'Heebo', sans-serif;
+      color: var(--cream);
+      background: var(--ink);
+      border: none;
+      border-radius: 12px;
+      padding: 16px 34px;
+      text-decoration: none;
+      cursor: pointer;
+      box-shadow: 0 14px 30px -12px rgba(34,28,21,.45);
+      transition: transform .2s var(--ease), box-shadow .2s;
+    }
+    .cta-dark .arr { color: var(--gold); font-size: 1.1em; }
+    .cta-dark:hover { transform: translateY(-2px); box-shadow: 0 18px 36px -12px rgba(34,28,21,.5); }
+
+    .secure-note {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 14px;
+      font-size: 13.5px;
+      color: var(--muted);
+    }
+    .secure-note svg { flex: none; }
+
+    .hero-media img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 18px;
+      box-shadow: 0 30px 60px -28px rgba(34,28,21,.45);
+    }
+
+    /* ── features ────────────────────────────────────── */
+    .features-band {
+      background: var(--cream-soft);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+    .features {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      padding: clamp(36px, 5vw, 56px) 0;
+    }
+    .feature {
+      text-align: center;
+      padding: 8px 18px;
+      border-inline-start: 1px solid var(--line);
+    }
+    .feature:first-child { border-inline-start: none; }
+    .feature svg { width: 46px; height: 46px; stroke: var(--gold); margin-bottom: 14px; }
+    .feature h3 { font-size: 17px; font-weight: 700; margin-bottom: 4px; }
+    .feature p  { font-size: 14px; color: var(--muted); line-height: 1.55; }
+
+    /* ── form ────────────────────────────────────────── */
+    .join-section { padding: clamp(48px, 7vw, 84px) 0 clamp(56px, 7vw, 90px); }
+
+    .form-card {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      box-shadow: 0 30px 70px -40px rgba(34,28,21,.35);
+      padding: clamp(28px, 5vw, 52px);
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .form-card h2 {
+      text-align: center;
+      font-size: clamp(24px, 3vw, 30px);
+      font-weight: 800;
+    }
+    .form-sub {
+      text-align: center;
+      color: var(--muted);
+      font-size: 15px;
+      margin: 8px auto 34px;
+      max-width: 34em;
+    }
+    .form-sub .req { color: var(--gold-deep); font-weight: 700; }
+
+    .grid-3, .grid-2 { display: grid; gap: 16px; margin-bottom: 16px; }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid-2 { grid-template-columns: repeat(2, 1fr); }
+
+    .field {
+      position: relative;
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 12px 16px 10px;
+      transition: border-color .2s, box-shadow .2s;
+    }
+    .field:focus-within { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(176,138,79,.14); }
+    .field label {
+      display: block;
+      font-size: 14.5px;
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+    .req { color: var(--gold-deep); }
+    .field input, .field select, .field textarea {
+      width: 100%;
+      font: 400 15px 'Heebo', sans-serif;
+      color: var(--ink);
+      border: none;
+      outline: none;
+      background: transparent;
+      padding-inline-end: 30px; /* clear the icon */
+    }
+    .field ::placeholder { color: #B9AE9E; }
+    .field textarea { resize: vertical; min-height: 56px; }
+    .field select { appearance: none; -webkit-appearance: none; cursor: pointer; }
+    .field select.empty { color: #B9AE9E; }
+    .field .icon {
+      position: absolute;
+      inset-inline-end: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      stroke: var(--gold);
+      pointer-events: none;
+    }
+    .field.has-area .icon { top: 24px; transform: none; }
+
+    input[type=tel], input[type=email] { direction: ltr; text-align: right; }
+
+    .group-label {
+      font-size: 14.5px;
+      font-weight: 700;
+      margin: 6px 0 10px;
+    }
+
+    .sector-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 16px; }
+    .sector-card {
+      position: relative;
+      display: block;
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 14px 48px 12px 16px;
+      cursor: pointer;
+      transition: border-color .2s, background .2s, box-shadow .2s;
+    }
+    .sector-card input { position: absolute; opacity: 0; }
+    .sector-card b { display: block; font-size: 15.5px; }
+    .sector-card span { font-size: 13.5px; color: var(--muted); }
+    .sector-card svg { position: absolute; inset-inline-end: 14px; top: 16px; stroke: var(--gold); }
+    .sector-card:has(input:checked) {
+      border-color: var(--gold);
+      background: #FBF6EC;
+      box-shadow: 0 0 0 3px rgba(176,138,79,.14);
+    }
+    .sector-card:has(input:focus-visible) { outline: 2px solid var(--gold); outline-offset: 2px; }
+
+    .submit-row { text-align: center; margin-top: 26px; }
+    .cta-gold {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 52px;
-      height: 52px;
-      margin-top: -26px;
-      border-radius: 50%;
-      background: var(--accent);
-      color: #fff;
-      border: 3px solid var(--card);
-      box-shadow: 0 8px 18px rgba(232, 67, 63, 0.35);
-      position: relative;
-      z-index: 2;
-    }
-
-    .logo-fab svg { width: 22px; height: 22px; }
-
-    .card-header h1 {
-      font-family: var(--font-display);
-      font-size: 30px;
-      font-weight: 600;
-      letter-spacing: 0.2px;
-      margin-top: 14px;
-      margin-bottom: 6px;
-      color: var(--text);
-      direction: ltr;
-      unicode-bidi: isolate;
-    }
-
-    .card-header h1 .the { font-style: italic; font-weight: 500; opacity: 0.75; }
-    .card-header h1 .craft { font-weight: 700; margin-inline-start: 6px; }
-
-    .wordmark-rule {
-      width: 40px;
-      height: 1px;
-      margin: 10px auto 14px;
-      background: linear-gradient(90deg, transparent, rgba(243, 216, 204, 0.4), transparent);
-    }
-
-    .card-header .tagline {
-      color: var(--text-muted);
-      font-size: 12px;
-      letter-spacing: 0.16em;
-      margin-bottom: 12px;
-      text-transform: uppercase;
-    }
-
-    .card-header p.lead {
-      color: var(--text-muted);
-      font-size: 14.5px;
-      line-height: 1.65;
-    }
-
-    /* ── perks strip ─────────────────────────────── */
-    .perks {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      margin-bottom: 16px;
-    }
-
-    .perk {
-      position: relative;
-      aspect-ratio: 1 / 1;
-      overflow: hidden;
-      border-radius: 20px;
-      border: 1px solid var(--border);
-      background: var(--card);
-      transition: transform 0.25s var(--ease);
-    }
-
-    .perk:hover { transform: translateY(-3px); }
-
-    .perk-photo {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .perk::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      z-index: 1;
-      background: linear-gradient(180deg, rgba(26, 10, 12, 0.08) 28%, rgba(20, 8, 9, 0.94) 80%);
-    }
-
-    .perk-fab {
-      position: absolute;
-      top: 8px;
-      inset-inline-end: 8px;
-      z-index: 2;
-      width: 26px;
-      height: 26px;
-      border-radius: 50%;
-      background: var(--accent);
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 4px 10px rgba(232, 67, 63, 0.4);
-    }
-
-    .perk-fab svg { width: 13px; height: 13px; }
-
-    .perk-copy {
-      position: absolute;
-      inset-inline: 10px;
-      bottom: 9px;
-      z-index: 2;
-      text-align: start;
-    }
-
-    .perk-copy strong { display: block; color: var(--text); font-size: 12px; font-weight: 700; margin-bottom: 1px; }
-    .perk-copy span { display: block; color: rgba(243, 216, 204, 0.72); font-size: 10px; line-height: 1.35; }
-
-    /* ── form card ───────────────────────────────── */
-    .card-form { position: relative; padding: 26px 24px; }
-
-    .form-fab {
-      position: absolute;
-      top: -16px;
-      inset-inline-end: 22px;
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      background: var(--accent);
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 8px 18px rgba(232, 67, 63, 0.35);
-      z-index: 2;
-    }
-
-    .form-fab svg { width: 17px; height: 17px; }
-
-    .eyebrow-block { text-align: center; margin-bottom: 8px; }
-
-    .eyebrow-block .rule {
-      width: 34px;
-      height: 1px;
-      margin: 0 auto 8px;
-      background: linear-gradient(90deg, transparent, rgba(243, 216, 204, 0.4), transparent);
-    }
-
-    .eyebrow-block .label {
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      font-size: 10.5px;
-      color: var(--text-muted);
-    }
-
-    .card-form h2 {
-      font-family: var(--font-display);
-      font-size: 18px;
-      font-weight: 600;
-      color: var(--text);
-      text-align: center;
-      margin-bottom: 6px;
-    }
-
-    .card-form .sub {
-      text-align: center;
-      color: var(--text-muted);
-      font-size: 13px;
-      margin-bottom: 20px;
-    }
-
-    .field { margin-bottom: 15px; }
-
-    .two-col {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
       gap: 12px;
-    }
-
-    @media (max-width: 540px) {
-      .two-col { grid-template-columns: 1fr; gap: 0; }
-    }
-
-    label {
-      display: block;
-      font-size: 13px;
-      font-weight: 500;
-      margin-bottom: 6px;
-      color: var(--text);
-    }
-
-    .req { color: var(--err); }
-
-    input[type="text"], input[type="tel"], input[type="email"] {
-      width: 100%;
-      padding: 13px 18px;
-      background: var(--card-2);
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      color: var(--text);
-      font-size: 14px;
-      font-family: inherit;
-      transition: border-color 0.2s, box-shadow 0.2s;
-    }
-
-    textarea {
-      width: 100%;
-      min-height: 84px;
-      resize: vertical;
-      padding: 14px 18px;
-      background: var(--card-2);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      color: var(--text);
-      font-size: 14px;
-      font-family: inherit;
-      transition: border-color 0.2s, box-shadow 0.2s;
-    }
-
-    input::placeholder, textarea::placeholder { color: rgba(243, 216, 204, 0.34); }
-
-    input:focus, textarea:focus {
-      outline: none;
-      border-color: rgba(243, 216, 204, 0.55);
-      box-shadow: 0 0 0 3px rgba(243, 216, 204, 0.12);
-    }
-
-    .field.invalid input, .field.invalid textarea {
-      border-color: var(--err);
-    }
-
-    .field.invalid input:focus, .field.invalid textarea:focus {
-      box-shadow: 0 0 0 3px rgba(255, 122, 138, 0.14);
-    }
-
-    .field-err {
-      display: none;
-      color: var(--err);
-      font-size: 12px;
-      margin-top: 6px;
-      padding-inline-start: 4px;
-    }
-
-    .field.invalid .field-err { display: block; }
-
-    /* ── sector toggle-cards ──────────────────────── */
-    .sector-group {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
-
-    @media (max-width: 380px) {
-      .sector-group { grid-template-columns: 1fr; }
-    }
-
-    .sector-option {
-      position: relative;
-      display: block;
-      cursor: pointer;
-      padding-block: 12px;
-      padding-inline-start: 34px;
-      padding-inline-end: 12px;
-      background: var(--card-2);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      transition: border-color 0.2s, background 0.2s;
-    }
-
-    .sector-option input {
-      position: absolute;
-      opacity: 0;
-      pointer-events: none;
-    }
-
-    .sector-option .tick {
-      position: absolute;
-      inset-inline-start: 12px;
-      top: 13px;
-      width: 16px;
-      height: 16px;
-      border-radius: 5px;
-      border: 1px solid rgba(243, 216, 204, 0.3);
-      background: rgba(0, 0, 0, 0.25);
-      transition: border-color 0.2s, background 0.2s;
-    }
-
-    .sector-option .tick::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      margin: auto;
-      width: 8px;
-      height: 5px;
-      border-left: 2px solid var(--bg-1);
-      border-bottom: 2px solid var(--bg-1);
-      transform: rotate(-45deg) translateY(-1px);
-      opacity: 0;
-      transition: opacity 0.15s;
-    }
-
-    .sector-option strong { display: block; font-size: 13px; font-weight: 600; margin-bottom: 2px; color: var(--text); }
-    .sector-option span.desc { display: block; font-size: 11.5px; color: var(--text-muted); line-height: 1.4; }
-
-    .sector-option:has(input:checked),
-    .sector-option.is-checked {
-      border-color: rgba(243, 216, 204, 0.55);
-      background: rgba(243, 216, 204, 0.08);
-    }
-
-    .sector-option:has(input:checked) .tick,
-    .sector-option.is-checked .tick {
-      border-color: var(--text);
-      background: var(--text);
-    }
-
-    .sector-option:has(input:checked) .tick::after,
-    .sector-option.is-checked .tick::after { opacity: 1; }
-
-    .sector-option:has(input:focus-visible) {
-      box-shadow: 0 0 0 3px rgba(243, 216, 204, 0.12);
-    }
-
-    .field.invalid .sector-option { border-color: var(--err); }
-
-    button[type="submit"] {
-      position: relative;
-      width: 100%;
-      padding: 15px;
-      background: linear-gradient(135deg, #f8e9dd, var(--text));
-      color: var(--bg-1);
+      min-width: min(420px, 100%);
+      font: 700 17px 'Heebo', sans-serif;
+      color: #fff;
+      background: linear-gradient(180deg, var(--gold-btn), var(--gold-btn-2));
       border: none;
-      border-radius: 999px;
-      font-size: 15px;
-      font-weight: 700;
-      font-family: inherit;
+      border-radius: 12px;
+      padding: 16px 34px;
       cursor: pointer;
-      margin-top: 12px;
-      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
-      transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease), opacity 0.2s;
+      box-shadow: 0 14px 30px -12px rgba(150,112,58,.55);
+      transition: transform .2s var(--ease), box-shadow .2s;
     }
+    .cta-gold:hover { transform: translateY(-2px); box-shadow: 0 18px 36px -12px rgba(150,112,58,.6); }
+    .cta-gold[disabled] { opacity: .65; cursor: wait; transform: none; }
 
-    button[type="submit"]:hover { transform: translateY(-1px); box-shadow: 0 12px 28px rgba(0, 0, 0, 0.42); }
-    button[type="submit"]:active { transform: translateY(0); }
-    button[type="submit"]:focus-visible { outline: 2px solid var(--text); outline-offset: 3px; }
-    button[type="submit"]:disabled { opacity: 0.6; cursor: wait; transform: none; box-shadow: none; }
-
-    .note {
+    .form-msg {
+      margin-top: 18px;
       text-align: center;
-      font-size: 12px;
-      color: var(--text-muted);
-      margin-top: 12px;
+      font-weight: 600;
+      border-radius: 12px;
+      padding: 12px 16px;
     }
+    .form-msg.err { color: var(--err); background: rgba(192,57,43,.07); }
+    .form-msg[hidden] { display: none; }
 
-    .msg {
-      display: none;
-      border-radius: 14px;
-      padding: 12px 14px;
-      margin-bottom: 16px;
-      font-size: 13.5px;
-      font-weight: 500;
-    }
+    /* success state */
+    .success { text-align: center; padding: 26px 10px; }
+    .success svg { width: 64px; height: 64px; stroke: var(--gold); margin-bottom: 18px; }
+    .success h2 { font-size: 28px; font-weight: 800; }
+    .success p { color: var(--ink-soft); max-width: 28em; margin: 10px auto 0; }
+    [hidden] { display: none !important; }
 
-    .msg.error {
-      display: block;
-      background: rgba(255, 122, 138, 0.12);
-      color: var(--err);
-      border: 1px solid rgba(255, 122, 138, 0.32);
-    }
-
-    .success-card {
-      display: none;
-      text-align: center;
-      padding: 20px 6px;
-    }
-
-    @media (prefers-reduced-motion: no-preference) {
-      .success-card.is-visible { animation: rise-in 0.5s var(--ease) both; }
-    }
-
-    .success-card .icon {
+    /* ── footer ──────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 34px 24px 40px;
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 56px;
-      height: 56px;
-      margin: 0 auto 14px;
-      border-radius: 50%;
-      background: rgba(243, 216, 204, 0.1);
-      border: 1px solid rgba(243, 216, 204, 0.35);
-      color: var(--text);
+      gap: 14px;
+    }
+    footer .foot-mark {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: 11.5px;
+      letter-spacing: .26em;
+      color: var(--ink-soft);
+      text-transform: uppercase;
+    }
+    footer svg { stroke: var(--gold); }
+
+    /* ── motion ──────────────────────────────────────── */
+    @media (prefers-reduced-motion: no-preference) {
+      @keyframes rise-in {
+        from { opacity: 0; transform: translateY(16px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+      .topbar     { animation: rise-in .6s var(--ease) both; }
+      .hero-copy  { animation: rise-in .6s var(--ease) both .08s; }
+      .hero-media { animation: rise-in .6s var(--ease) both .16s; }
+      .feature:nth-child(1) { animation: rise-in .5s var(--ease) both .1s; }
+      .feature:nth-child(2) { animation: rise-in .5s var(--ease) both .18s; }
+      .feature:nth-child(3) { animation: rise-in .5s var(--ease) both .26s; }
+      .feature:nth-child(4) { animation: rise-in .5s var(--ease) both .34s; }
+      .feature:nth-child(5) { animation: rise-in .5s var(--ease) both .42s; }
     }
 
-    .success-card .icon svg { width: 26px; height: 26px; }
-    .success-card h2 { font-family: var(--font-display); font-size: 1.35rem; color: var(--text); margin-bottom: 8px; }
-    .success-card p { color: var(--text-muted); font-size: 14px; }
-
-    footer {
-      text-align: center;
-      padding: 22px 0 4px;
-      color: var(--text-muted);
-      font-size: 12px;
+    /* ── responsive ──────────────────────────────────── */
+    @media (max-width: 860px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-media { order: 2; }
+      .hero-copy  { order: 1; text-align: center; }
+      .hero-rule  { margin: 22px auto; }
+      .hero-copy p { margin: 0 auto; }
+      .secure-note { justify-content: center; }
+      .features { grid-template-columns: repeat(2, 1fr); gap: 8px 0; }
+      .feature { border-inline-start: none; padding: 14px 10px; }
+      .grid-3, .grid-2, .sector-cards { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 480px) {
+      .topbar { flex-direction: column; gap: 16px; }
     }
   </style>
 </head>
 <body>
 
-<div class="app-container">
+<div class="wrap">
+  <header class="topbar">
+    <div class="brand">
+      <span class="wordmark">CUTP<span class="o" role="presentation"></span>INT</span>
+      <span class="tagline">The Professional Beauty Network</span>
+    </div>
+    <a class="early-btn" href="#join">הצטרפו מוקדם <span class="arr">‹</span></a>
+  </header>
 
-  <div class="card card-header">
-    <div class="hero-photo">
-      <img src="images/hero.webp" width="960" height="540" alt="מעצבת שיער גוזרת קצוות שיער בדיוק מקצועי" loading="eager" fetchpriority="high">
+  <section class="hero">
+    <div class="hero-media">
+      <img src="images/hero.webp" width="1600" height="1200"
+           alt="צוות אנשי מקצוע מתחום השיער והיופי" loading="eager" fetchpriority="high">
     </div>
-    <div class="card-header-body">
-      <span class="logo-fab">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="6" cy="6" r="3"></circle>
-          <circle cx="6" cy="18" r="3"></circle>
-          <line x1="20" y1="4" x2="8.12" y2="15.88"></line>
-          <line x1="14.47" y1="14.48" x2="20" y2="20"></line>
-          <line x1="8.12" y1="8.12" x2="12" y2="12"></line>
-        </svg>
-      </span>
-      <h1><span class="the">The</span><span class="craft">Craft.</span></h1>
-      <div class="wordmark-rule"></div>
-      <div class="tagline">קהילת מקצועות היופי והשיער</div>
-      <p class="lead">
-        הבית המקצועי של קהילת היופי והשיער בישראל.
-        ערוץ חברתי סגור, מסונן ומפתח — נקי מרעש של לקוחות קצה.
-        החברות באישור בלבד.
-      </p>
-    </div>
-  </div>
-
-  <div class="perks">
-    <div class="perk">
-      <img class="perk-photo" src="images/perk-community.webp" width="460" height="460" alt="" loading="lazy">
-      <span class="perk-fab">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg>
-      </span>
-      <span class="perk-copy">
-        <strong>קהילה סגורה.</strong>
-        <span>אנשי מקצוע בלבד</span>
-      </span>
-    </div>
-    <div class="perk">
-      <img class="perk-photo" src="images/perk-craft.webp" width="460" height="460" alt="" loading="lazy">
-      <span class="perk-fab">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9l10-5 10 5-10 5-10-5z"></path><path d="M6 11.5V17c0 1.5 3 3 6 3s6-1.5 6-3v-5.5"></path><path d="M22 9v6"></path></svg>
-      </span>
-      <span class="perk-copy">
-        <strong>מיפוי הסמכה.</strong>
-        <span>קהילה מסוננת ואמינה</span>
-      </span>
-    </div>
-    <div class="perk">
-      <img class="perk-photo" src="images/perk-growth.webp" width="460" height="460" alt="" loading="lazy">
-      <span class="perk-fab">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 17 9 11 13 15 21 7"></polyline><polyline points="15 7 21 7 21 13"></polyline></svg>
-      </span>
-      <span class="perk-copy">
-        <strong>צמיחה משותפת.</strong>
-        <span>ידע, השראה וחיבורים</span>
-      </span>
-    </div>
-  </div>
-
-  <div class="card card-form">
-    <span class="form-fab">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="20" y2="6"></line><line x1="8" y1="12" x2="20" y2="12"></line><line x1="8" y1="18" x2="20" y2="18"></line><line x1="4" y1="6" x2="4.01" y2="6"></line><line x1="4" y1="12" x2="4.01" y2="12"></line><line x1="4" y1="18" x2="4.01" y2="18"></line></svg>
-    </span>
-    <div id="form-wrap">
-      <div class="eyebrow-block">
-        <div class="rule"></div>
-        <div class="label">בקשת הצטרפות</div>
+    <div class="hero-copy">
+      <h1>המקום המקצועי לאנשי השיער והיופי.</h1>
+      <div class="hero-rule"></div>
+      <p>קהילה סגורה ומקצועית למעצבי שיער, ברברים, מאפרים ואנשי יופי. חיבורים אמיתיים. הזדמנויות אמיתיות.</p>
+      <a class="cta-dark" href="#join">הצטרפו לרשימת ההמתנה <span class="arr">‹</span></a>
+      <div class="secure-note">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        הפרטים שלכם נשמרים במאגר מאובטח.
       </div>
-      <h2>הגשת מועמדות ומיפוי הסמכה.</h2>
-      <p class="sub">מלאו את הפרטים — כל בקשה נבדקת ומאושרת אישית. שדות עם <span class="req">*</span> הם חובה.</p>
-
-      <div class="msg error" id="error-msg" style="display:none" role="alert" aria-live="polite"></div>
-
-      <form id="join-form" novalidate>
-        <div class="two-col">
-          <div class="field" data-field="owner_name">
-            <label for="owner_name">שם מלא <span class="req">*</span></label>
-            <input type="text" id="owner_name" name="owner_name" required maxlength="120" autocomplete="name" placeholder="ישראל ישראלי">
-            <span class="field-err" id="owner_name-err"></span>
-          </div>
-          <div class="field" data-field="business_name">
-            <label for="business_name">שם העסק / מספרה <span class="req">*</span></label>
-            <input type="text" id="business_name" name="business_name" required maxlength="150" autocomplete="organization" placeholder="בוטיק עיצוב שיער">
-            <span class="field-err" id="business_name-err"></span>
-          </div>
-        </div>
-
-        <div class="two-col">
-          <div class="field" data-field="phone">
-            <label for="phone">טלפון נייד (לוואטסאפ) <span class="req">*</span></label>
-            <input type="tel" id="phone" name="phone" required maxlength="30" autocomplete="tel" inputmode="tel" placeholder="050-1234567">
-            <span class="field-err" id="phone-err"></span>
-          </div>
-          <div class="field" data-field="email">
-            <label for="email">אימייל <span class="req">*</span></label>
-            <input type="email" id="email" name="email" required maxlength="254" autocomplete="email" placeholder="name@example.com">
-            <span class="field-err" id="email-err"></span>
-          </div>
-        </div>
-
-        <div class="two-col">
-          <div class="field" data-field="city">
-            <label for="city">עיר <span class="req">*</span></label>
-            <input type="text" id="city" name="city" required maxlength="100" autocomplete="address-level2" placeholder="תל אביב">
-            <span class="field-err" id="city-err"></span>
-          </div>
-          <div class="field" data-field="instagram">
-            <label for="instagram">אינסטגרם</label>
-            <input type="text" id="instagram" name="instagram" maxlength="150" placeholder="@המשתמש_שלכם">
-          </div>
-        </div>
-
-        <div class="field" data-field="sector">
-          <label>סטטוס הסמכה מקצועית <span class="req">*</span></label>
-          <div class="sector-group">
-            <label class="sector-option">
-              <input type="radio" name="sector" value="certified" required>
-              <span class="tick"></span>
-              <strong>מוסמך</strong>
-              <span class="desc">תעודת תמ"ת / אקדמיה מוכרת</span>
-            </label>
-            <label class="sector-option">
-              <input type="radio" name="sector" value="independent">
-              <span class="tick"></span>
-              <strong>עצמאי</strong>
-              <span class="desc">בשלבי למידה והשתלמויות</span>
-            </label>
-          </div>
-          <span class="field-err" id="sector-err"></span>
-        </div>
-
-        <div class="field" data-field="education">
-          <label for="education">היכן למדת או אצל מי עברת השתלמויות? <span class="req">*</span></label>
-          <input type="text" id="education" name="education" required maxlength="200" placeholder="שם האקדמיה או המנטור">
-          <span class="field-err" id="education-err"></span>
-        </div>
-
-        <div class="field">
-          <label for="description">כמה מילים עליך ועל העסק</label>
-          <textarea id="description" name="description" placeholder="התמחויות, ניסיון, מה מיוחד אצלך..."></textarea>
-        </div>
-
-        <button type="submit" id="submit-btn">הגש בקשת הצטרפות</button>
-        <p class="note">הפרטים ישמשו לבחינת המועמדות בלבד.</p>
-      </form>
     </div>
-
-    <div class="success-card" id="success-card">
-      <span class="icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M8 12.5l2.5 2.5L16 9.5"></path></svg>
-      </span>
-      <h2>הבקשה התקבלה!</h2>
-      <p>תודה על הגשת המועמדות ל-The Craft.<br>נבחן את הפרטים ונחזור אליך בוואטסאפ עם אישור ההצטרפות.</p>
-    </div>
-  </div>
-
-  <footer>The Craft · קהילת מקצועות היופי של ישראל</footer>
-
+  </section>
 </div>
 
-<script>
-  const form = document.getElementById('join-form');
-  const errorMsg = document.getElementById('error-msg');
-  const submitBtn = document.getElementById('submit-btn');
+<div class="features-band">
+  <div class="wrap">
+    <div class="features">
+      <div class="feature">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"/></svg>
+        <h3>פרופיל מקצועי</h3>
+        <p>הציגו את עצמכם, היכולות וההתמחות.</p>
+      </div>
+      <div class="feature">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+        <h3>חיפוש מתקדם</h3>
+        <p>מצאו אנשי מקצוע, עבודות והזדמנויות.</p>
+      </div>
+      <div class="feature">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="14" height="12" rx="2"/><path d="M7 7V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v10"/><circle cx="8" cy="12" r="1.6"/><path d="m3 17 4-3 4 3 4-4 2 2"/></svg>
+        <h3>תיק עבודות</h3>
+        <p>שתפו עבודות והשרו השראה.</p>
+      </div>
+      <div class="feature">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.2L4 21l1.8-5.4A8 8 0 1 1 21 12Z"/><circle cx="9" cy="12" r=".8"/><circle cx="12.5" cy="12" r=".8"/><circle cx="16" cy="12" r=".8"/></svg>
+        <h3>קהילה וידע</h3>
+        <p>שיח מקצועי, טיפים וכל מה שמקדם.</p>
+      </div>
+      <div class="feature">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M9 8V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/><path d="M3 13h18"/></svg>
+        <h3>משרות והזדמנויות</h3>
+        <p>משרות, השכרת כסאות, שיתופי פעולה ועוד.</p>
+      </div>
+    </div>
+  </div>
+</div>
 
-  const MESSAGES = {
-    owner_name:    { missing: 'נא להזין שם מלא' },
-    business_name: { missing: 'נא להזין שם העסק' },
-    phone:         { missing: 'נא להזין מספר טלפון' },
-    email:         { missing: 'נא להזין כתובת אימייל', invalid: 'כתובת האימייל אינה תקינה' },
-    city:          { missing: 'נא להזין עיר' },
-    education:     { missing: 'נא לספר איפה למדת' },
-    sector:        { missing: 'נא לבחור סטטוס הסמכה' },
+<div class="wrap">
+  <section class="join-section" id="join">
+    <div class="form-card">
+      <div id="formWrap">
+        <h2>הצטרפו לרשימת ההמתנה</h2>
+        <p class="form-sub">מלאו את הפרטים — כל בקשה נבדקת ומאושרת אישית.<br>שדות עם <span class="req">*</span> הם חובה.</p>
+
+        <form id="joinForm" novalidate>
+          <div class="grid-3">
+            <div class="field">
+              <label for="fullName">שם מלא <span class="req">*</span></label>
+              <input id="fullName" name="owner_name" type="text" autocomplete="name" placeholder="השם שלכם" maxlength="120" required>
+              <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"/></svg>
+            </div>
+            <div class="field">
+              <label for="occupation">תחום עיסוק <span class="req">*</span></label>
+              <select id="occupation" name="occupation" class="empty" required>
+                <option value="" disabled selected>בחרו תחום</option>
+                <option value="hair">מעצב/ת שיער</option>
+                <option value="barber">ברבר</option>
+                <option value="makeup">מאפר/ת</option>
+                <option value="cosmetics">קוסמטיקאי/ת</option>
+                <option value="nails">מעצב/ת ציפורניים</option>
+                <option value="other">אחר</option>
+              </select>
+              <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+            </div>
+            <div class="field">
+              <label for="city">עיר <span class="req">*</span></label>
+              <input id="city" name="city" type="text" autocomplete="address-level2" placeholder="העיר שלכם" maxlength="100" required>
+              <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-5.3-7-11a7 7 0 0 1 14 0c0 5.7-7 11-7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="field">
+              <label for="email">אימייל <span class="req">*</span></label>
+              <input id="email" name="email" type="email" autocomplete="email" placeholder="example@mail.com" maxlength="254" required>
+              <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+            </div>
+            <div class="field">
+              <label for="phone">טלפון נייד (לוואטסאפ) <span class="req">*</span></label>
+              <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="050-1234567" maxlength="30" required>
+              <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8 10a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.7 2Z"/></svg>
+            </div>
+          </div>
+
+          <p class="group-label">סטטוס הסמכה מקצועית <span class="req">*</span></p>
+          <div class="sector-cards">
+            <label class="sector-card">
+              <input type="radio" name="sector" value="certified" required>
+              <b>מוסמך/ת</b>
+              <span>תעודת תמ"ת / אקדמיה מוכרת</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="5"/><path d="m8.5 13.5-2 7 5.5-3 5.5 3-2-7"/></svg>
+            </label>
+            <label class="sector-card">
+              <input type="radio" name="sector" value="independent" required>
+              <b>עצמאי/ה</b>
+              <span>בשלבי למידה / העשרה עצמית</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"/></svg>
+            </label>
+          </div>
+
+          <div class="field has-area" style="margin-bottom:16px">
+            <label for="education">היכן למדת או אצל מי עברת השתלמויות? <span class="req">*</span></label>
+            <input id="education" name="education" type="text" placeholder="שם האקדמיה או המוסד, תחום הלימוד…" maxlength="200" required>
+            <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m2 9 10-5 10 5-10 5L2 9Z"/><path d="M6 11.5V17c0 1.7 2.7 3 6 3s6-1.3 6-3v-5.5"/></svg>
+          </div>
+
+          <div class="field has-area">
+            <label for="description">כמה מילים עליך ועל העסק</label>
+            <textarea id="description" name="description" rows="3" maxlength="1000" placeholder="תחומי התמחות, ניסיון, מה מיוחד אצלך…"></textarea>
+            <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+          </div>
+
+          <p class="form-msg err" id="formErr" role="alert" hidden></p>
+
+          <div class="submit-row">
+            <button type="submit" class="cta-gold" id="submitBtn">הצטרפו לרשימת ההמתנה <span class="arr">‹</span></button>
+          </div>
+        </form>
+      </div>
+
+      <div class="success" id="successBox" hidden>
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m8 12.5 2.5 2.5L16 9.5"/></svg>
+        <h2>הבקשה נשלחה!</h2>
+        <p>כל בקשה נבדקת ומאושרת אישית — נחזור אליכם בהקדם בוואטסאפ או באימייל.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <span class="foot-mark">Cutpoint — The Professional Beauty Network</span>
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.6" cy="6.4" r="1.1" fill="currentColor" stroke="none"/></svg>
+</footer>
+
+<script>
+  const form = document.getElementById('joinForm');
+  const errBox = document.getElementById('formErr');
+  const btn = document.getElementById('submitBtn');
+
+  // select placeholder color handling
+  const occ = document.getElementById('occupation');
+  occ.addEventListener('change', () => occ.classList.toggle('empty', !occ.value));
+
+  const FIELD_NAMES = {
+    owner_name: 'שם מלא',
+    occupation: 'תחום עיסוק',
+    city: 'עיר',
+    email: 'אימייל',
+    phone: 'טלפון נייד',
+    sector: 'סטטוס הסמכה',
+    education: 'היכן למדת',
   };
 
-  function setFieldError(name, msg) {
-    const fieldEl = form.querySelector(`[data-field="${name}"]`);
-    const errEl = document.getElementById(`${name}-err`);
-    if (!fieldEl) return;
-    if (msg) {
-      fieldEl.classList.add('invalid');
-      if (errEl) errEl.textContent = msg;
-    } else {
-      fieldEl.classList.remove('invalid');
-      if (errEl) errEl.textContent = '';
-    }
-  }
-
-  function messageFor(input) {
-    const rules = MESSAGES[input.name];
-    if (!rules) return '';
-    if (input.validity.valueMissing) return rules.missing || '';
-    if (input.validity.typeMismatch) return rules.invalid || rules.missing || '';
-    return '';
-  }
-
-  function validateTextField(input) {
-    const msg = messageFor(input);
-    setFieldError(input.name, msg);
-    return !msg;
-  }
-
-  function validateSector() {
-    const checked = form.querySelector('input[name="sector"]:checked');
-    const msg = checked ? '' : MESSAGES.sector.missing;
-    setFieldError('sector', msg);
-    return !msg;
-  }
-
-  const requiredInputs = form.querySelectorAll('input[required]:not([type="radio"])');
-  requiredInputs.forEach((input) => {
-    input.addEventListener('blur', () => validateTextField(input));
-    input.addEventListener('input', () => {
-      if (form.querySelector(`[data-field="${input.name}"]`).classList.contains('invalid')) {
-        validateTextField(input);
-      }
-    });
-  });
-
-  form.querySelectorAll('input[name="sector"]').forEach((radio) => {
-    radio.addEventListener('change', () => {
-      validateSector();
-      form.querySelectorAll('.sector-option').forEach((opt) => {
-        opt.classList.toggle('is-checked', opt.querySelector('input').checked);
-      });
-    });
-  });
-
-  function validateAll() {
-    let firstInvalid = null;
-    requiredInputs.forEach((input) => {
-      const ok = validateTextField(input);
-      if (!ok && !firstInvalid) firstInvalid = input;
-    });
-    const sectorOk = validateSector();
-    if (!sectorOk && !firstInvalid) firstInvalid = form.querySelector('.sector-group');
-    return firstInvalid;
+  function showErr(msg) {
+    errBox.textContent = msg;
+    errBox.hidden = false;
+    errBox.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
   }
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    errorMsg.style.display = 'none';
-
-    const firstInvalid = validateAll();
-    if (firstInvalid) {
-      firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      if (typeof firstInvalid.focus === 'function') firstInvalid.focus();
-      errorMsg.textContent = 'יש להשלים את השדות המסומנים.';
-      errorMsg.style.display = 'block';
-      return;
-    }
-
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'שולחים...';
+    errBox.hidden = true;
 
     const data = Object.fromEntries(new FormData(form).entries());
+    data.owner_name = (data.owner_name || '').trim();
+    data.city = (data.city || '').trim();
+    data.education = (data.education || '').trim();
+    data.description = (data.description || '').trim();
+
+    const missing = Object.keys(FIELD_NAMES).filter((k) => !data[k]);
+    if (missing.length) {
+      return showErr('חסרים פרטים: ' + missing.map((k) => FIELD_NAMES[k]).join(', '));
+    }
+    if (!/^\+?[\d\s-]{9,15}$/.test(data.phone)) {
+      return showErr('מספר הטלפון לא נראה תקין — בדקו ונסו שוב.');
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
+      return showErr('כתובת האימייל לא נראית תקינה — בדקו ונסו שוב.');
+    }
+
+    btn.disabled = true;
+    btn.textContent = 'שולח…';
 
     try {
       const res = await fetch('/api/barbershops/', {
@@ -784,44 +596,27 @@
         body: JSON.stringify(data),
       });
 
-      if (res.ok) {
-        document.getElementById('form-wrap').style.display = 'none';
-        const successCard = document.getElementById('success-card');
-        successCard.style.display = 'block';
-        successCard.classList.add('is-visible');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (res.status === 201) {
+        document.getElementById('formWrap').hidden = true;
+        const ok = document.getElementById('successBox');
+        ok.hidden = false;
+        ok.scrollIntoView({ block: 'center', behavior: 'smooth' });
         return;
       }
-
       if (res.status === 429) {
-        throw new Error('נשלחו יותר מדי בקשות. נסו שוב מאוחר יותר.');
+        showErr('יותר מדי בקשות — נסו שוב בעוד מספר דקות.');
+      } else if (res.status === 400) {
+        const body = await res.json().catch(() => ({}));
+        const bad = Object.keys(body).map((k) => FIELD_NAMES[k]).filter(Boolean);
+        showErr(bad.length ? 'בדקו את השדות: ' + bad.join(', ') : 'בדקו את הפרטים ונסו שוב.');
+      } else {
+        showErr('משהו השתבש — נסו שוב בעוד רגע.');
       }
-
-      let serverErrors = null;
-      try { serverErrors = await res.json(); } catch (_) { /* non-JSON error body */ }
-
-      if (serverErrors && typeof serverErrors === 'object') {
-        let firstField = null;
-        Object.entries(serverErrors).forEach(([key, val]) => {
-          if (!MESSAGES[key]) return;
-          const msg = Array.isArray(val) ? val[0] : String(val);
-          setFieldError(key, msg);
-          if (!firstField) firstField = key;
-        });
-        if (firstField) {
-          const el = form.querySelector(`[data-field="${firstField}"]`);
-          if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          throw new Error('יש לתקן את השדות המסומנים.');
-        }
-      }
-
-      throw new Error('משהו לא הסתדר. בדקו את הפרטים ונסו שוב.');
-    } catch (err) {
-      errorMsg.textContent = err.message || 'שגיאת רשת. נסו שוב בעוד רגע.';
-      errorMsg.style.display = 'block';
-      submitBtn.disabled = false;
-      submitBtn.textContent = 'הגש בקשת הצטרפות';
+    } catch {
+      showErr('בעיית תקשורת — בדקו את החיבור ונסו שוב.');
     }
+    btn.disabled = false;
+    btn.innerHTML = 'הצטרפו לרשימת ההמתנה <span class="arr">‹</span>';
   });
 </script>
 </body>

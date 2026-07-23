@@ -6,8 +6,22 @@ class Barbershop(models.Model):
         CERTIFIED = "certified", 'מוסמך — תעודת תמ"ת / אקדמיה מוכרת'
         INDEPENDENT = "independent", "עצמאי — בשלבי למידה והשתלמויות"
 
-    business_name = models.CharField("שם המספרה", max_length=150)
-    owner_name = models.CharField("שם הבעלים", max_length=120)
+    class Occupation(models.TextChoices):
+        HAIR = "hair", "מעצב/ת שיער"
+        BARBER = "barber", "ברבר"
+        MAKEUP = "makeup", "מאפר/ת"
+        COSMETICS = "cosmetics", "קוסמטיקאי/ת"
+        NAILS = "nails", "מעצב/ת ציפורניים"
+        OTHER = "other", "אחר"
+
+    business_name = models.CharField("שם העסק", max_length=150, blank=True, default="")
+    owner_name = models.CharField("שם מלא", max_length=120)
+    occupation = models.CharField(
+        "תחום עיסוק",
+        max_length=20,
+        choices=Occupation.choices,
+        default=Occupation.OTHER,
+    )
     phone = models.CharField("טלפון", max_length=30)
     email = models.EmailField("אימייל", max_length=254, blank=True)
     city = models.CharField("עיר", max_length=100)
