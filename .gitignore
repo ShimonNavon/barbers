@@ -6,5 +6,6 @@ dist/
 staticfiles/
 *.tsbuildinfo
 .DS_Store
+._*
 media/
 *.log

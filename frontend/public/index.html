@@ -242,7 +242,8 @@
     .req { color: var(--gold-deep); }
     .field input, .field select, .field textarea {
       width: 100%;
-      font: 400 15px 'Heebo', sans-serif;
+      /* 16px minimum — anything smaller makes iOS Safari zoom in on focus */
+      font: 400 16px 'Heebo', sans-serif;
       color: var(--ink);
       border: none;
       outline: none;
@@ -454,13 +455,13 @@
           <div class="grid-3">
             <div class="field">
               <label for="fullName">שם מלא <span class="req">*</span></label>
-              <input id="fullName" name="owner_name" type="text" autocomplete="name" placeholder="השם שלכם" maxlength="120" required>
+              <input id="fullName" name="owner_name" type="text" autocomplete="name" autocapitalize="words" enterkeyhint="next" placeholder="השם שלכם" maxlength="120" required>
               <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"/></svg>
             </div>
             <div class="field">
-              <label for="occupation">תחום עיסוק <span class="req">*</span></label>
-              <select id="occupation" name="occupation" class="empty" required>
-                <option value="" disabled selected>בחרו תחום</option>
+              <label for="occupation">תחום עיסוק</label>
+              <select id="occupation" name="occupation" class="empty">
+                <option value="" selected>בחרו תחום</option>
                 <option value="hair">מעצב/ת שיער</option>
                 <option value="barber">ברבר</option>
                 <option value="makeup">מאפר/ת</option>
@@ -471,16 +472,16 @@
               <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
             </div>
             <div class="field">
-              <label for="city">עיר <span class="req">*</span></label>
-              <input id="city" name="city" type="text" autocomplete="address-level2" placeholder="העיר שלכם" maxlength="100" required>
+              <label for="city">עיר</label>
+              <input id="city" name="city" type="text" autocomplete="address-level2" enterkeyhint="next" placeholder="העיר שלכם" maxlength="100">
               <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-5.3-7-11a7 7 0 0 1 14 0c0 5.7-7 11-7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg>
             </div>
           </div>
 
           <div class="grid-2">
             <div class="field">
-              <label for="email">אימייל <span class="req">*</span></label>
-              <input id="email" name="email" type="email" autocomplete="email" placeholder="example@mail.com" maxlength="254" required>
+              <label for="email">אימייל</label>
+              <input id="email" name="email" type="email" inputmode="email" autocomplete="email" autocapitalize="none" autocorrect="off" spellcheck="false" enterkeyhint="next" placeholder="example@mail.com" maxlength="254">
               <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
             </div>
             <div class="field">
@@ -490,16 +491,16 @@
             </div>
           </div>
 
-          <p class="group-label">סטטוס הסמכה מקצועית <span class="req">*</span></p>
+          <p class="group-label">סטטוס הסמכה מקצועית</p>
           <div class="sector-cards">
             <label class="sector-card">
-              <input type="radio" name="sector" value="certified" required>
+              <input type="radio" name="sector" value="certified">
               <b>מוסמך/ת</b>
               <span>תעודת תמ"ת / אקדמיה מוכרת</span>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="5"/><path d="m8.5 13.5-2 7 5.5-3 5.5 3-2-7"/></svg>
             </label>
             <label class="sector-card">
-              <input type="radio" name="sector" value="independent" required>
+              <input type="radio" name="sector" value="independent">
               <b>עצמאי/ה</b>
               <span>בשלבי למידה / העשרה עצמית</span>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"/></svg>
@@ -507,8 +508,8 @@
           </div>
 
           <div class="field has-area" style="margin-bottom:16px">
-            <label for="education">היכן למדת או אצל מי עברת השתלמויות? <span class="req">*</span></label>
-            <textarea id="education" name="education" rows="2" maxlength="1000" placeholder="שם האקדמיה או המוסד, תחום הלימוד…" required></textarea>
+            <label for="education">היכן למדת או אצל מי עברת השתלמויות?</label>
+            <textarea id="education" name="education" rows="2" maxlength="1000" placeholder="שם האקדמיה או המוסד, תחום הלימוד…"></textarea>
             <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m2 9 10-5 10 5-10 5L2 9Z"/><path d="M6 11.5V17c0 1.7 2.7 3 6 3s6-1.3 6-3v-5.5"/></svg>
           </div>
 
@@ -557,7 +558,9 @@
     phone: 'טלפון נייד',
     sector: 'סטטוס הסמכה',
     education: 'היכן למדת',
+    description: 'כמה מילים עליך',
   };
+  const REQUIRED = ['owner_name', 'phone'];
 
   function showErr(msg) {
     errBox.textContent = msg;
@@ -570,21 +573,23 @@
     errBox.hidden = true;
 
     const data = Object.fromEntries(new FormData(form).entries());
-    data.owner_name = (data.owner_name || '').trim();
-    data.city = (data.city || '').trim();
-    data.education = (data.education || '').trim();
-    data.description = (data.description || '').trim();
+    // trim everything — iOS autofill loves sneaking in trailing spaces
+    for (const k of Object.keys(data)) data[k] = data[k].trim();
 
-    const missing = Object.keys(FIELD_NAMES).filter((k) => !data[k]);
+    const missing = REQUIRED.filter((k) => !data[k]);
     if (missing.length) {
       return showErr('חסרים פרטים: ' + missing.map((k) => FIELD_NAMES[k]).join(', '));
     }
-    if (!/^\+?[\d\s-]{9,15}$/.test(data.phone)) {
+    // validate the digits, not the formatting (spaces/dashes are fine)
+    const phoneDigits = data.phone.replace(/[\s ().-]/g, '');
+    if (!/^\+?\d{9,15}$/.test(phoneDigits)) {
       return showErr('מספר הטלפון לא נראה תקין — בדקו ונסו שוב.');
     }
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
+    if (data.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
       return showErr('כתובת האימייל לא נראית תקינה — בדקו ונסו שוב.');
     }
+    // omit empty optional fields so the backend applies its defaults
+    for (const k of Object.keys(data)) if (!data[k]) delete data[k];
 
     btn.disabled = true;
     btn.textContent = 'שולח…';
