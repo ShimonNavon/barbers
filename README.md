@@ -11,7 +11,7 @@ An application-and-vetting funnel for a closed professional community of Israeli
 - **Full-stack, fully containerized** — static frontend, Django + DRF API, Postgres 16, and Valkey, orchestrated with Docker Compose behind a host nginx + Cloudflare Tunnel edge.
 - **Abuse-resistant public endpoint** — anonymous submissions are rate-limited with DRF throttling backed by a shared Valkey cache (`allkeys-lru`, memory-capped), so limits hold across gunicorn workers and deploys.
 - **Hebrew-first admin** — Django admin localized to Hebrew serves as the vetting dashboard: sector filters, education search, one-click approval.
-- **Design without dependencies** — the luxury dark/gold aesthetic is pure CSS (layered radial gradients, backdrop blur); no external images, no JS framework, ~0 network weight beyond fonts.
+- **Lightweight by design** — dark oxblood/coral "ClickA." aesthetic is pure CSS (radial gradients, coral FAB accents) plus four real photographs (hero + 3 perk cards), all self-hosted WebP totaling ~74KB; no JS framework, no external image host.
 - **Operational hygiene** — nightly `pg_dump` backups with rotation, healthchecked services, secrets in `.env` (never committed), TLS at the edge with `X-Forwarded-Proto` honored.
 
 ## Architecture
@@ -29,7 +29,7 @@ flowchart LR
 
 | Layer | Tech |
 |---|---|
-| Frontend | Static HTML/CSS/JS, Heebo, RTL, glassmorphism |
+| Frontend | Static HTML/CSS/JS, Frank Ruhl Libre + Heebo, RTL |
 | API | Django 5 · Django REST Framework · gunicorn |
 | Data | PostgreSQL 16 · Valkey 8 |
 | Infra | Docker Compose · nginx · Cloudflare Tunnel |

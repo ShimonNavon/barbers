@@ -5,93 +5,158 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Craft | הבית של קהילת מקצועות היופי</title>
   <meta name="description" content="The Craft — הבית המקצועי של קהילת היופי והשיער בישראל. ערוץ סגור, מסונן ומפתח. הגישו מועמדות להצטרפות.">
+  <meta name="theme-color" content="#1a0a0c">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%231a0a0c'/%3E%3Ctext x='16' y='21.5' font-family='Georgia,serif' font-size='16' font-weight='700' fill='%23f3d8cc' text-anchor='middle'%3EC%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:ital,wght@0,500;0,600;0,700;1,500&family=Heebo:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --bg-main: #0d0e12;
-      --card-bg: rgba(33, 35, 44, 0.75);
-      --card-bg-deep: rgba(22, 23, 29, 0.85);
-      --gold: #d4af37;
-      --gold-soft: #e6c96a;
-      --text-primary: #f5f5f7;
-      --text-muted: #a0a0a5;
-      --line: rgba(255, 255, 255, 0.07);
-      --err: #ff6b60;
+      --bg-1: #1a0a0c;
+      --bg-2: #2a0e12;
+      --card: #2e1216;
+      --card-2: #3a1519;
+      --border: rgba(232, 130, 118, 0.16);
+      --accent: #e8433f;
+      --accent-soft: #f0645f;
+      --text: #f3d8cc;
+      --text-muted: rgba(243, 216, 204, 0.6);
+      --err: #ff7a8a;
       --ok: #6fd68f;
+      --font-display: 'Frank Ruhl Libre', serif;
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
     }
 
+    html { -webkit-tap-highlight-color: transparent; }
+
     body {
+      position: relative;
       font-family: 'Heebo', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       -webkit-font-smoothing: antialiased;
-      background-color: var(--bg-main);
-      /* Luxury atmosphere without external images: layered gold glows on near-black */
+      background-color: var(--bg-1);
       background-image:
-        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(212, 175, 55, 0.13), transparent 65%),
-        radial-gradient(ellipse 60% 40% at 15% 100%, rgba(90, 70, 120, 0.18), transparent 70%),
-        radial-gradient(ellipse 50% 35% at 90% 60%, rgba(212, 175, 55, 0.05), transparent 70%);
+        radial-gradient(ellipse 90% 55% at 50% -8%, var(--bg-2), transparent 65%),
+        radial-gradient(ellipse 70% 45% at 100% 100%, rgba(232, 67, 63, 0.07), transparent 70%);
       background-repeat: no-repeat;
-      color: var(--text-primary);
+      color: var(--text);
       line-height: 1.7;
       min-height: 100vh;
       display: flex;
       justify-content: center;
     }
 
+    /* fine film-grain texture — analog, "handmade craft" feel under the digital gloss */
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.035;
+      mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
     .app-container {
+      position: relative;
       width: 100%;
       max-width: 480px;
       padding: 28px 20px 40px;
     }
 
-    /* ── header card ─────────────────────────────── */
+    @media (prefers-reduced-motion: no-preference) {
+      @keyframes rise-in {
+        from { opacity: 0; transform: translateY(14px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+      .card-header  { animation: rise-in 0.6s var(--ease) both; }
+      .perks        { animation: rise-in 0.6s var(--ease) both; animation-delay: 0.08s; }
+      .card-form    { animation: rise-in 0.6s var(--ease) both; animation-delay: 0.16s; }
+      .perk:nth-child(1) { animation: rise-in 0.5s var(--ease) both 0.16s; }
+      .perk:nth-child(2) { animation: rise-in 0.5s var(--ease) both 0.24s; }
+      .perk:nth-child(3) { animation: rise-in 0.5s var(--ease) both 0.32s; }
+    }
+
+    /* ── cards ────────────────────────────────────── */
     .card {
-      background: var(--card-bg);
-      backdrop-filter: blur(25px);
-      -webkit-backdrop-filter: blur(25px);
-      border: 1px solid var(--line);
-      border-radius: 20px;
-      padding: 26px 24px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 24px;
       margin-bottom: 16px;
     }
 
-    .card-header {
-      background:
-        linear-gradient(160deg, rgba(212, 175, 55, 0.10), rgba(22, 23, 29, 0) 45%),
-        var(--card-bg-deep);
-      text-align: center;
+    /* ── header card ─────────────────────────────── */
+    .card-header { overflow: hidden; text-align: center; }
+
+    .hero-photo {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
     }
 
-    .logo-mark {
+    .hero-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .hero-photo::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(26, 10, 12, 0) 45%, var(--card) 96%);
+    }
+
+    .card-header-body { padding: 0 24px 26px; }
+
+    .logo-fab {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 54px;
-      height: 54px;
-      border-radius: 16px;
-      border: 1px solid rgba(212, 175, 55, 0.45);
-      background: rgba(212, 175, 55, 0.08);
-      font-size: 1.6rem;
-      margin-bottom: 14px;
+      width: 52px;
+      height: 52px;
+      margin-top: -26px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #fff;
+      border: 3px solid var(--card);
+      box-shadow: 0 8px 18px rgba(232, 67, 63, 0.35);
+      position: relative;
+      z-index: 2;
     }
+
+    .logo-fab svg { width: 22px; height: 22px; }
 
     .card-header h1 {
-      font-size: 28px;
-      font-weight: 900;
-      letter-spacing: 0.5px;
-      margin-bottom: 4px;
+      font-family: var(--font-display);
+      font-size: 30px;
+      font-weight: 600;
+      letter-spacing: 0.2px;
+      margin-top: 14px;
+      margin-bottom: 6px;
+      color: var(--text);
+      direction: ltr;
+      unicode-bidi: isolate;
     }
 
-    .card-header h1 span { color: var(--gold); }
+    .card-header h1 .the { font-style: italic; font-weight: 500; opacity: 0.75; }
+    .card-header h1 .craft { font-weight: 700; margin-inline-start: 6px; }
+
+    .wordmark-rule {
+      width: 40px;
+      height: 1px;
+      margin: 10px auto 14px;
+      background: linear-gradient(90deg, transparent, rgba(243, 216, 204, 0.4), transparent);
+    }
 
     .card-header .tagline {
-      color: var(--gold-soft);
-      font-size: 13px;
-      letter-spacing: 0.12em;
+      color: var(--text-muted);
+      font-size: 12px;
+      letter-spacing: 0.16em;
       margin-bottom: 12px;
+      text-transform: uppercase;
     }
 
     .card-header p.lead {
@@ -109,26 +174,104 @@
     }
 
     .perk {
-      background: var(--card-bg);
-      backdrop-filter: blur(25px);
-      -webkit-backdrop-filter: blur(25px);
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      padding: 14px 10px;
-      text-align: center;
-      font-size: 12px;
-      color: var(--text-muted);
-      line-height: 1.45;
+      position: relative;
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      transition: transform 0.25s var(--ease);
     }
 
-    .perk .icon { display: block; font-size: 1.3rem; margin-bottom: 6px; }
-    .perk strong { display: block; color: var(--text-primary); font-size: 12.5px; margin-bottom: 2px; }
+    .perk:hover { transform: translateY(-3px); }
+
+    .perk-photo {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .perk::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: linear-gradient(180deg, rgba(26, 10, 12, 0.08) 28%, rgba(20, 8, 9, 0.94) 80%);
+    }
+
+    .perk-fab {
+      position: absolute;
+      top: 8px;
+      inset-inline-end: 8px;
+      z-index: 2;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 10px rgba(232, 67, 63, 0.4);
+    }
+
+    .perk-fab svg { width: 13px; height: 13px; }
+
+    .perk-copy {
+      position: absolute;
+      inset-inline: 10px;
+      bottom: 9px;
+      z-index: 2;
+      text-align: start;
+    }
+
+    .perk-copy strong { display: block; color: var(--text); font-size: 12px; font-weight: 700; margin-bottom: 1px; }
+    .perk-copy span { display: block; color: rgba(243, 216, 204, 0.72); font-size: 10px; line-height: 1.35; }
 
     /* ── form card ───────────────────────────────── */
+    .card-form { position: relative; padding: 26px 24px; }
+
+    .form-fab {
+      position: absolute;
+      top: -16px;
+      inset-inline-end: 22px;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 18px rgba(232, 67, 63, 0.35);
+      z-index: 2;
+    }
+
+    .form-fab svg { width: 17px; height: 17px; }
+
+    .eyebrow-block { text-align: center; margin-bottom: 8px; }
+
+    .eyebrow-block .rule {
+      width: 34px;
+      height: 1px;
+      margin: 0 auto 8px;
+      background: linear-gradient(90deg, transparent, rgba(243, 216, 204, 0.4), transparent);
+    }
+
+    .eyebrow-block .label {
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-size: 10.5px;
+      color: var(--text-muted);
+    }
+
     .card-form h2 {
-      font-size: 16px;
+      font-family: var(--font-display);
+      font-size: 18px;
       font-weight: 600;
-      color: var(--gold);
+      color: var(--text);
       text-align: center;
       margin-bottom: 6px;
     }
@@ -148,7 +291,7 @@
       gap: 12px;
     }
 
-    @media (max-width: 420px) {
+    @media (max-width: 540px) {
       .two-col { grid-template-columns: 1fr; gap: 0; }
     }
 
@@ -157,76 +300,164 @@
       font-size: 13px;
       font-weight: 500;
       margin-bottom: 6px;
+      color: var(--text);
     }
 
-    .req { color: var(--gold); }
+    .req { color: var(--err); }
 
-    input[type="text"], input[type="tel"], textarea {
+    input[type="text"], input[type="tel"], input[type="email"] {
       width: 100%;
-      padding: 12px;
-      background: rgba(0, 0, 0, 0.4);
-      border: 1px solid var(--line);
-      border-radius: 10px;
-      color: #fff;
+      padding: 13px 18px;
+      background: var(--card-2);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: var(--text);
       font-size: 14px;
       font-family: inherit;
-      transition: border-color 0.2s;
+      transition: border-color 0.2s, box-shadow 0.2s;
     }
 
-    textarea { min-height: 84px; resize: vertical; }
+    textarea {
+      width: 100%;
+      min-height: 84px;
+      resize: vertical;
+      padding: 14px 18px;
+      background: var(--card-2);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      color: var(--text);
+      font-size: 14px;
+      font-family: inherit;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
 
-    input::placeholder, textarea::placeholder { color: #6c6c72; }
+    input::placeholder, textarea::placeholder { color: rgba(243, 216, 204, 0.34); }
 
     input:focus, textarea:focus {
       outline: none;
-      border-color: var(--gold);
+      border-color: rgba(243, 216, 204, 0.55);
+      box-shadow: 0 0 0 3px rgba(243, 216, 204, 0.12);
     }
 
+    .field.invalid input, .field.invalid textarea {
+      border-color: var(--err);
+    }
+
+    .field.invalid input:focus, .field.invalid textarea:focus {
+      box-shadow: 0 0 0 3px rgba(255, 122, 138, 0.14);
+    }
+
+    .field-err {
+      display: none;
+      color: var(--err);
+      font-size: 12px;
+      margin-top: 6px;
+      padding-inline-start: 4px;
+    }
+
+    .field.invalid .field-err { display: block; }
+
+    /* ── sector toggle-cards ──────────────────────── */
     .sector-group {
-      display: flex;
-      flex-direction: column;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
       gap: 10px;
-      background: rgba(0, 0, 0, 0.3);
-      padding: 14px 12px;
-      border-radius: 10px;
-      border: 1px solid var(--line);
+    }
+
+    @media (max-width: 380px) {
+      .sector-group { grid-template-columns: 1fr; }
     }
 
     .sector-option {
-      display: flex;
-      align-items: center;
-      gap: 10px;
+      position: relative;
+      display: block;
       cursor: pointer;
-      font-size: 13px;
-      font-weight: 400;
-      margin: 0;
+      padding-block: 12px;
+      padding-inline-start: 34px;
+      padding-inline-end: 12px;
+      background: var(--card-2);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      transition: border-color 0.2s, background 0.2s;
     }
 
     .sector-option input {
-      accent-color: var(--gold);
-      width: 16px;
-      height: 16px;
-      flex-shrink: 0;
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
     }
 
+    .sector-option .tick {
+      position: absolute;
+      inset-inline-start: 12px;
+      top: 13px;
+      width: 16px;
+      height: 16px;
+      border-radius: 5px;
+      border: 1px solid rgba(243, 216, 204, 0.3);
+      background: rgba(0, 0, 0, 0.25);
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .sector-option .tick::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      margin: auto;
+      width: 8px;
+      height: 5px;
+      border-left: 2px solid var(--bg-1);
+      border-bottom: 2px solid var(--bg-1);
+      transform: rotate(-45deg) translateY(-1px);
+      opacity: 0;
+      transition: opacity 0.15s;
+    }
+
+    .sector-option strong { display: block; font-size: 13px; font-weight: 600; margin-bottom: 2px; color: var(--text); }
+    .sector-option span.desc { display: block; font-size: 11.5px; color: var(--text-muted); line-height: 1.4; }
+
+    .sector-option:has(input:checked),
+    .sector-option.is-checked {
+      border-color: rgba(243, 216, 204, 0.55);
+      background: rgba(243, 216, 204, 0.08);
+    }
+
+    .sector-option:has(input:checked) .tick,
+    .sector-option.is-checked .tick {
+      border-color: var(--text);
+      background: var(--text);
+    }
+
+    .sector-option:has(input:checked) .tick::after,
+    .sector-option.is-checked .tick::after { opacity: 1; }
+
+    .sector-option:has(input:focus-visible) {
+      box-shadow: 0 0 0 3px rgba(243, 216, 204, 0.12);
+    }
+
+    .field.invalid .sector-option { border-color: var(--err); }
+
     button[type="submit"] {
+      position: relative;
       width: 100%;
-      padding: 14px;
-      background: #ffffff;
-      color: #000000;
+      padding: 15px;
+      background: linear-gradient(135deg, #f8e9dd, var(--text));
+      color: var(--bg-1);
       border: none;
-      border-radius: 12px;
+      border-radius: 999px;
       font-size: 15px;
-      font-weight: 600;
+      font-weight: 700;
       font-family: inherit;
       cursor: pointer;
       margin-top: 12px;
-      transition: opacity 0.2s;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+      transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease), opacity 0.2s;
     }
 
-    button[type="submit"]:hover { opacity: 0.9; }
-    button[type="submit"]:active { opacity: 0.8; }
-    button[type="submit"]:disabled { opacity: 0.55; cursor: wait; }
+    button[type="submit"]:hover { transform: translateY(-1px); box-shadow: 0 12px 28px rgba(0, 0, 0, 0.42); }
+    button[type="submit"]:active { transform: translateY(0); }
+    button[type="submit"]:focus-visible { outline: 2px solid var(--text); outline-offset: 3px; }
+    button[type="submit"]:disabled { opacity: 0.6; cursor: wait; transform: none; box-shadow: none; }
 
     .note {
       text-align: center;
@@ -237,7 +468,7 @@
 
     .msg {
       display: none;
-      border-radius: 10px;
+      border-radius: 14px;
       padding: 12px 14px;
       margin-bottom: 16px;
       font-size: 13.5px;
@@ -246,19 +477,36 @@
 
     .msg.error {
       display: block;
-      background: rgba(255, 107, 96, 0.12);
+      background: rgba(255, 122, 138, 0.12);
       color: var(--err);
-      border: 1px solid rgba(255, 107, 96, 0.35);
+      border: 1px solid rgba(255, 122, 138, 0.32);
     }
 
     .success-card {
       display: none;
       text-align: center;
-      padding: 18px 6px;
+      padding: 20px 6px;
     }
 
-    .success-card .icon { font-size: 3rem; display: block; margin-bottom: 10px; }
-    .success-card h2 { font-size: 1.35rem; color: var(--gold); margin-bottom: 8px; }
+    @media (prefers-reduced-motion: no-preference) {
+      .success-card.is-visible { animation: rise-in 0.5s var(--ease) both; }
+    }
+
+    .success-card .icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      margin: 0 auto 14px;
+      border-radius: 50%;
+      background: rgba(243, 216, 204, 0.1);
+      border: 1px solid rgba(243, 216, 204, 0.35);
+      color: var(--text);
+    }
+
+    .success-card .icon svg { width: 26px; height: 26px; }
+    .success-card h2 { font-family: var(--font-display); font-size: 1.35rem; color: var(--text); margin-bottom: 8px; }
     .success-card p { color: var(--text-muted); font-size: 14px; }
 
     footer {
@@ -274,74 +522,139 @@
 <div class="app-container">
 
   <div class="card card-header">
-    <span class="logo-mark">✂️</span>
-    <h1>The <span>Craft</span></h1>
-    <div class="tagline">קהילת מקצועות היופי והשיער</div>
-    <p class="lead">
-      הבית המקצועי של קהילת היופי והשיער בישראל.
-      ערוץ חברתי סגור, מסונן ומפתח — נקי מרעש של לקוחות קצה.
-      החברות באישור בלבד.
-    </p>
+    <div class="hero-photo">
+      <img src="images/hero.webp" width="960" height="540" alt="מעצבת שיער גוזרת קצוות שיער בדיוק מקצועי" loading="eager" fetchpriority="high">
+    </div>
+    <div class="card-header-body">
+      <span class="logo-fab">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="6" cy="6" r="3"></circle>
+          <circle cx="6" cy="18" r="3"></circle>
+          <line x1="20" y1="4" x2="8.12" y2="15.88"></line>
+          <line x1="14.47" y1="14.48" x2="20" y2="20"></line>
+          <line x1="8.12" y1="8.12" x2="12" y2="12"></line>
+        </svg>
+      </span>
+      <h1><span class="the">The</span><span class="craft">Craft.</span></h1>
+      <div class="wordmark-rule"></div>
+      <div class="tagline">קהילת מקצועות היופי והשיער</div>
+      <p class="lead">
+        הבית המקצועי של קהילת היופי והשיער בישראל.
+        ערוץ חברתי סגור, מסונן ומפתח — נקי מרעש של לקוחות קצה.
+        החברות באישור בלבד.
+      </p>
+    </div>
   </div>
 
   <div class="perks">
-    <div class="perk"><span class="icon">🔒</span><strong>קהילה סגורה</strong>אנשי מקצוע בלבד</div>
-    <div class="perk"><span class="icon">🎓</span><strong>מיפוי הסמכה</strong>קהילה מסוננת ואמינה</div>
-    <div class="perk"><span class="icon">🤝</span><strong>צמיחה משותפת</strong>ידע, השראה וחיבורים</div>
+    <div class="perk">
+      <img class="perk-photo" src="images/perk-community.webp" width="460" height="460" alt="" loading="lazy">
+      <span class="perk-fab">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg>
+      </span>
+      <span class="perk-copy">
+        <strong>קהילה סגורה.</strong>
+        <span>אנשי מקצוע בלבד</span>
+      </span>
+    </div>
+    <div class="perk">
+      <img class="perk-photo" src="images/perk-craft.webp" width="460" height="460" alt="" loading="lazy">
+      <span class="perk-fab">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9l10-5 10 5-10 5-10-5z"></path><path d="M6 11.5V17c0 1.5 3 3 6 3s6-1.5 6-3v-5.5"></path><path d="M22 9v6"></path></svg>
+      </span>
+      <span class="perk-copy">
+        <strong>מיפוי הסמכה.</strong>
+        <span>קהילה מסוננת ואמינה</span>
+      </span>
+    </div>
+    <div class="perk">
+      <img class="perk-photo" src="images/perk-growth.webp" width="460" height="460" alt="" loading="lazy">
+      <span class="perk-fab">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 17 9 11 13 15 21 7"></polyline><polyline points="15 7 21 7 21 13"></polyline></svg>
+      </span>
+      <span class="perk-copy">
+        <strong>צמיחה משותפת.</strong>
+        <span>ידע, השראה וחיבורים</span>
+      </span>
+    </div>
   </div>
 
   <div class="card card-form">
+    <span class="form-fab">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="20" y2="6"></line><line x1="8" y1="12" x2="20" y2="12"></line><line x1="8" y1="18" x2="20" y2="18"></line><line x1="4" y1="6" x2="4.01" y2="6"></line><line x1="4" y1="12" x2="4.01" y2="12"></line><line x1="4" y1="18" x2="4.01" y2="18"></line></svg>
+    </span>
     <div id="form-wrap">
-      <h2>הגשת מועמדות ומיפוי הסמכה</h2>
+      <div class="eyebrow-block">
+        <div class="rule"></div>
+        <div class="label">בקשת הצטרפות</div>
+      </div>
+      <h2>הגשת מועמדות ומיפוי הסמכה.</h2>
       <p class="sub">מלאו את הפרטים — כל בקשה נבדקת ומאושרת אישית. שדות עם <span class="req">*</span> הם חובה.</p>
 
-      <div class="msg error" id="error-msg"></div>
+      <div class="msg error" id="error-msg" style="display:none" role="alert" aria-live="polite"></div>
 
-      <form id="join-form">
+      <form id="join-form" novalidate>
         <div class="two-col">
-          <div class="field">
+          <div class="field" data-field="owner_name">
             <label for="owner_name">שם מלא <span class="req">*</span></label>
-            <input type="text" id="owner_name" name="owner_name" required maxlength="120" placeholder="ישראל ישראלי">
+            <input type="text" id="owner_name" name="owner_name" required maxlength="120" autocomplete="name" placeholder="ישראל ישראלי">
+            <span class="field-err" id="owner_name-err"></span>
           </div>
-          <div class="field">
+          <div class="field" data-field="business_name">
             <label for="business_name">שם העסק / מספרה <span class="req">*</span></label>
-            <input type="text" id="business_name" name="business_name" required maxlength="150" placeholder="בוטיק עיצוב שיער">
+            <input type="text" id="business_name" name="business_name" required maxlength="150" autocomplete="organization" placeholder="בוטיק עיצוב שיער">
+            <span class="field-err" id="business_name-err"></span>
           </div>
         </div>
 
         <div class="two-col">
-          <div class="field">
+          <div class="field" data-field="phone">
             <label for="phone">טלפון נייד (לוואטסאפ) <span class="req">*</span></label>
-            <input type="tel" id="phone" name="phone" required maxlength="30" placeholder="050-1234567">
+            <input type="tel" id="phone" name="phone" required maxlength="30" autocomplete="tel" inputmode="tel" placeholder="050-1234567">
+            <span class="field-err" id="phone-err"></span>
           </div>
-          <div class="field">
-            <label for="city">עיר <span class="req">*</span></label>
-            <input type="text" id="city" name="city" required maxlength="100" placeholder="תל אביב">
+          <div class="field" data-field="email">
+            <label for="email">אימייל <span class="req">*</span></label>
+            <input type="email" id="email" name="email" required maxlength="254" autocomplete="email" placeholder="name@example.com">
+            <span class="field-err" id="email-err"></span>
           </div>
         </div>
 
-        <div class="field">
+        <div class="two-col">
+          <div class="field" data-field="city">
+            <label for="city">עיר <span class="req">*</span></label>
+            <input type="text" id="city" name="city" required maxlength="100" autocomplete="address-level2" placeholder="תל אביב">
+            <span class="field-err" id="city-err"></span>
+          </div>
+          <div class="field" data-field="instagram">
+            <label for="instagram">אינסטגרם</label>
+            <input type="text" id="instagram" name="instagram" maxlength="150" placeholder="@המשתמש_שלכם">
+          </div>
+        </div>
+
+        <div class="field" data-field="sector">
           <label>סטטוס הסמכה מקצועית <span class="req">*</span></label>
           <div class="sector-group">
             <label class="sector-option">
               <input type="radio" name="sector" value="certified" required>
-              סקטור מוסמך (תעודת תמ"ת / אקדמיה מוכרת)
+              <span class="tick"></span>
+              <strong>מוסמך</strong>
+              <span class="desc">תעודת תמ"ת / אקדמיה מוכרת</span>
             </label>
             <label class="sector-option">
               <input type="radio" name="sector" value="independent">
-              סקטור עצמאי (בשלבי למידה והשתלמויות)
+              <span class="tick"></span>
+              <strong>עצמאי</strong>
+              <span class="desc">בשלבי למידה והשתלמויות</span>
             </label>
           </div>
+          <span class="field-err" id="sector-err"></span>
         </div>
 
-        <div class="field">
+        <div class="field" data-field="education">
           <label for="education">היכן למדת או אצל מי עברת השתלמויות? <span class="req">*</span></label>
           <input type="text" id="education" name="education" required maxlength="200" placeholder="שם האקדמיה או המנטור">
-        </div>
-
-        <div class="field">
-          <label for="instagram">אינסטגרם</label>
-          <input type="text" id="instagram" name="instagram" maxlength="150" placeholder="@המשתמש_שלכם">
+          <span class="field-err" id="education-err"></span>
         </div>
 
         <div class="field">
@@ -355,7 +668,9 @@
     </div>
 
     <div class="success-card" id="success-card">
-      <span class="icon">🥂</span>
+      <span class="icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M8 12.5l2.5 2.5L16 9.5"></path></svg>
+      </span>
       <h2>הבקשה התקבלה!</h2>
       <p>תודה על הגשת המועמדות ל-The Craft.<br>נבחן את הפרטים ונחזור אליך בוואטסאפ עם אישור ההצטרפות.</p>
     </div>
@@ -370,9 +685,93 @@
   const errorMsg = document.getElementById('error-msg');
   const submitBtn = document.getElementById('submit-btn');
 
+  const MESSAGES = {
+    owner_name:    { missing: 'נא להזין שם מלא' },
+    business_name: { missing: 'נא להזין שם העסק' },
+    phone:         { missing: 'נא להזין מספר טלפון' },
+    email:         { missing: 'נא להזין כתובת אימייל', invalid: 'כתובת האימייל אינה תקינה' },
+    city:          { missing: 'נא להזין עיר' },
+    education:     { missing: 'נא לספר איפה למדת' },
+    sector:        { missing: 'נא לבחור סטטוס הסמכה' },
+  };
+
+  function setFieldError(name, msg) {
+    const fieldEl = form.querySelector(`[data-field="${name}"]`);
+    const errEl = document.getElementById(`${name}-err`);
+    if (!fieldEl) return;
+    if (msg) {
+      fieldEl.classList.add('invalid');
+      if (errEl) errEl.textContent = msg;
+    } else {
+      fieldEl.classList.remove('invalid');
+      if (errEl) errEl.textContent = '';
+    }
+  }
+
+  function messageFor(input) {
+    const rules = MESSAGES[input.name];
+    if (!rules) return '';
+    if (input.validity.valueMissing) return rules.missing || '';
+    if (input.validity.typeMismatch) return rules.invalid || rules.missing || '';
+    return '';
+  }
+
+  function validateTextField(input) {
+    const msg = messageFor(input);
+    setFieldError(input.name, msg);
+    return !msg;
+  }
+
+  function validateSector() {
+    const checked = form.querySelector('input[name="sector"]:checked');
+    const msg = checked ? '' : MESSAGES.sector.missing;
+    setFieldError('sector', msg);
+    return !msg;
+  }
+
+  const requiredInputs = form.querySelectorAll('input[required]:not([type="radio"])');
+  requiredInputs.forEach((input) => {
+    input.addEventListener('blur', () => validateTextField(input));
+    input.addEventListener('input', () => {
+      if (form.querySelector(`[data-field="${input.name}"]`).classList.contains('invalid')) {
+        validateTextField(input);
+      }
+    });
+  });
+
+  form.querySelectorAll('input[name="sector"]').forEach((radio) => {
+    radio.addEventListener('change', () => {
+      validateSector();
+      form.querySelectorAll('.sector-option').forEach((opt) => {
+        opt.classList.toggle('is-checked', opt.querySelector('input').checked);
+      });
+    });
+  });
+
+  function validateAll() {
+    let firstInvalid = null;
+    requiredInputs.forEach((input) => {
+      const ok = validateTextField(input);
+      if (!ok && !firstInvalid) firstInvalid = input;
+    });
+    const sectorOk = validateSector();
+    if (!sectorOk && !firstInvalid) firstInvalid = form.querySelector('.sector-group');
+    return firstInvalid;
+  }
+
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     errorMsg.style.display = 'none';
+
+    const firstInvalid = validateAll();
+    if (firstInvalid) {
+      firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      if (typeof firstInvalid.focus === 'function') firstInvalid.focus();
+      errorMsg.textContent = 'יש להשלים את השדות המסומנים.';
+      errorMsg.style.display = 'block';
+      return;
+    }
+
     submitBtn.disabled = true;
     submitBtn.textContent = 'שולחים...';
 
@@ -387,13 +786,36 @@
 
       if (res.ok) {
         document.getElementById('form-wrap').style.display = 'none';
-        document.getElementById('success-card').style.display = 'block';
+        const successCard = document.getElementById('success-card');
+        successCard.style.display = 'block';
+        successCard.classList.add('is-visible');
         window.scrollTo({ top: 0, behavior: 'smooth' });
-      } else if (res.status === 429) {
-        throw new Error('נשלחו יותר מדי בקשות. נסו שוב מאוחר יותר.');
-      } else {
-        throw new Error('משהו לא הסתדר. בדקו את הפרטים ונסו שוב.');
+        return;
       }
+
+      if (res.status === 429) {
+        throw new Error('נשלחו יותר מדי בקשות. נסו שוב מאוחר יותר.');
+      }
+
+      let serverErrors = null;
+      try { serverErrors = await res.json(); } catch (_) { /* non-JSON error body */ }
+
+      if (serverErrors && typeof serverErrors === 'object') {
+        let firstField = null;
+        Object.entries(serverErrors).forEach(([key, val]) => {
+          if (!MESSAGES[key]) return;
+          const msg = Array.isArray(val) ? val[0] : String(val);
+          setFieldError(key, msg);
+          if (!firstField) firstField = key;
+        });
+        if (firstField) {
+          const el = form.querySelector(`[data-field="${firstField}"]`);
+          if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          throw new Error('יש לתקן את השדות המסומנים.');
+        }
+      }
+
+      throw new Error('משהו לא הסתדר. בדקו את הפרטים ונסו שוב.');
     } catch (err) {
       errorMsg.textContent = err.message || 'שגיאת רשת. נסו שוב בעוד רגע.';
       errorMsg.style.display = 'block';

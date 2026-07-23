@@ -9,6 +9,7 @@ class Barbershop(models.Model):
     business_name = models.CharField("שם המספרה", max_length=150)
     owner_name = models.CharField("שם הבעלים", max_length=120)
     phone = models.CharField("טלפון", max_length=30)
+    email = models.EmailField("אימייל", max_length=254, blank=True)
     city = models.CharField("עיר", max_length=100)
     address = models.CharField("כתובת", max_length=200, blank=True)
     description = models.TextField("על המספרה", blank=True)

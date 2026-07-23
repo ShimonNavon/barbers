@@ -10,6 +10,7 @@ class BarbershopSerializer(serializers.ModelSerializer):
             "business_name",
             "owner_name",
             "phone",
+            "email",
             "city",
             "address",
             "description",
@@ -18,6 +19,7 @@ class BarbershopSerializer(serializers.ModelSerializer):
             "education",
         ]
         extra_kwargs = {
+            "email": {"required": True, "allow_blank": False},
             "sector": {"required": True},
             "education": {"required": True, "allow_blank": False},
         }
