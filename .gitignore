@@ -9,3 +9,6 @@ staticfiles/
 ._*
 media/
 *.log
+.worktrees/
+.venv/
+dev.sqlite3
