@@ -11,6 +11,8 @@ RUN pip install -r requirements.txt
 
 COPY . /app/
 
+RUN python manage.py collectstatic --noinput
+
 RUN mkdir -p /app/media \
     && adduser --disabled-password --gecos "" appuser \
     && chown -R appuser:appuser /app

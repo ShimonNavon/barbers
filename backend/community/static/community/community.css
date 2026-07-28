@@ -1,41 +1,42 @@
-/* ClickA. dark tokens. Before deploy, diff these hex values against
-   frontend/public/index.html :root and align exactly. */
+/* CUTPOINT brand — dark variant of the landing's cream/ink/gold tokens
+   (frontend/public/index.html :root). Heebo body, Poppins accents. */
 :root {
-  --bg: #140a0d;        /* deep oxblood-black */
-  --card: #221116;
-  --ink: #f5ede9;
-  --muted: #a08a8c;
-  --coral: #ff6b57;
-  --oxblood: #6d1a2a;
+  --bg: #1A150F;        /* deep ink */
+  --card: #2A231A;
+  --ink: #F6F1E8;       /* cream */
+  --muted: #8C8272;
+  --gold: #B08A4F;
+  --gold-btn: #BE9A64;
+  --gold-deep: #96703A;
   --radius: 14px;
 }
 * { box-sizing: border-box; }
 body {
-  margin: 0; background: radial-gradient(1200px 600px at 80% -10%, #2a1218 0%, var(--bg) 60%);
-  color: var(--ink); font-family: "Heebo", sans-serif; min-height: 100dvh;
+  margin: 0; background: radial-gradient(1200px 600px at 80% -10%, #2c251b 0%, var(--bg) 60%);
+  color: var(--ink); font-family: "Heebo", -apple-system, sans-serif; min-height: 100dvh;
 }
-h1, h2, h3 { font-family: "Frank Ruhl Libre", serif; margin: 0 0 .5em; }
+h1, h2, h3 { font-family: "Poppins", "Heebo", sans-serif; margin: 0 0 .5em; }
 .page { max-width: 640px; margin: 0 auto; padding: 16px 16px 84px; }
 .card { background: var(--card); border-radius: var(--radius); padding: 14px; margin-bottom: 12px; }
 .btn { display: inline-block; border: 0; border-radius: 999px; padding: 10px 22px;
-  font: inherit; cursor: pointer; background: #3a222a; color: var(--ink); }
-.btn-coral { background: var(--coral); color: #1c0a0e; font-weight: 700; }
+  font: inherit; cursor: pointer; background: #3a3226; color: var(--ink); }
+.btn-coral { background: var(--gold-btn); color: #221C15; font-weight: 700; }
 .field { width: 100%; font-size: 16px; padding: 12px; border-radius: 10px;
-  border: 1px solid #3a2a2e; background: #1b0f13; color: var(--ink); }
+  border: 1px solid #453A2B; background: #221C15; color: var(--ink); }
 .tabbar { position: fixed; bottom: 0; inset-inline: 0; display: flex;
-  justify-content: space-around; background: #1b0f13ee; backdrop-filter: blur(8px);
-  padding: 10px 4px calc(10px + env(safe-area-inset-bottom)); border-top: 1px solid #33222699; }
+  justify-content: space-around; background: #221C15ee; backdrop-filter: blur(8px);
+  padding: 10px 4px calc(10px + env(safe-area-inset-bottom)); border-top: 1px solid #453A2B99; }
 .tabbar a { color: var(--muted); text-decoration: none; font-size: 14px; }
-.tabbar a:hover, .tabbar a:focus { color: var(--coral); }
-.chip { display: inline-block; background: var(--oxblood); color: var(--ink);
+.tabbar a:hover, .tabbar a:focus { color: var(--gold-btn); }
+.chip { display: inline-block; background: var(--gold-deep); color: var(--ink);
   border-radius: 999px; padding: 2px 10px; font-size: 12px; }
-.badge { background: var(--coral); color: #1c0a0e; border-radius: 999px;
+.badge { background: var(--gold-btn); color: #221C15; border-radius: 999px;
   padding: 0 6px; font-size: 12px; font-weight: 700; }
-.flash { background: var(--oxblood); border-radius: 10px; padding: 10px 14px; margin-bottom: 10px; }
+.flash { background: var(--gold-deep); border-radius: 10px; padding: 10px 14px; margin-bottom: 10px; }
 .flash-warn { background: #4a3413; }
-.form-errors { color: var(--coral); font-size: 14px; margin: 6px 0; }
+.form-errors { color: #E5A791; font-size: 14px; margin: 6px 0; }
 .muted { color: var(--muted); font-size: 13px; }
-.avatar { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; background: var(--oxblood); }
+.avatar { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; background: var(--gold-deep); }
 .row { display: flex; gap: 10px; align-items: center; }
 .grow { flex: 1; }
 textarea.field { resize: vertical; min-height: 72px; }
