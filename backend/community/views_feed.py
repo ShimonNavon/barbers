@@ -1,5 +1,6 @@
 from uuid import uuid4
 
+from django.contrib import messages
 from django.core.exceptions import ValidationError
 from django.core.paginator import Paginator
 from django.db.models import Count, Exists, OuterRef, Q
@@ -10,7 +11,7 @@ from accounts.images import process_upload
 from accounts.throttle import allow
 
 from .forms import PostForm
-from .models import Like, Post
+from .models import Group, GroupMembership, Like, Post
 
 PAGE_SIZE = 20
 
@@ -55,17 +56,32 @@ def create_post(request):
     form = PostForm(request.member, request.POST, request.FILES)
 
     def rerender():
-        page = Paginator(feed_queryset(request.member),
+        """Re-show the composer with the typed text intact, in the context it
+        was written in (group page vs main feed) — losing a long post to a
+        validation error is the worst possible outcome here."""
+        slug = (request.POST.get("group") or "").strip()
+        group = Group.objects.filter(slug=slug).first() if slug else None
+        page = Paginator(feed_queryset(request.member, group=group),
                          PAGE_SIZE).get_page(1)
-        return render(request, "community/feed.html",
-                      {"page": page, "form": form,
-                       "joined_groups": _joined_groups(request.member),
-                       "feed_url": "/"})
+        context = {"page": page, "form": form,
+                   "joined_groups": _joined_groups(request.member),
+                   "text_value": request.POST.get("text", "")}
+        if group is not None:
+            context.update({
+                "group": group, "feed_url": f"/groups/{group.slug}",
+                "joined": GroupMembership.objects.filter(
+                    group=group, member=request.member).exists()})
+            return render(request, "community/group_detail.html", context)
+        context["feed_url"] = "/"
+        return render(request, "community/feed.html", context)
 
     if not form.is_valid():
         return rerender()
     if not allow(f"post:{request.member.pk}", 10, 3600):
-        return render(request, "community/partials/throttled.html", status=429)
+        # a bare fragment would replace the whole page on this normal form
+        # POST; bounce back with a flash instead
+        messages.warning(request, "לאט לאט 🙂 נסו שוב בעוד כמה דקות.")
+        return rerender()
     post = Post(author=request.member, text=form.cleaned_data["text"],
                 group=form.cleaned_data.get("group"))
     upload = form.cleaned_data.get("image")

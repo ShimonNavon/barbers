@@ -1,6 +1,6 @@
 from django import forms
 from django.db.models import Count, Max, Q
-from django.http import Http404
+from django.http import Http404, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
 
@@ -69,6 +69,10 @@ def poll(request, conversation_id):
         after = 0
     newer = conv.messages.filter(pk__gt=after).select_related("sender")
     _mark_read(conv, request.member)
+    if not newer.exists():
+        # 204 => htmx skips the swap, so after-swap never fires and the
+        # thread stops yanking the reader back to the bottom every 5s
+        return HttpResponse(status=204)
     return render(request, "community/partials/messages_page.html",
                   {"msgs": newer, "me": request.member})
 

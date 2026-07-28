@@ -16,7 +16,9 @@
     {% if messages %}{% for m in messages %}<div class="flash">{{ m }}</div>{% endfor %}{% endif %}
     {% block content %}{% endblock %}
   </main>
-  {% if user.is_authenticated %}
+  {# request.member is set only by member_required — i.e. on real community
+     pages. Login/verify/onboarding must not show nav or poll the badge. #}
+  {% if request.member %}
   <nav class="tabbar">
     <a href="/">פיד</a>
     <a href="/groups">קבוצות</a>

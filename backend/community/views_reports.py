@@ -32,6 +32,9 @@ def report(request):
             Report.objects.create(reporter=request.member,
                                   reason=form.cleaned_data["reason"], **target)
             messages.success(request, "תודה, הדיווח התקבל ויטופל.")
+        else:
+            # silently dropping a report looked identical to accepting one
+            messages.warning(request, "לאט לאט 🙂 נסו שוב בעוד כמה דקות.")
         return redirect("community:feed")
     return render(request, "community/report.html",
                   {"form": form, "qs": request.META.get("QUERY_STRING", "")})

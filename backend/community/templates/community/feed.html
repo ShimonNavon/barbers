@@ -6,7 +6,7 @@
   {% csrf_token %}
   {% include "community/partials/form_errors.html" %}
   <textarea class="field" name="text" maxlength="2000" required
-            placeholder="מה קורה אצלך?"></textarea>
+            placeholder="מה קורה אצלך?">{{ text_value|default:"" }}</textarea>
   <div class="row" style="margin-top:8px">
     <select class="field grow" name="group">
       <option value="">📣 הפיד הראשי</option>

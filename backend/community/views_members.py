@@ -46,9 +46,11 @@ def profile(request, member_id):
         pk=member_id, onboarded=True)
     page = (Paginator(feed_queryset(request.member).filter(author=person),
                       PAGE_SIZE).get_page(request.GET.get("page")))
-    return render(request, "community/profile.html",
-                  {"person": person, "page": page,
-                   "feed_url": f"/members/{member_id}"})
+    context = {"person": person, "page": page,
+               "feed_url": f"/members/{member_id}"}
+    if request.headers.get("HX-Request"):
+        return render(request, "community/partials/post_list.html", context)
+    return render(request, "community/profile.html", context)
 
 
 @member_required
