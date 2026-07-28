@@ -70,3 +70,27 @@ class DmTests(TestCase):
     def test_cannot_dm_self(self):
         r = self.client.get(f"/dm/with/{self.dana.pk}")
         self.assertEqual(r.status_code, 404)
+
+
+class DmInboxTests(TestCase):
+    def setUp(self):
+        cache.clear()
+        self.dana = make_member()
+        self.yossi = make_member(phone="+972529999999", name="יוסי")
+        self.client.force_login(self.dana.user)
+        self.conv = Conversation.for_pair(self.dana, self.yossi)
+        Message.objects.create(conversation=self.conv, sender=self.yossi,
+                               text="שלום דנה")
+
+    def test_inbox_lists_conversation_with_unread(self):
+        r = self.client.get("/dm")
+        self.assertContains(r, "יוסי")
+        self.assertContains(r, "שלום דנה")
+        self.assertContains(r, 'class="badge"')
+
+    def test_badge_counts_unread(self):
+        r = self.client.get("/dm/badge")
+        self.assertContains(r, ">1<")
+        self.client.get(f"/dm/t/{self.conv.pk}")  # reading clears it
+        r = self.client.get("/dm/badge")
+        self.assertNotContains(r, "badge")

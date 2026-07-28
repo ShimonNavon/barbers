@@ -1,0 +1,19 @@
+{% extends "community/base.html" %}
+{% block title %}הודעות{% endblock %}
+{% block content %}
+<h1>הודעות</h1>
+{% for item in items %}
+<a class="card row" href="/dm/t/{{ item.conv.pk }}"
+   style="color:var(--ink);text-decoration:none">
+  {% if item.other.avatar %}<img class="avatar" src="/media/{{ item.other.avatar.name }}" alt="">
+  {% else %}<div class="avatar"></div>{% endif %}
+  <div class="grow">
+    <strong>{{ item.other.display_name }}</strong>
+    <div class="muted">{{ item.last.text|truncatechars:60 }}</div>
+  </div>
+  {% if item.unread %}<span class="badge">{{ item.unread }}</span>{% endif %}
+</a>
+{% empty %}
+<div class="card muted">אין שיחות עדיין — מצאו מישהו בדף החברים 💬</div>
+{% endfor %}
+{% endblock %}

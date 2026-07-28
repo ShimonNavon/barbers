@@ -1,4 +1,5 @@
 from django import forms
+from django.db.models import Count, Max, Q
 from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
@@ -70,3 +71,33 @@ def poll(request, conversation_id):
     _mark_read(conv, request.member)
     return render(request, "community/partials/messages_page.html",
                   {"msgs": newer, "me": request.member})
+
+
+@member_required
+def inbox(request):
+    me = request.member
+    convs = (Conversation.objects
+             .filter(Q(member_low=me) | Q(member_high=me))
+             .select_related("member_low", "member_high")
+             .annotate(last_at=Max("messages__created_at"),
+                       unread=Count("messages", filter=Q(
+                           messages__read_at__isnull=True)
+                           & ~Q(messages__sender=me)))
+             .exclude(last_at=None)
+             .order_by("-last_at"))
+    items = [{"conv": c, "other": c.other(me),
+              "last": c.messages.last(), "unread": c.unread}
+             for c in convs]
+    return render(request, "community/dm_list.html", {"items": items})
+
+
+@member_required
+def badge(request):
+    me = request.member
+    total = (Message.objects
+             .filter(Q(conversation__member_low=me)
+                     | Q(conversation__member_high=me),
+                     read_at__isnull=True)
+             .exclude(sender=me).count())
+    return render(request, "community/partials/dm_badge.html",
+                  {"total": total})
