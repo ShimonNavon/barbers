@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Comment, Group, Post
+from .models import Comment, Group, Post, Report
 
 
 @admin.register(Group)
@@ -23,3 +23,11 @@ class CommentAdmin(admin.ModelAdmin):
     list_filter = ("is_deleted", "created_at")
     list_editable = ("is_deleted",)
     search_fields = ("text", "author__display_name")
+
+
+@admin.register(Report)
+class ReportAdmin(admin.ModelAdmin):
+    list_display = ("reporter", "post", "comment", "reason",
+                    "created_at", "handled")
+    list_filter = ("handled", "created_at")
+    list_editable = ("handled",)

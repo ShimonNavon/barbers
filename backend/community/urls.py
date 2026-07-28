@@ -1,7 +1,7 @@
 from django.urls import path
 
 from . import (views_dm, views_engage, views_feed, views_groups,
-               views_members)
+               views_members, views_reports)
 
 app_name = "community"
 
@@ -26,4 +26,5 @@ urlpatterns = [
     path("dm/t/<int:conversation_id>/send", views_dm.send, name="dm_send"),
     path("dm/t/<int:conversation_id>/messages", views_dm.poll,
          name="dm_poll"),
+    path("report", views_reports.report, name="report"),
 ]

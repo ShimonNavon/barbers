@@ -1,0 +1,14 @@
+{% extends "community/base.html" %}
+{% block title %}דיווח{% endblock %}
+{% block content %}
+<div class="card">
+  <h1>דיווח על תוכן</h1>
+  <p class="muted">הדיווח מגיע ישירות למנהלת הקהילה.</p>
+  <form method="post" action="/report?{{ qs }}">{% csrf_token %}
+    {% include "community/partials/form_errors.html" %}
+    <textarea class="field" name="reason" maxlength="500" required
+              placeholder="מה הבעיה בתוכן הזה?"></textarea>
+    <button class="btn btn-coral" style="margin-top:10px" type="submit">שליחת דיווח</button>
+  </form>
+</div>
+{% endblock %}

@@ -116,3 +116,25 @@ class Message(models.Model):
 
     class Meta:
         ordering = ["created_at", "pk"]
+
+
+class Report(models.Model):
+    reporter = models.ForeignKey("accounts.Member", on_delete=models.CASCADE,
+                                 related_name="reports")
+    post = models.ForeignKey(Post, on_delete=models.CASCADE,
+                             null=True, blank=True, related_name="reports")
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE,
+                                null=True, blank=True, related_name="reports")
+    reason = models.CharField("סיבה", max_length=500)
+    handled = models.BooleanField("טופל", default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["handled", "-created_at"]
+        verbose_name = "דיווח"
+        verbose_name_plural = "דיווחים"
+        constraints = [models.CheckConstraint(
+            name="report_exactly_one_target",
+            condition=(models.Q(post__isnull=False, comment__isnull=True)
+                       | models.Q(post__isnull=True,
+                                  comment__isnull=False)))]
