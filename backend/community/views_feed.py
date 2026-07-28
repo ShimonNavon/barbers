@@ -23,7 +23,9 @@ def feed_queryset(member, group=None):
               comment_count=Count("comments", distinct=True,
                                   filter=Q(comments__is_deleted=False)),
               liked=Exists(Like.objects.filter(
-                  post=OuterRef("pk"), member=member))))
+                  post=OuterRef("pk"), member=member)))
+          # aggregation strips Meta.ordering — order explicitly
+          .order_by("-created_at", "-pk"))
     if group is not None:
         qs = qs.filter(group=group)
     return qs
