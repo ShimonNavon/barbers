@@ -1,12 +1,17 @@
+from uuid import uuid4
+
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
 from django.shortcuts import redirect, render
 from django.views.decorators.http import require_POST
 
 from catalog.models import Barbershop
 
-from .forms import CodeForm, PhoneForm
+from .forms import CodeForm, OnboardingForm, PhoneForm
+from .images import process_upload
 from .models import Member, OtpCode
 from .phones import normalize_il_phone
 from .sms import send_sms
@@ -68,8 +73,27 @@ def verify_view(request):
     return render(request, "community/verify.html", {"form": form})
 
 
-def onboarding_view(request):  # replaced in Task 8
-    return redirect("/")
+@login_required
+def onboarding_view(request):
+    member = request.user.member
+    form = OnboardingForm(request.POST or None, request.FILES or None,
+                          initial={"display_name": member.display_name})
+    if request.method == "POST" and form.is_valid():
+        member.display_name = form.cleaned_data["display_name"]
+        avatar = form.cleaned_data.get("avatar")
+        if avatar:
+            try:
+                content = process_upload(avatar)
+            except ValidationError as e:
+                form.add_error("avatar", e.messages[0])
+                return render(request, "community/onboarding.html",
+                              {"form": form, "member": member})
+            member.avatar.save(f"{uuid4().hex}.webp", content, save=False)
+        member.onboarded = True
+        member.save()
+        return redirect("/")
+    return render(request, "community/onboarding.html",
+                  {"form": form, "member": member})
 
 
 @require_POST

@@ -16,3 +16,8 @@ class PhoneForm(forms.Form):
 class CodeForm(forms.Form):
     code = forms.RegexField(label="קוד", regex=r"^\d{6}$",
                             error_messages={"invalid": "קוד בן 6 ספרות"})
+
+
+class OnboardingForm(forms.Form):
+    display_name = forms.CharField(label="שם תצוגה", max_length=50)
+    avatar = forms.FileField(label="תמונת פרופיל", required=False)
