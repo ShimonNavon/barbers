@@ -1,4 +1,5 @@
 import os
+import sys
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -107,6 +108,12 @@ STORAGES = {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
 }
+
+# The manifest only exists after collectstatic (image build). Local dev and
+# tests use plain storage so {% static %} works without it.
+if DEBUG or "test" in sys.argv:
+    STORAGES["staticfiles"]["BACKEND"] = (
+        "django.contrib.staticfiles.storage.StaticFilesStorage")
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
