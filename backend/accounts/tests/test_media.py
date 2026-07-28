@@ -37,3 +37,14 @@ class MediaAuthTests(TestCase):
             User.objects.create(username="s", is_staff=True))
         r = self.client.get("/media/certificates/c.pdf")
         self.assertEqual(r.status_code, 200)
+
+
+class WebpMimeTests(TestCase):
+    def test_webp_mapping_ensured_even_on_bare_pythons(self):
+        # python:3.12-slim ships no .webp mapping; serve() then sends
+        # application/octet-stream which nosniff-blocks every image
+        import mimetypes
+        mimetypes.types_map.pop(".webp", None)
+        from accounts.apps import ensure_mime_types
+        ensure_mime_types()
+        self.assertEqual(mimetypes.guess_type("a.webp")[0], "image/webp")
