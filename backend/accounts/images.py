@@ -9,6 +9,16 @@ MAX_SIDE = 1600
 _ALLOWED_FORMATS = {"JPEG", "PNG", "WEBP"}
 
 
+def save_image_field(field, content):
+    """Attach re-encoded image `content` to `field`, deleting whatever file
+    it held before. Without this every photo change leaks a file forever."""
+    from uuid import uuid4
+    old_name = field.name
+    field.save(f"{uuid4().hex}.webp", content, save=False)
+    if old_name and old_name != field.name:
+        field.storage.delete(old_name)
+
+
 def process_upload(uploaded_file):
     """Validate and normalize a member-uploaded image. Re-encoding to WEBP
     drops EXIF (incl. GPS) and bounds dimensions/weight."""

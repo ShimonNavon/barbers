@@ -1,5 +1,4 @@
 import secrets
-from uuid import uuid4
 
 from django.conf import settings
 from django.contrib.auth import login as auth_login
@@ -13,7 +12,7 @@ from django.views.decorators.http import require_POST
 from catalog.models import Barbershop
 
 from .forms import CodeForm, OnboardingForm, PhoneForm
-from .images import process_upload
+from .images import process_upload, save_image_field
 from .models import Member, OtpCode
 from .phones import normalize_il_phone
 from .sms import send_sms
@@ -102,7 +101,7 @@ def onboarding_view(request):
                 form.add_error("avatar", e.messages[0])
                 return render(request, "community/onboarding.html",
                               {"form": form, "member": member})
-            member.avatar.save(f"{uuid4().hex}.webp", content, save=False)
+            save_image_field(member.avatar, content)
         member.onboarded = True
         member.save()
         return redirect("/")

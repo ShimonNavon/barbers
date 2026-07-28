@@ -56,3 +56,28 @@ class OnboardingTests(TestCase):
         login_member(self.client)
         r = self.client.post("/welcome", {"display_name": "א" * 51})
         self.assertEqual(r.status_code, 200)  # re-rendered with error
+
+
+@override_settings(MEDIA_ROOT=MEDIA_TMP)
+class AvatarReplacementTests(TestCase):
+    def _jpeg(self, colour):
+        buf = BytesIO()
+        Image.new("RGB", (20, 20), colour).save(buf, "JPEG")
+        return SimpleUploadedFile("a.jpg", buf.getvalue(), "image/jpeg")
+
+    def test_replacing_avatar_deletes_the_previous_file(self):
+        import os
+        m = login_member(self.client, onboarded=True)
+        self.client.post("/me", {"display_name": "דנה",
+                                 "avatar": self._jpeg("blue")})
+        m.refresh_from_db()
+        first_path = m.avatar.path
+        self.assertTrue(os.path.exists(first_path))
+
+        self.client.post("/me", {"display_name": "דנה",
+                                 "avatar": self._jpeg("red")})
+        m.refresh_from_db()
+        self.assertNotEqual(m.avatar.path, first_path)
+        # every photo change used to leak the old file forever
+        self.assertFalse(os.path.exists(first_path))
+        self.assertTrue(os.path.exists(m.avatar.path))

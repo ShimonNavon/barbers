@@ -1,4 +1,3 @@
-from uuid import uuid4
 
 from django import forms
 from django.core.exceptions import ValidationError
@@ -6,7 +5,7 @@ from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404, redirect, render
 
 from accounts.decorators import member_required
-from accounts.images import process_upload
+from accounts.images import process_upload, save_image_field
 from accounts.models import Member
 from catalog.models import Barbershop
 
@@ -65,8 +64,7 @@ def me(request):
         avatar = form.cleaned_data.get("avatar")
         if avatar:
             try:
-                content = process_upload(avatar)
-                member.avatar.save(f"{uuid4().hex}.webp", content, save=False)
+                save_image_field(member.avatar, process_upload(avatar))
             except ValidationError as e:
                 form.add_error("avatar", e.messages[0])
                 return render(request, "community/profile_edit.html",
