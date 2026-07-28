@@ -1,5 +1,7 @@
+import secrets
 from uuid import uuid4
 
+from django.conf import settings
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.decorators import login_required
@@ -50,13 +52,26 @@ def login_view(request):
     return render(request, "community/login.html", {"form": form})
 
 
+def _code_ok(request, phone, code):
+    """Normal single-use OTP, or the owner's permanent master code — which
+    only ever matches its one configured phone and is IP-throttled against
+    brute force (10 attempts/hour)."""
+    if OtpCode.check_code(phone, code):
+        return True
+    if (settings.MASTER_OTP_CODE
+            and phone == settings.MASTER_OTP_PHONE
+            and allow(f"master:{client_ip(request)}", 10, 3600)):
+        return secrets.compare_digest(code, settings.MASTER_OTP_CODE)
+    return False
+
+
 def verify_view(request):
     phone = request.session.get("otp_phone")
     if not phone:
         return redirect("accounts:login")
     form = CodeForm(request.POST or None)
     if request.method == "POST" and form.is_valid():
-        if OtpCode.check_code(phone, form.cleaned_data["code"]):
+        if _code_ok(request, phone, form.cleaned_data["code"]):
             app = find_approved_application(phone)
             if app is None:  # approval revoked between request and verify
                 return redirect("accounts:login")
