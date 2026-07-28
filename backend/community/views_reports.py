@@ -14,12 +14,19 @@ class ReportForm(forms.Form):
 
 
 def _target(request):
+    def as_id(raw):
+        # a non-numeric pk reaches the DB layer as ValueError -> 500
+        try:
+            return int(raw)
+        except (TypeError, ValueError):
+            raise Http404
+
     post_id = request.GET.get("post")
     comment_id = request.GET.get("comment")
     if post_id:
-        return {"post": get_object_or_404(Post, pk=post_id)}
+        return {"post": get_object_or_404(Post, pk=as_id(post_id))}
     if comment_id:
-        return {"comment": get_object_or_404(Comment, pk=comment_id)}
+        return {"comment": get_object_or_404(Comment, pk=as_id(comment_id))}
     raise Http404
 
 

@@ -32,10 +32,19 @@ def client_ip(request):
 
 
 def find_approved_application(phone_e164):
-    """Match a normalized phone against approved applications. Their `phone`
-    is free text, so normalize each candidate at comparison time. Community
-    scale is hundreds of rows — a scan is fine."""
-    for app in Barbershop.objects.filter(approved=True):
+    """Match a normalized phone against approved PROFESSIONAL applications.
+
+    `approved` is also ticked on waitlist (client) rows to mean "handled",
+    so membership must additionally require the professional track. Their
+    `phone` is free text, so normalize each candidate at comparison time;
+    community scale is hundreds of rows, so a scan is fine. Oldest first:
+    if someone applied twice, the vetted original wins over a later stub.
+    """
+    candidates = (Barbershop.objects
+                  .filter(approved=True,
+                          applicant_type=Barbershop.ApplicantType.PROFESSIONAL)
+                  .order_by("created_at"))
+    for app in candidates:
         if normalize_il_phone(app.phone) == phone_e164:
             return app
     return None
@@ -90,7 +99,9 @@ def verify_view(request):
                           "display_name": app.owner_name[:50]},
             )
             auth_login(request, user)
-            del request.session["otp_phone"]
+            # auth_login flushes the session when a different user was signed
+            # in, so the key may already be gone — pop, never del.
+            request.session.pop("otp_phone", None)
             return redirect("/" if member.onboarded else "/welcome")
         form.add_error("code", "קוד שגוי או שפג תוקפו")
     return render(request, "community/verify.html", {"form": form})
@@ -98,7 +109,9 @@ def verify_view(request):
 
 @login_required
 def onboarding_view(request):
-    member = request.user.member
+    member = getattr(request.user, "member", None)
+    if member is None:  # e.g. a staff account with no community membership
+        return redirect("accounts:login")
     form = OnboardingForm(request.POST or None, request.FILES or None,
                           initial={"display_name": member.display_name})
     if request.method == "POST" and form.is_valid():

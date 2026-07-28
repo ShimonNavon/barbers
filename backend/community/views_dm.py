@@ -89,8 +89,15 @@ def inbox(request):
                            & ~Q(messages__sender=me)))
              .exclude(last_at=None)
              .order_by("-last_at"))
+    # one query for the newest message of every conversation, instead of
+    # c.messages.last() once per row
+    latest = {}
+    for msg in (Message.objects
+                .filter(conversation__in=convs)
+                .order_by("conversation_id", "-created_at", "-pk")):
+        latest.setdefault(msg.conversation_id, msg)
     items = [{"conv": c, "other": c.other(me),
-              "last": c.messages.last(), "unread": c.unread}
+              "last": latest.get(c.pk), "unread": c.unread}
              for c in convs]
     return render(request, "community/dm_list.html", {"items": items})
 

@@ -18,7 +18,9 @@ PAGE_SIZE = 20
 
 def feed_queryset(member, group=None):
     qs = (Post.objects.filter(is_deleted=False)
-          .select_related("author", "group")
+          # author__application: every card renders occupation_display, which
+          # walks Member -> Barbershop (one extra query per post otherwise)
+          .select_related("author", "author__application", "group")
           .annotate(
               like_count=Count("likes", distinct=True),
               comment_count=Count("comments", distinct=True,

@@ -75,7 +75,9 @@ def me(request):
                 form.add_error("avatar", e.messages[0])
                 return render(request, "community/profile_edit.html",
                               {"form": form, "member": member})
-        member.save()
+        # save only what this form owns: a blanket save() would write back the
+        # stale last_seen this instance was loaded with, rewinding presence
+        member.save(update_fields=["display_name", "bio", "avatar"])
         return redirect("community:me")
     return render(request, "community/profile_edit.html",
                   {"form": form, "member": member})
