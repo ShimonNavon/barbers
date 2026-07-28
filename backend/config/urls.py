@@ -7,6 +7,7 @@ urlpatterns = [
     path("", include("accounts.urls")),
     path("admin/", admin.site.urls),
     path("api/", include("catalog.urls")),
+    path("", include("community.urls")),
     # Closed community: certificates staff-only, all other media members-only
     re_path(r"^media/(?P<path>.*)$", media_serve),
 ]

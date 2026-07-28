@@ -40,7 +40,8 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        ordering = ["-created_at"]
+        # -pk tiebreaks same-instant rows (bulk seeds, fast posting)
+        ordering = ["-created_at", "-pk"]
         verbose_name = "פוסט"
         verbose_name_plural = "פוסטים"
 

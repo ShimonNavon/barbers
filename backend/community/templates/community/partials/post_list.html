@@ -1,0 +1,10 @@
+{% for post in page %}
+  {% include "community/partials/post_card.html" %}
+{% empty %}
+  <div class="card muted">עדיין שקט כאן… תהיו הראשונים לפרסם 🎉</div>
+{% endfor %}
+{% if page.has_next %}
+<button class="btn" style="width:100%"
+        hx-get="{{ feed_url }}?page={{ page.next_page_number }}"
+        hx-target="this" hx-swap="outerHTML">עוד</button>
+{% endif %}

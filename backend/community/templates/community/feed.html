@@ -1,0 +1,24 @@
+{% extends "community/base.html" %}
+{% block title %}פיד{% endblock %}
+{% block content %}
+<h1>הקהילה</h1>
+<form class="card" method="post" action="/posts" enctype="multipart/form-data">
+  {% csrf_token %}
+  {% include "community/partials/form_errors.html" %}
+  <textarea class="field" name="text" maxlength="2000" required
+            placeholder="מה קורה אצלך?"></textarea>
+  <div class="row" style="margin-top:8px">
+    <select class="field grow" name="group">
+      <option value="">📣 הפיד הראשי</option>
+      {% for g in joined_groups %}
+      <option value="{{ g.slug }}">{{ g.emoji }} {{ g.name }}</option>
+      {% endfor %}
+    </select>
+    <input type="file" name="image" accept="image/jpeg,image/png,image/webp">
+    <button class="btn btn-coral" type="submit">פרסום</button>
+  </div>
+</form>
+<div id="post-list">
+  {% include "community/partials/post_list.html" %}
+</div>
+{% endblock %}

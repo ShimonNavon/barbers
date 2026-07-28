@@ -1,0 +1,24 @@
+<article class="card" id="post-{{ post.pk }}">
+  <div class="row">
+    {% if post.author.avatar %}<img class="avatar" src="/media/{{ post.author.avatar.name }}" alt="">
+    {% else %}<div class="avatar"></div>{% endif %}
+    <div class="grow">
+      <a href="/members/{{ post.author.pk }}" style="color:var(--ink);text-decoration:none">
+        <strong>{{ post.author.display_name }}</strong></a>
+      <div class="muted">{{ post.author.occupation_display }}
+        · {{ post.created_at|date:"j בF, H:i" }}</div>
+    </div>
+    {% if post.group %}<span class="chip">{{ post.group.emoji }} {{ post.group.name }}</span>{% endif %}
+  </div>
+  <p style="white-space:pre-line">{{ post.text }}</p>
+  {% if post.image %}<img src="/media/{{ post.image.name }}" alt=""
+       style="max-width:100%;border-radius:10px">{% endif %}
+  <div class="row" style="margin-top:8px">
+    {% include "community/partials/like_button.html" %}
+    <button class="btn" hx-get="/posts/{{ post.pk }}/comments"
+            hx-target="#comments-{{ post.pk }}" hx-swap="innerHTML">
+      💬 {{ post.comment_count }}</button>
+    <a class="muted grow" style="text-align:left" href="/report?post={{ post.pk }}">דיווח</a>
+  </div>
+  <div id="comments-{{ post.pk }}"></div>
+</article>

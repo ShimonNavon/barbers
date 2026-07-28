@@ -1,0 +1,4 @@
+<button class="btn{% if post.liked %} btn-coral{% endif %}"
+        hx-post="/posts/{{ post.pk }}/like" hx-swap="outerHTML"
+        hx-headers='{"X-CSRFToken":"{{ csrf_token }}"}'>
+  ♥ {{ post.like_count }}</button>
