@@ -8,7 +8,7 @@
     {% include "community/partials/form_errors.html" %}
     <label class="muted">שם תצוגה</label>
     <input class="field" name="display_name" maxlength="50" required
-           value="{{ form.initial.display_name|default:form.data.display_name }}">
+           value="{{ form.display_name.value|default_if_none:'' }}">
     <label class="muted" style="display:block;margin-top:10px">תמונת פרופיל (לא חובה)</label>
     <input class="field" type="file" name="avatar" accept="image/jpeg,image/png,image/webp">
     <button class="btn btn-coral" style="margin-top:14px" type="submit">אל הפיד ←</button>
