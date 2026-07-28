@@ -18,5 +18,10 @@ def media_serve(request, path):
     """Closed community: no public media. Certificates carry personal
     documents — staff only. Everything else needs a logged-in member."""
     if path.startswith("certificates/"):
-        return _staff_serve(request, path)
-    return _member_serve(request, path)
+        response = _staff_serve(request, path)
+    else:
+        response = _member_serve(request, path)
+    # Cloudflare edge-caches image extensions by default; no-store keeps
+    # authenticated media out of shared caches (else: auth bypass via cache)
+    response["Cache-Control"] = "private, no-store"
+    return response
