@@ -6,6 +6,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 
 from accounts.decorators import member_required
 from accounts.images import process_upload, save_image_field
+from accounts.throttle import allow
 from accounts.models import Member
 from catalog.models import Barbershop
 
@@ -63,6 +64,11 @@ def me(request):
         member.bio = form.cleaned_data.get("bio", "")
         avatar = form.cleaned_data.get("avatar")
         if avatar:
+            # image decoding is the most expensive thing a member can trigger
+            if not allow(f"avatar:{member.pk}", 12, 3600):
+                form.add_error("avatar", "לאט לאט 🙂 נסו שוב בעוד כמה דקות.")
+                return render(request, "community/profile_edit.html",
+                              {"form": form, "member": member})
             try:
                 save_image_field(member.avatar, process_upload(avatar))
             except ValidationError as e:

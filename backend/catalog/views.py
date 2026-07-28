@@ -9,6 +9,12 @@ from .serializers import BarbershopSerializer
 class BarbershopThrottle(AnonRateThrottle):
     scope = "barbershops"
 
+    def get_ident(self, request):
+        # DRF's default identity includes the client-supplied X-Forwarded-For,
+        # so rotating that header hands out a fresh quota per request.
+        from accounts.views import client_ip
+        return client_ip(request)
+
 
 class BarbershopCreateView(CreateAPIView):
     queryset = Barbershop.objects.all()

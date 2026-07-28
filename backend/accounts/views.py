@@ -20,9 +20,15 @@ from .throttle import allow
 
 
 def client_ip(request):
-    fwd = request.META.get("HTTP_X_FORWARDED_FOR", "")
-    return (fwd.split(",")[0].strip() or
-            request.META.get("REMOTE_ADDR", "unknown"))
+    """Identify the caller for rate limiting.
+
+    X-Forwarded-For must NOT be trusted: nginx appends to whatever the client
+    sent, so its first entry is attacker-controlled and rotating it would
+    reset every per-IP limit. Traffic reaches us through Cloudflare Tunnel,
+    which sets CF-Connecting-IP itself; fall back to the socket address.
+    """
+    cf = request.META.get("HTTP_CF_CONNECTING_IP", "").strip()
+    return cf or request.META.get("REMOTE_ADDR", "unknown")
 
 
 def find_approved_application(phone_e164):
@@ -58,7 +64,11 @@ def _code_ok(request, phone, code):
     if OtpCode.check_code(phone, code):
         return True
     expected = settings.MASTER_OTP_PAIRS.get(phone, "")
-    if expected and allow(f"master:{client_ip(request)}", 10, 3600):
+    # The phone comes from the session and is the one identifier an attacker
+    # cannot rotate — cap on it as well as on the (spoofable-ish) IP.
+    if (expected
+            and allow(f"master-phone:{phone}", 10, 3600)
+            and allow(f"master:{client_ip(request)}", 10, 3600)):
         return secrets.compare_digest(code, expected)
     return False
 
@@ -95,6 +105,10 @@ def onboarding_view(request):
         member.display_name = form.cleaned_data["display_name"]
         avatar = form.cleaned_data.get("avatar")
         if avatar:
+            if not allow(f"avatar:{member.pk}", 12, 3600):
+                form.add_error("avatar", "לאט לאט 🙂 נסו שוב בעוד כמה דקות.")
+                return render(request, "community/onboarding.html",
+                              {"form": form, "member": member})
             try:
                 content = process_upload(avatar)
             except ValidationError as e:

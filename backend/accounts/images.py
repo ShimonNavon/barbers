@@ -6,6 +6,9 @@ from PIL import Image, ImageOps, UnidentifiedImageError
 
 MAX_BYTES = 5 * 1024 * 1024
 MAX_SIDE = 1600
+# A 500KB PNG can decode to gigabytes of RAM, so bytes alone are no defence.
+# 50MP is far above any phone camera and ~200MB decoded worst case.
+MAX_PIXELS = 50_000_000
 _ALLOWED_FORMATS = {"JPEG", "PNG", "WEBP"}
 
 
@@ -27,8 +30,16 @@ def process_upload(uploaded_file):
     try:
         img = Image.open(uploaded_file)
         img_format = img.format
+        # Read dimensions from the header BEFORE decoding pixels — this is
+        # what stops a decompression bomb from OOM-killing the process.
+        width, height = img.size
+        if width * height > MAX_PIXELS:
+            raise ValidationError("התמונה גדולה מדי (רזולוציה)")
         img.load()
-    except (UnidentifiedImageError, OSError):
+    except ValidationError:
+        raise
+    except (UnidentifiedImageError, OSError, Image.DecompressionBombError,
+            Image.DecompressionBombWarning):
         raise ValidationError("קובץ התמונה לא תקין")
     if img_format not in _ALLOWED_FORMATS:
         raise ValidationError("פורמט לא נתמך — JPEG, PNG או WEBP")

@@ -34,7 +34,17 @@ class BarbershopSerializer(serializers.ModelSerializer):
             "certificate": {"required": False, "allow_null": True},
         }
 
+    # Staff open these from the admin origin, so an .html/.svg here would be
+    # stored XSS against the admin session. Documents and photos only.
+    ALLOWED_CERTIFICATE_SUFFIXES = (".pdf", ".jpg", ".jpeg", ".png", ".webp")
+
     def validate_certificate(self, value):
-        if value and value.size > 8 * 1024 * 1024:
+        if not value:
+            return value
+        if value.size > 8 * 1024 * 1024:
             raise serializers.ValidationError("הקובץ גדול מדי (עד 8MB).")
+        name = (value.name or "").lower()
+        if not name.endswith(self.ALLOWED_CERTIFICATE_SUFFIXES):
+            raise serializers.ValidationError(
+                "פורמט לא נתמך — PDF או תמונה בלבד.")
         return value
