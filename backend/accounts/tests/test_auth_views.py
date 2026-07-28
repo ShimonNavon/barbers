@@ -58,3 +58,51 @@ class OtpRequestTests(TestCase):
             self.client.post("/login", {"phone": f"05299{i:05d}"}, follow=True)
         self.client.post("/login", {"phone": "0521111111"}, follow=True)
         self.assertEqual(OtpCode.objects.count(), 0)
+
+
+from django.contrib.auth.models import User  # noqa: E402
+
+from accounts.models import Member  # noqa: E402
+
+
+class OtpVerifyTests(TestCase):
+    def setUp(self):
+        cache.clear()
+        self.app = make_application()
+        self.client.post("/login", {"phone": "0521234567"})
+        self.code = OtpCode.objects.get().code
+
+    def test_correct_code_logs_in_creates_member_redirects_onboarding(self):
+        r = self.client.post("/login/verify", {"code": self.code})
+        self.assertRedirects(r, "/welcome", fetch_redirect_response=False)
+        m = Member.objects.get()
+        self.assertEqual(m.phone_e164, "+972521234567")
+        self.assertEqual(m.display_name, "דנה כהן")
+        self.assertEqual(m.application, self.app)
+        self.assertEqual(int(self.client.session["_auth_user_id"]), m.user.pk)
+
+    def test_onboarded_member_redirects_to_feed(self):
+        self.client.post("/login/verify", {"code": self.code})
+        Member.objects.update(onboarded=True)
+        self.client.post("/logout")
+        self.client.post("/login", {"phone": "0521234567"})
+        code2 = OtpCode.objects.filter(used=False).get().code
+        r = self.client.post("/login/verify", {"code": code2})
+        self.assertRedirects(r, "/", fetch_redirect_response=False)
+        self.assertEqual(Member.objects.count(), 1)  # no duplicate
+
+    def test_wrong_code_stays_anonymous(self):
+        r = self.client.post("/login/verify", {"code": "000000"})
+        self.assertEqual(r.status_code, 200)
+        self.assertContains(r, "קוד שגוי")
+        self.assertNotIn("_auth_user_id", self.client.session)
+
+    def test_verify_without_session_phone_redirects_login(self):
+        c = self.client_class()
+        r = c.post("/login/verify", {"code": "123456"})
+        self.assertRedirects(r, "/login")
+
+    def test_logout(self):
+        self.client.post("/login/verify", {"code": self.code})
+        self.client.post("/logout")
+        self.assertNotIn("_auth_user_id", self.client.session)

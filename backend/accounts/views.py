@@ -1,9 +1,13 @@
+from django.contrib.auth import login as auth_login
+from django.contrib.auth import logout as auth_logout
+from django.contrib.auth.models import User
 from django.shortcuts import redirect, render
+from django.views.decorators.http import require_POST
 
 from catalog.models import Barbershop
 
 from .forms import CodeForm, PhoneForm
-from .models import OtpCode
+from .models import Member, OtpCode
 from .phones import normalize_il_phone
 from .sms import send_sms
 from .throttle import allow
@@ -41,13 +45,34 @@ def login_view(request):
     return render(request, "community/login.html", {"form": form})
 
 
-def verify_view(request):  # replaced in Task 6
-    return render(request, "community/verify.html", {"form": CodeForm()})
+def verify_view(request):
+    phone = request.session.get("otp_phone")
+    if not phone:
+        return redirect("accounts:login")
+    form = CodeForm(request.POST or None)
+    if request.method == "POST" and form.is_valid():
+        if OtpCode.check_code(phone, form.cleaned_data["code"]):
+            app = find_approved_application(phone)
+            if app is None:  # approval revoked between request and verify
+                return redirect("accounts:login")
+            user, _ = User.objects.get_or_create(username=phone)
+            member, _ = Member.objects.get_or_create(
+                user=user,
+                defaults={"application": app, "phone_e164": phone,
+                          "display_name": app.owner_name[:50]},
+            )
+            auth_login(request, user)
+            del request.session["otp_phone"]
+            return redirect("/" if member.onboarded else "/welcome")
+        form.add_error("code", "קוד שגוי או שפג תוקפו")
+    return render(request, "community/verify.html", {"form": form})
 
 
 def onboarding_view(request):  # replaced in Task 8
     return redirect("/")
 
 
-def logout_view(request):  # replaced in Task 6
+@require_POST
+def logout_view(request):
+    auth_logout(request)
     return redirect("accounts:login")
