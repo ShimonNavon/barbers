@@ -1,0 +1,25 @@
+{% extends "community/base.html" %}
+{% block title %}{{ person.display_name }}{% endblock %}
+{% block content %}
+<div class="card row">
+  {% if person.avatar %}<img class="avatar" src="/media/{{ person.avatar.name }}"
+       alt="" style="width:72px;height:72px">
+  {% else %}<div class="avatar" style="width:72px;height:72px"></div>{% endif %}
+  <div class="grow">
+    <h1 style="margin:0">{{ person.display_name }}</h1>
+    <div class="muted">{{ person.occupation_display }}{% if person.city %} · {{ person.city }}{% endif %}
+      · בקהילה מאז {{ person.created_at|date:"F Y" }}</div>
+    {% if person.bio %}<p>{{ person.bio }}</p>{% endif %}
+    {% if person.instagram %}
+    <a style="color:var(--coral)" rel="noopener" target="_blank"
+       href="https://instagram.com/{{ person.instagram|cut:"@" }}">אינסטגרם</a>
+    {% endif %}
+  </div>
+</div>
+{% if person.pk != request.member.pk %}
+<a class="btn btn-coral" href="/dm/with/{{ person.pk }}">שלח/י הודעה 💬</a>
+{% endif %}
+<div id="post-list" style="margin-top:12px">
+  {% include "community/partials/post_list.html" %}
+</div>
+{% endblock %}

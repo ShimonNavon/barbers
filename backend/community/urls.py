@@ -1,6 +1,6 @@
 from django.urls import path
 
-from . import views_engage, views_feed, views_groups
+from . import views_engage, views_feed, views_groups, views_members
 
 app_name = "community"
 
@@ -15,4 +15,7 @@ urlpatterns = [
          name="group_detail"),
     path("groups/<slug:slug>/join", views_groups.join_toggle,
          name="group_join"),
+    path("members", views_members.directory, name="members"),
+    path("members/<int:member_id>", views_members.profile, name="profile"),
+    path("me", views_members.me, name="me"),
 ]

@@ -1,0 +1,30 @@
+{% extends "community/base.html" %}
+{% block title %}חברים{% endblock %}
+{% block content %}
+<h1>חברי הקהילה</h1>
+<form class="card" method="get">
+  <input class="field" name="q" value="{{ q }}" placeholder="חיפוש לפי שם…">
+  <div class="row" style="margin-top:8px;flex-wrap:wrap">
+    <select class="field grow" name="occupation">
+      <option value="">כל התחומים</option>
+      {% for value, label in occupations %}
+      <option value="{{ value }}" {% if value == occupation %}selected{% endif %}>
+        {{ label }}</option>
+      {% endfor %}
+    </select>
+    <input class="field grow" name="city" value="{{ city }}" placeholder="עיר">
+    <button class="btn btn-coral" type="submit">סינון</button>
+  </div>
+</form>
+{% for m in members %}
+<a class="card row" href="/members/{{ m.pk }}"
+   style="color:var(--ink);text-decoration:none">
+  {% if m.avatar %}<img class="avatar" src="/media/{{ m.avatar.name }}" alt="">
+  {% else %}<div class="avatar"></div>{% endif %}
+  <div class="grow">
+    <strong>{{ m.display_name }}</strong>
+    <div class="muted">{{ m.occupation_display }}{% if m.city %} · {{ m.city }}{% endif %}</div>
+  </div>
+</a>
+{% empty %}<div class="card muted">לא נמצאו חברים.</div>{% endfor %}
+{% endblock %}
