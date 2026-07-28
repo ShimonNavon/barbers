@@ -1,0 +1,27 @@
+{% extends "community/base.html" %}
+{% block title %}{{ group.name }}{% endblock %}
+{% block content %}
+<h1>{{ group.emoji }} {{ group.name }}</h1>
+<p class="muted">{{ group.description }}</p>
+<form method="post" action="/groups/{{ group.slug }}/join">{% csrf_token %}
+  <button class="btn{% if not joined %} btn-coral{% endif %}">
+    {% if joined %}עזיבת הקבוצה{% else %}הצטרפות לקבוצה{% endif %}</button>
+</form>
+{% if joined %}
+<form class="card" method="post" action="/posts" enctype="multipart/form-data"
+      style="margin-top:12px">
+  {% csrf_token %}
+  <textarea class="field" name="text" maxlength="2000" required
+            placeholder="שיתוף עם {{ group.name }}…"></textarea>
+  <input type="hidden" name="group" value="{{ group.slug }}">
+  <div class="row" style="margin-top:8px">
+    <input class="grow" type="file" name="image"
+           accept="image/jpeg,image/png,image/webp">
+    <button class="btn btn-coral" type="submit">פרסום</button>
+  </div>
+</form>
+{% endif %}
+<div id="post-list" style="margin-top:12px">
+  {% include "community/partials/post_list.html" %}
+</div>
+{% endblock %}

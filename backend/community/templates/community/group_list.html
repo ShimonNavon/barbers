@@ -1,0 +1,18 @@
+{% extends "community/base.html" %}
+{% block title %}קבוצות{% endblock %}
+{% block content %}
+<h1>קבוצות</h1>
+{% for g in groups %}
+<div class="card row">
+  <a class="grow" href="/groups/{{ g.slug }}"
+     style="color:var(--ink);text-decoration:none">
+    <strong>{{ g.emoji }} {{ g.name }}</strong>
+    <div class="muted">{{ g.description }} · {{ g.member_count }} חברים</div>
+  </a>
+  <form method="post" action="/groups/{{ g.slug }}/join">{% csrf_token %}
+    <button class="btn{% if not g.joined %} btn-coral{% endif %}">
+      {% if g.joined %}עזיבה{% else %}הצטרפות{% endif %}</button>
+  </form>
+</div>
+{% empty %}<div class="card muted">אין קבוצות עדיין.</div>{% endfor %}
+{% endblock %}
