@@ -1,0 +1,17 @@
+{% for c in comments %}
+<div class="row" style="margin:8px 0">
+  <strong>{{ c.author.display_name }}</strong>
+  <span class="grow">{{ c.text }}</span>
+  <a class="muted" href="/report?comment={{ c.pk }}">דיווח</a>
+</div>
+{% empty %}<p class="muted">אין תגובות עדיין.</p>{% endfor %}
+{% if throttled %}{% include "community/partials/throttled.html" %}{% endif %}
+<form hx-post="/posts/{{ post.pk }}/comments"
+      hx-target="#comments-{{ post.pk }}" hx-swap="innerHTML">
+  {% csrf_token %}
+  <div class="row">
+    <input class="field grow" name="text" maxlength="500" required
+           placeholder="תגובה…">
+    <button class="btn btn-coral" type="submit">שליחה</button>
+  </div>
+</form>
