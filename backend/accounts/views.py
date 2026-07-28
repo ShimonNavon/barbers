@@ -53,15 +53,14 @@ def login_view(request):
 
 
 def _code_ok(request, phone, code):
-    """Normal single-use OTP, or the owner's permanent master code — which
-    only ever matches its one configured phone and is IP-throttled against
-    brute force (10 attempts/hour)."""
+    """Normal single-use OTP, or a permanent master code — each master code
+    only ever matches its one configured phone, and attempts are IP-throttled
+    against brute force (10/hour)."""
     if OtpCode.check_code(phone, code):
         return True
-    if (settings.MASTER_OTP_CODE
-            and phone == settings.MASTER_OTP_PHONE
-            and allow(f"master:{client_ip(request)}", 10, 3600)):
-        return secrets.compare_digest(code, settings.MASTER_OTP_CODE)
+    expected = settings.MASTER_OTP_PAIRS.get(phone, "")
+    if expected and allow(f"master:{client_ip(request)}", 10, 3600):
+        return secrets.compare_digest(code, expected)
     return False
 
 

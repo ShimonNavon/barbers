@@ -134,10 +134,14 @@ REST_FRAMEWORK = {
     },
 }
 
-# Owner master login: a permanent code valid ONLY for this one phone.
-# Both values live in the server's .env — never in git. Empty = disabled.
-MASTER_OTP_PHONE = os.environ.get("MASTER_OTP_PHONE", "")
-MASTER_OTP_CODE = os.environ.get("MASTER_OTP_CODE", "")
+# Owner/master logins: permanent codes, each valid ONLY for its one phone.
+# Env format: MASTER_OTP_PAIRS="+9725xxxxxxxx:code,+9725yyyyyyyy:code"
+# Values live in the server's .env — never in git. Empty = disabled.
+MASTER_OTP_PAIRS = {}
+for _pair in os.environ.get("MASTER_OTP_PAIRS", "").split(","):
+    if ":" in _pair:
+        _phone, _code = _pair.strip().split(":", 1)
+        MASTER_OTP_PAIRS[_phone] = _code
 
 LOGIN_URL = "/login"
 SESSION_COOKIE_AGE = 60 * 60 * 24 * 30  # 30 days

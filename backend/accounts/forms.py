@@ -14,8 +14,8 @@ class PhoneForm(forms.Form):
 
 
 class CodeForm(forms.Form):
-    # 6 digits for SMS codes; up to 12 to admit the owner master code
-    code = forms.RegexField(label="קוד", regex=r"^\d{6,12}$",
+    # 6 digits for SMS codes; 5-12 to admit the permanent master codes
+    code = forms.RegexField(label="קוד", regex=r"^\d{5,12}$",
                             error_messages={"invalid": "קוד בן 6 ספרות"})
 
 
