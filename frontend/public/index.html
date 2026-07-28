@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CUTPOINT | הרשת המקצועית לאנשי השיער והיופי</title>
-  <meta name="description" content="CUTPOINT — קהילה סגורה ומקצועית למעצבי שיער, ברברים, מאפרים ואנשי יופי. חיבורים אמיתיים, הזדמנויות אמיתיות. הצטרפו לרשימת ההמתנה.">
+  <title>CUTPOINT | טיפוח שיער בטוח, מוסמך ואחראי</title>
+  <meta name="description" content="CUTPOINT — קהילת מומחי הכימיה ומעצבי השיער המובילים בישראל. הצטרפו לרשימת ההמתנה וקבלו גישה מוקדמת למומחים באזורכם.">
   <meta name="theme-color" content="#F6F1E8">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%23221C15'/%3E%3Ctext x='15' y='21.5' font-family='Georgia,serif' font-size='15' font-weight='700' fill='%23F6F1E8' text-anchor='middle'%3EC%3C/text%3E%3Ccircle cx='23' cy='10' r='2.6' fill='%23B08A4F'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -119,8 +119,8 @@
 
     .hero-copy h1 {
       font-weight: 800;
-      font-size: clamp(34px, 4.6vw, 52px);
-      line-height: 1.18;
+      font-size: clamp(30px, 4.2vw, 46px);
+      line-height: 1.2;
       letter-spacing: -0.01em;
     }
     .hero-rule {
@@ -129,11 +129,18 @@
       border-radius: 2px;
       margin: 22px 0;
     }
+    .hero-copy .hero-lead {
+      font-size: clamp(17px, 2vw, 21px);
+      font-weight: 600;
+      color: var(--ink);
+      max-width: 26em;
+      margin-bottom: 14px;
+    }
     .hero-copy p {
-      font-size: clamp(16px, 1.8vw, 19px);
+      font-size: clamp(15px, 1.7vw, 17.5px);
       font-weight: 400;
       color: var(--ink-soft);
-      max-width: 26em;
+      max-width: 28em;
     }
 
     .cta-dark {
@@ -173,29 +180,37 @@
       box-shadow: 0 30px 60px -28px rgba(34,28,21,.45);
     }
 
-    /* ── features ────────────────────────────────────── */
+    /* ── why us ──────────────────────────────────────── */
     .features-band {
       background: var(--cream-soft);
       border-top: 1px solid var(--line);
       border-bottom: 1px solid var(--line);
+      padding: clamp(36px, 5vw, 60px) 0;
+    }
+    .features-band h2 {
+      text-align: center;
+      font-size: clamp(24px, 3vw, 32px);
+      font-weight: 800;
+      margin-bottom: clamp(26px, 4vw, 40px);
     }
     .features {
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      padding: clamp(36px, 5vw, 56px) 0;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
     }
     .feature {
       text-align: center;
-      padding: 8px 18px;
-      border-inline-start: 1px solid var(--line);
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 28px 22px 24px;
     }
-    .feature:first-child { border-inline-start: none; }
     .feature svg { width: 46px; height: 46px; stroke: var(--gold); margin-bottom: 14px; }
-    .feature h3 { font-size: 17px; font-weight: 700; margin-bottom: 4px; }
-    .feature p  { font-size: 14px; color: var(--muted); line-height: 1.55; }
+    .feature h3 { font-size: 17.5px; font-weight: 700; margin-bottom: 6px; }
+    .feature p  { font-size: 14.5px; color: var(--muted); line-height: 1.65; }
 
     /* ── form ────────────────────────────────────────── */
-    .join-section { padding: clamp(48px, 7vw, 84px) 0 clamp(56px, 7vw, 90px); }
+    .join-section { padding: clamp(48px, 7vw, 84px) 0 clamp(28px, 4vw, 48px); }
 
     .form-card {
       background: var(--white);
@@ -203,7 +218,7 @@
       border-radius: 22px;
       box-shadow: 0 30px 70px -40px rgba(34,28,21,.35);
       padding: clamp(28px, 5vw, 52px);
-      max-width: 900px;
+      max-width: 760px;
       margin: 0 auto;
     }
     .form-card h2 {
@@ -216,7 +231,7 @@
       color: var(--muted);
       font-size: 15px;
       margin: 8px auto 34px;
-      max-width: 34em;
+      max-width: 36em;
     }
     .form-sub .req { color: var(--gold-deep); font-weight: 700; }
 
@@ -240,7 +255,7 @@
       margin-bottom: 2px;
     }
     .req { color: var(--gold-deep); }
-    .field input, .field select, .field textarea {
+    .field input {
       width: 100%;
       /* 16px minimum — anything smaller makes iOS Safari zoom in on focus */
       font: 400 16px 'Heebo', sans-serif;
@@ -251,9 +266,6 @@
       padding-inline-end: 30px; /* clear the icon */
     }
     .field ::placeholder { color: #B9AE9E; }
-    .field textarea { resize: vertical; min-height: 56px; }
-    .field select { appearance: none; -webkit-appearance: none; cursor: pointer; }
-    .field select.empty { color: #B9AE9E; }
     .field .icon {
       position: absolute;
       inset-inline-end: 14px;
@@ -262,37 +274,25 @@
       stroke: var(--gold);
       pointer-events: none;
     }
-    .field.has-area .icon { top: 24px; transform: none; }
+    input[type=tel] { direction: ltr; text-align: right; }
 
-    input[type=tel], input[type=email] { direction: ltr; text-align: right; }
-
-    .group-label {
+    .field input[type=file] {
+      padding-inline-end: 0;
       font-size: 14.5px;
-      font-weight: 700;
-      margin: 6px 0 10px;
-    }
-
-    .sector-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 16px; }
-    .sector-card {
-      position: relative;
-      display: block;
-      background: var(--white);
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      padding: 14px 48px 12px 16px;
+      color: var(--ink-soft);
       cursor: pointer;
-      transition: border-color .2s, background .2s, box-shadow .2s;
     }
-    .sector-card input { position: absolute; opacity: 0; }
-    .sector-card b { display: block; font-size: 15.5px; }
-    .sector-card span { font-size: 13.5px; color: var(--muted); }
-    .sector-card svg { position: absolute; inset-inline-end: 14px; top: 16px; stroke: var(--gold); }
-    .sector-card:has(input:checked) {
-      border-color: var(--gold);
-      background: #FBF6EC;
-      box-shadow: 0 0 0 3px rgba(176,138,79,.14);
+    .field input[type=file]::file-selector-button {
+      font: 600 14px 'Heebo', sans-serif;
+      color: var(--ink);
+      background: var(--cream);
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      padding: 7px 14px;
+      margin-inline-end: 12px;
+      cursor: pointer;
     }
-    .sector-card:has(input:focus-visible) { outline: 2px solid var(--gold); outline-offset: 2px; }
+    .field-hint { font-size: 12.5px; color: var(--muted); margin-top: 3px; }
 
     .submit-row { text-align: center; margin-top: 26px; }
     .cta-gold {
@@ -314,6 +314,15 @@
     .cta-gold:hover { transform: translateY(-2px); box-shadow: 0 18px 36px -12px rgba(150,112,58,.6); }
     .cta-gold[disabled] { opacity: .65; cursor: wait; transform: none; }
 
+    .note-line {
+      text-align: center;
+      font-size: 13.5px;
+      color: var(--muted);
+      margin-top: 14px;
+      max-width: 38em;
+      margin-inline: auto;
+    }
+
     .form-msg {
       margin-top: 18px;
       text-align: center;
@@ -330,6 +339,140 @@
     .success h2 { font-size: 28px; font-weight: 800; }
     .success p { color: var(--ink-soft); max-width: 28em; margin: 10px auto 0; }
     [hidden] { display: none !important; }
+
+    /* ── designers band ──────────────────────────────── */
+    .pros-band {
+      background: var(--ink);
+      color: var(--cream);
+      padding: clamp(44px, 6vw, 72px) 0;
+      margin-top: clamp(28px, 4vw, 48px);
+    }
+    .pros-inner { max-width: 760px; margin: 0 auto; text-align: center; }
+    .pros-band h2 {
+      font-size: clamp(23px, 3vw, 30px);
+      font-weight: 800;
+      line-height: 1.3;
+    }
+    .pros-band .pros-q {
+      color: var(--gold);
+      font-weight: 700;
+      font-size: clamp(15px, 1.8vw, 17px);
+      letter-spacing: .02em;
+      margin-bottom: 10px;
+    }
+    .pros-band p.pros-body {
+      color: #D8CFC0;
+      font-size: clamp(15px, 1.7vw, 17px);
+      max-width: 40em;
+      margin: 16px auto 28px;
+    }
+    .cta-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font: 700 16.5px 'Heebo', sans-serif;
+      color: var(--cream);
+      background: transparent;
+      border: 1.5px solid var(--gold);
+      border-radius: 12px;
+      padding: 15px 32px;
+      cursor: pointer;
+      transition: background .2s, transform .2s var(--ease);
+    }
+    .cta-outline .arr { color: var(--gold); }
+    .cta-outline:hover { background: rgba(176,138,79,.14); transform: translateY(-2px); }
+
+    /* ── members ─────────────────────────────────────── */
+    .members-section { padding: clamp(48px, 7vw, 80px) 0 clamp(56px, 7vw, 88px); }
+    .members-section h2 {
+      text-align: center;
+      font-size: clamp(22px, 3vw, 28px);
+      font-weight: 800;
+      max-width: 22em;
+      margin: 0 auto clamp(28px, 4vw, 42px);
+    }
+    .members {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      max-width: 980px;
+      margin: 0 auto;
+    }
+    .member {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 20px 22px 18px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+    .member .badge {
+      flex: none;
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      background: var(--cream);
+      border: 1px solid var(--line);
+      display: grid;
+      place-items: center;
+    }
+    .member .badge svg { width: 20px; height: 20px; stroke: var(--gold); }
+    .member b { display: block; font-size: 15.5px; }
+    .member span { font-size: 13.5px; color: var(--muted); line-height: 1.55; display: block; }
+
+    /* ── modal ───────────────────────────────────────── */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(24,19,13,.55);
+      backdrop-filter: blur(3px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 100;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .25s;
+    }
+    .modal-overlay.open { opacity: 1; pointer-events: auto; }
+    .modal {
+      background: var(--white);
+      border-radius: 20px;
+      max-width: 480px;
+      width: 100%;
+      max-height: 92vh;
+      overflow-y: auto;
+      padding: clamp(24px, 4vw, 36px);
+      box-shadow: 0 40px 90px -30px rgba(0,0,0,.5);
+      transform: translateY(14px);
+      transition: transform .25s var(--ease);
+    }
+    .modal-overlay.open .modal { transform: translateY(0); }
+    .modal-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 6px;
+    }
+    .modal h3 { font-size: 21px; font-weight: 800; line-height: 1.35; }
+    .modal-close {
+      flex: none;
+      width: 34px; height: 34px;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      background: var(--white);
+      color: var(--ink-soft);
+      font-size: 17px;
+      line-height: 1;
+      cursor: pointer;
+      transition: border-color .2s;
+    }
+    .modal-close:hover { border-color: var(--gold); }
+    .modal .modal-sub { color: var(--muted); font-size: 14px; margin-bottom: 20px; }
+    .modal .field { margin-bottom: 14px; }
+    .modal .cta-gold { width: 100%; min-width: 0; }
 
     /* ── footer ──────────────────────────────────────── */
     footer {
@@ -362,8 +505,6 @@
       .feature:nth-child(1) { animation: rise-in .5s var(--ease) both .1s; }
       .feature:nth-child(2) { animation: rise-in .5s var(--ease) both .18s; }
       .feature:nth-child(3) { animation: rise-in .5s var(--ease) both .26s; }
-      .feature:nth-child(4) { animation: rise-in .5s var(--ease) both .34s; }
-      .feature:nth-child(5) { animation: rise-in .5s var(--ease) both .42s; }
     }
 
     /* ── responsive ──────────────────────────────────── */
@@ -372,11 +513,11 @@
       .hero-media { order: 2; }
       .hero-copy  { order: 1; text-align: center; }
       .hero-rule  { margin: 22px auto; }
-      .hero-copy p { margin: 0 auto; }
+      .hero-copy p, .hero-copy .hero-lead { margin-inline: auto; }
       .secure-note { justify-content: center; }
-      .features { grid-template-columns: repeat(2, 1fr); gap: 8px 0; }
-      .feature { border-inline-start: none; padding: 14px 10px; }
-      .grid-3, .grid-2, .sector-cards { grid-template-columns: 1fr; }
+      .features { grid-template-columns: 1fr; }
+      .grid-3, .grid-2 { grid-template-columns: 1fr; }
+      .members { grid-template-columns: 1fr; }
     }
     @media (max-width: 480px) {
       .topbar { flex-direction: column; gap: 16px; }
@@ -394,15 +535,17 @@
     <a class="early-btn" href="#join">הצטרפו מוקדם <span class="arr">‹</span></a>
   </header>
 
+  <!-- 1. Hero -->
   <section class="hero">
     <div class="hero-media">
       <img src="images/hero.webp" width="1600" height="1200"
-           alt="צוות אנשי מקצוע מתחום השיער והיופי" loading="eager" fetchpriority="high">
+           alt="טיפוח שיער מקצועי ובטוח" loading="eager" fetchpriority="high">
     </div>
     <div class="hero-copy">
-      <h1>המקום המקצועי לאנשי השיער והיופי.</h1>
+      <h1>חולמים על שיער מושלם?<br>די לרוקן את הכיס על ניסויים.</h1>
       <div class="hero-rule"></div>
-      <p>קהילה סגורה ומקצועית למעצבי שיער, ברברים, מאפרים ואנשי יופי. חיבורים אמיתיים. הזדמנויות אמיתיות.</p>
+      <p class="hero-lead">הגיע הזמן לטיפוח בטוח, מוסמך ואחראי לשיער שלך.</p>
+      <p>קהילת מומחי הכימיה ומעצבי השיער המובילים בישראל מתאחדים כדי לשים סוף לעוגמת הנפש, הנזקים והחובבנות. אנחנו מחזירים את הכבוד למקצוע — ואת הביטחון המלא לראש שלך.</p>
       <a class="cta-dark" href="#join">הצטרפו לרשימת ההמתנה <span class="arr">‹</span></a>
       <div class="secure-note">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
@@ -412,128 +555,157 @@
   </section>
 </div>
 
+<!-- 2. Why us -->
 <div class="features-band">
   <div class="wrap">
+    <h2>למה דווקא דרכנו?</h2>
     <div class="features">
       <div class="feature">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"/></svg>
-        <h3>פרופיל מקצועי</h3>
-        <p>הציגו את עצמכם, היכולות וההתמחות.</p>
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="5"/><path d="m8.5 13.5-2 7 5.5-3 5.5 3-2-7"/></svg>
+        <h3>סינון קפדני ואימות תעודות</h3>
+        <p>אך ורק מעצבי שיער שעברו אימות הסמכות כימיות רשמיות.</p>
       </div>
       <div class="feature">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
-        <h3>חיפוש מתקדם</h3>
-        <p>מצאו אנשי מקצוע, עבודות והזדמנויות.</p>
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-3.5 8-10V5l-8-3-8 3v7c0 6.5 8 10 8 10Z"/><path d="m8.8 11.8 2.2 2.2 4.2-4.5"/></svg>
+        <h3>אמנת בטיחות ושירות</h3>
+        <p>התחייבות מלאה לשקיפות, אחריות מקצועית, מענה רציף ובטיחות רפואית־כימית.</p>
       </div>
       <div class="feature">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="14" height="12" rx="2"/><path d="M7 7V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v10"/><circle cx="8" cy="12" r="1.6"/><path d="m3 17 4-3 4 3 4-4 2 2"/></svg>
-        <h3>תיק עבודות</h3>
-        <p>שתפו עבודות והשרו השראה.</p>
-      </div>
-      <div class="feature">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.2L4 21l1.8-5.4A8 8 0 1 1 21 12Z"/><circle cx="9" cy="12" r=".8"/><circle cx="12.5" cy="12" r=".8"/><circle cx="16" cy="12" r=".8"/></svg>
-        <h3>קהילה וידע</h3>
-        <p>שיח מקצועי, טיפים וכל מה שמקדם.</p>
-      </div>
-      <div class="feature">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M9 8V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/><path d="M3 13h18"/></svg>
-        <h3>משרות והזדמנויות</h3>
-        <p>משרות, השכרת כסאות, שיתופי פעולה ועוד.</p>
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"/><path d="m17.5 5.5 1 1 2-2.2"/></svg>
+        <h3>אבחון מותאם אישית</h3>
+        <p>התאמת הטיפול הכימי המדויק לסוג השיער וההיסטוריה שלו — בלי החלקות גורפות ובלי קיצורי דרך.</p>
       </div>
     </div>
   </div>
 </div>
 
+<!-- 3. Client waitlist form -->
 <div class="wrap">
   <section class="join-section" id="join">
     <div class="form-card">
       <div id="formWrap">
-        <h2>הצטרפו לרשימת ההמתנה</h2>
-        <p class="form-sub">מלאו את הפרטים — כל בקשה נבדקת ומאושרת אישית.<br>שדות עם <span class="req">*</span> הם חובה.</p>
+        <h2>הצטרפי לרשימת ההמתנה</h2>
+        <p class="form-sub">וקבלי גישה מוקדמת למומחים באזורך.<br>שדות עם <span class="req">*</span> הם חובה.</p>
 
         <form id="joinForm" novalidate>
           <div class="grid-3">
             <div class="field">
               <label for="fullName">שם מלא <span class="req">*</span></label>
-              <input id="fullName" name="owner_name" type="text" autocomplete="name" autocapitalize="words" enterkeyhint="next" placeholder="השם שלכם" maxlength="120" required>
+              <input id="fullName" name="owner_name" type="text" autocomplete="name" autocapitalize="words" enterkeyhint="next" placeholder="השם שלך" maxlength="120" required>
               <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"/></svg>
             </div>
             <div class="field">
-              <label for="occupation">תחום עיסוק</label>
-              <select id="occupation" name="occupation" class="empty">
-                <option value="" selected>בחרו תחום</option>
-                <option value="hair">מעצב/ת שיער</option>
-                <option value="barber">ברבר</option>
-                <option value="makeup">מאפר/ת</option>
-                <option value="cosmetics">קוסמטיקאי/ת</option>
-                <option value="nails">מעצב/ת ציפורניים</option>
-                <option value="other">אחר</option>
-              </select>
-              <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-            </div>
-            <div class="field">
-              <label for="city">עיר</label>
-              <input id="city" name="city" type="text" autocomplete="address-level2" enterkeyhint="next" placeholder="העיר שלכם" maxlength="100">
-              <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-5.3-7-11a7 7 0 0 1 14 0c0 5.7-7 11-7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg>
-            </div>
-          </div>
-
-          <div class="grid-2">
-            <div class="field">
-              <label for="email">אימייל</label>
-              <input id="email" name="email" type="email" inputmode="email" autocomplete="email" autocapitalize="none" autocorrect="off" spellcheck="false" enterkeyhint="next" placeholder="example@mail.com" maxlength="254">
-              <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
-            </div>
-            <div class="field">
-              <label for="phone">טלפון נייד (לוואטסאפ) <span class="req">*</span></label>
+              <label for="phone">טלפון (ווטסאפ) <span class="req">*</span></label>
               <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="050-1234567" maxlength="30" required>
               <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8 10a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.7 2Z"/></svg>
             </div>
-          </div>
-
-          <p class="group-label">סטטוס הסמכה מקצועית</p>
-          <div class="sector-cards">
-            <label class="sector-card">
-              <input type="radio" name="sector" value="certified">
-              <b>מוסמך/ת</b>
-              <span>תעודת תמ"ת / אקדמיה מוכרת</span>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="5"/><path d="m8.5 13.5-2 7 5.5-3 5.5 3-2-7"/></svg>
-            </label>
-            <label class="sector-card">
-              <input type="radio" name="sector" value="independent">
-              <b>עצמאי/ה</b>
-              <span>בשלבי למידה / העשרה עצמית</span>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"/></svg>
-            </label>
-          </div>
-
-          <div class="field has-area" style="margin-bottom:16px">
-            <label for="education">היכן למדת או אצל מי עברת השתלמויות?</label>
-            <textarea id="education" name="education" rows="2" maxlength="1000" placeholder="שם האקדמיה או המוסד, תחום הלימוד…"></textarea>
-            <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m2 9 10-5 10 5-10 5L2 9Z"/><path d="M6 11.5V17c0 1.7 2.7 3 6 3s6-1.3 6-3v-5.5"/></svg>
-          </div>
-
-          <div class="field has-area">
-            <label for="description">כמה מילים עליך ועל העסק</label>
-            <textarea id="description" name="description" rows="3" maxlength="1000" placeholder="תחומי התמחות, ניסיון, מה מיוחד אצלך…"></textarea>
-            <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+            <div class="field">
+              <label for="city">עיר / אזור מגורים</label>
+              <input id="city" name="city" type="text" autocomplete="address-level2" enterkeyhint="done" placeholder="העיר שלך" maxlength="100">
+              <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-5.3-7-11a7 7 0 0 1 14 0c0 5.7-7 11-7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+            </div>
           </div>
 
           <p class="form-msg err" id="formErr" role="alert" hidden></p>
 
           <div class="submit-row">
-            <button type="submit" class="cta-gold" id="submitBtn">הצטרפו לרשימת ההמתנה <span class="arr">‹</span></button>
+            <button type="submit" class="cta-gold" id="submitBtn">תשמרו לי מקום במהפכה! <span class="arr">‹</span></button>
           </div>
+          <p class="note-line">ההרשמה לא מחייבת ומשייכת אותך לרשימה הסגורה שתקבל עדיפות בתיאום אבחון ותורים.</p>
         </form>
       </div>
 
       <div class="success" id="successBox" hidden>
         <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m8 12.5 2.5 2.5L16 9.5"/></svg>
-        <h2>הבקשה נשלחה!</h2>
-        <p>כל בקשה נבדקת ומאושרת אישית — נחזור אליכם בהקדם בוואטסאפ או באימייל.</p>
+        <h2>שמרנו לך מקום!</h2>
+        <p>את/ה ברשימה הסגורה — נחזור אליך בוואטסאפ עם עדיפות בתיאום אבחון ותורים.</p>
       </div>
     </div>
   </section>
+</div>
+
+<!-- 4. Designers area -->
+<div class="pros-band" id="pros">
+  <div class="wrap">
+    <div class="pros-inner">
+      <p class="pros-q">אתה מעצב שיער מוסמך? נמאס לך מהחובבנות בשוק?</p>
+      <h2>הצטרף לקהילת המאסטרים.</h2>
+      <p class="pros-body">אנחנו בונים את תו התקן המוביל בישראל שמאגד את אנשי המקצוע האמיתיים, ומעניק לך גב מקצועי, רשת התייעצות כימית וזרם לקוחות מעריך.</p>
+      <button class="cta-outline" id="prosOpenBtn">להגשת מועמדות והצטרפות לקהילה <span class="arr">‹</span></button>
+    </div>
+  </div>
+</div>
+
+<!-- 5. Community members & charter -->
+<div class="wrap">
+  <section class="members-section">
+    <h2>על אמנת האיכות והאחריות חתומים מומחי הכימיה המובילים:</h2>
+    <div class="members">
+      <div class="member">
+        <div class="badge"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="5"/><path d="m8.5 13.5-2 7 5.5-3 5.5 3-2-7"/></svg></div>
+        <div><b>גיל רפאלי</b><span>מאסטר בכימיה ובהחלקות שיער מתקדמות<br>אחי אילת 14, קריית מוצקין</span></div>
+      </div>
+      <div class="member">
+        <div class="badge"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="5"/><path d="m8.5 13.5-2 7 5.5-3 5.5 3-2-7"/></svg></div>
+        <div><b>אלי רומנו</b><span>מאסטר בכימיה ועיצוב שיער<br>כפר יובל 276</span></div>
+      </div>
+      <div class="member">
+        <div class="badge"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="5"/><path d="m8.5 13.5-2 7 5.5-3 5.5 3-2-7"/></svg></div>
+        <div><b>מישל זאווי</b><span>מעצב שיער ומאסטר בכימיה<br>הרברט סמואל 103, חדרה</span></div>
+      </div>
+      <div class="member">
+        <div class="badge"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="5"/><path d="m8.5 13.5-2 7 5.5-3 5.5 3-2-7"/></svg></div>
+        <div><b>מיטל ארביב</b><span>מעצבת שיער ומומחית להחלקות<br>מושב שפיר</span></div>
+      </div>
+      <div class="member">
+        <div class="badge"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="5"/><path d="m8.5 13.5-2 7 5.5-3 5.5 3-2-7"/></svg></div>
+        <div><b>אורן ישראל</b><span>מאסטר בלונד ומעצב שיער<br>דב הוז 8, חולון</span></div>
+      </div>
+      <div class="member">
+        <div class="badge"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="5"/><path d="m8.5 13.5-2 7 5.5-3 5.5 3-2-7"/></svg></div>
+        <div><b>דוברת שרון</b><span>מעצב שיער ומומחה כימיה<br>פרילנסר</span></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- Designer application modal -->
+<div class="modal-overlay" id="prosModal" role="dialog" aria-modal="true" aria-labelledby="prosTitle">
+  <div class="modal">
+    <div id="prosFormWrap">
+      <div class="modal-head">
+        <h3 id="prosTitle">הגשת מועמדות לקהילת המאסטרים</h3>
+        <button class="modal-close" id="prosCloseBtn" aria-label="סגירה">✕</button>
+      </div>
+      <p class="modal-sub">מלאו את הפרטים — כל מועמדות נבדקת ומאושרת אישית.</p>
+      <form id="prosForm" novalidate>
+        <div class="field">
+          <label for="prosName">שם מלא <span class="req">*</span></label>
+          <input id="prosName" name="owner_name" type="text" autocomplete="name" placeholder="השם שלך" maxlength="120" required>
+        </div>
+        <div class="field">
+          <label for="prosPhone">טלפון <span class="req">*</span></label>
+          <input id="prosPhone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="050-1234567" maxlength="30" required>
+        </div>
+        <div class="field">
+          <label for="prosCity">עיר</label>
+          <input id="prosCity" name="city" type="text" autocomplete="address-level2" placeholder="העיר שלך" maxlength="100">
+        </div>
+        <div class="field">
+          <label for="prosCert">צילום תעודת הסמכה / תמ"ת</label>
+          <input id="prosCert" name="certificate" type="file" accept="image/*,.pdf">
+          <p class="field-hint">לא חובה — יתרון. עד 8MB.</p>
+        </div>
+        <p class="form-msg err" id="prosErr" role="alert" hidden></p>
+        <button type="submit" class="cta-gold" id="prosSubmitBtn">שליחת מועמדות <span class="arr">‹</span></button>
+      </form>
+    </div>
+    <div class="success" id="prosSuccess" hidden>
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m8 12.5 2.5 2.5L16 9.5"/></svg>
+      <h2>המועמדות נשלחה!</h2>
+      <p>כל מועמדות נבדקת ומאושרת אישית — נחזור אליך בהקדם בוואטסאפ.</p>
+    </div>
+  </div>
 </div>
 
 <footer>
@@ -542,31 +714,21 @@
 </footer>
 
 <script>
+  /* ── shared helpers ─────────────────────────────────── */
+  function validPhone(raw) {
+    const digits = raw.replace(/[\s ().-]/g, '');
+    return /^\+?\d{9,15}$/.test(digits);
+  }
+  function showErrIn(box, msg) {
+    box.textContent = msg;
+    box.hidden = false;
+    box.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+  }
+
+  /* ── client waitlist form ───────────────────────────── */
   const form = document.getElementById('joinForm');
   const errBox = document.getElementById('formErr');
   const btn = document.getElementById('submitBtn');
-
-  // select placeholder color handling
-  const occ = document.getElementById('occupation');
-  occ.addEventListener('change', () => occ.classList.toggle('empty', !occ.value));
-
-  const FIELD_NAMES = {
-    owner_name: 'שם מלא',
-    occupation: 'תחום עיסוק',
-    city: 'עיר',
-    email: 'אימייל',
-    phone: 'טלפון נייד',
-    sector: 'סטטוס הסמכה',
-    education: 'היכן למדת',
-    description: 'כמה מילים עליך',
-  };
-  const REQUIRED = ['owner_name', 'phone'];
-
-  function showErr(msg) {
-    errBox.textContent = msg;
-    errBox.hidden = false;
-    errBox.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
-  }
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -576,20 +738,14 @@
     // trim everything — iOS autofill loves sneaking in trailing spaces
     for (const k of Object.keys(data)) data[k] = data[k].trim();
 
-    const missing = REQUIRED.filter((k) => !data[k]);
-    if (missing.length) {
-      return showErr('חסרים פרטים: ' + missing.map((k) => FIELD_NAMES[k]).join(', '));
+    if (!data.owner_name || !data.phone) {
+      return showErrIn(errBox, 'חסרים פרטים: ' + [!data.owner_name && 'שם מלא', !data.phone && 'טלפון'].filter(Boolean).join(', '));
     }
-    // validate the digits, not the formatting (spaces/dashes are fine)
-    const phoneDigits = data.phone.replace(/[\s ().-]/g, '');
-    if (!/^\+?\d{9,15}$/.test(phoneDigits)) {
-      return showErr('מספר הטלפון לא נראה תקין — בדקו ונסו שוב.');
+    if (!validPhone(data.phone)) {
+      return showErrIn(errBox, 'מספר הטלפון לא נראה תקין — בדקו ונסו שוב.');
     }
-    if (data.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
-      return showErr('כתובת האימייל לא נראית תקינה — בדקו ונסו שוב.');
-    }
-    // omit empty optional fields so the backend applies its defaults
     for (const k of Object.keys(data)) if (!data[k]) delete data[k];
+    data.applicant_type = 'client';
 
     btn.disabled = true;
     btn.textContent = 'שולח…';
@@ -609,19 +765,99 @@
         return;
       }
       if (res.status === 429) {
-        showErr('יותר מדי בקשות — נסו שוב בעוד מספר דקות.');
+        showErrIn(errBox, 'יותר מדי בקשות — נסו שוב בעוד מספר דקות.');
       } else if (res.status === 400) {
-        const body = await res.json().catch(() => ({}));
-        const bad = Object.keys(body).map((k) => FIELD_NAMES[k]).filter(Boolean);
-        showErr(bad.length ? 'בדקו את השדות: ' + bad.join(', ') : 'בדקו את הפרטים ונסו שוב.');
+        showErrIn(errBox, 'בדקו את הפרטים ונסו שוב.');
       } else {
-        showErr('משהו השתבש — נסו שוב בעוד רגע.');
+        showErrIn(errBox, 'משהו השתבש — נסו שוב בעוד רגע.');
       }
     } catch {
-      showErr('בעיית תקשורת — בדקו את החיבור ונסו שוב.');
+      showErrIn(errBox, 'בעיית תקשורת — בדקו את החיבור ונסו שוב.');
     }
     btn.disabled = false;
-    btn.innerHTML = 'הצטרפו לרשימת ההמתנה <span class="arr">‹</span>';
+    btn.innerHTML = 'תשמרו לי מקום במהפכה! <span class="arr">‹</span>';
+  });
+
+  /* ── designer modal ─────────────────────────────────── */
+  const overlay = document.getElementById('prosModal');
+  const openBtn = document.getElementById('prosOpenBtn');
+  const closeBtn = document.getElementById('prosCloseBtn');
+  let lastFocus = null;
+
+  function openModal() {
+    lastFocus = document.activeElement;
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    document.getElementById('prosName').focus();
+  }
+  function closeModal() {
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+    if (lastFocus) lastFocus.focus();
+  }
+  openBtn.addEventListener('click', openModal);
+  closeBtn.addEventListener('click', closeModal);
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && overlay.classList.contains('open')) closeModal();
+  });
+
+  const prosForm = document.getElementById('prosForm');
+  const prosErr = document.getElementById('prosErr');
+  const prosBtn = document.getElementById('prosSubmitBtn');
+
+  prosForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    prosErr.hidden = true;
+
+    const fd = new FormData(prosForm);
+    const name = (fd.get('owner_name') || '').trim();
+    const phone = (fd.get('phone') || '').trim();
+    const city = (fd.get('city') || '').trim();
+    const cert = fd.get('certificate');
+
+    if (!name || !phone) {
+      return showErrIn(prosErr, 'חסרים פרטים: ' + [!name && 'שם מלא', !phone && 'טלפון'].filter(Boolean).join(', '));
+    }
+    if (!validPhone(phone)) {
+      return showErrIn(prosErr, 'מספר הטלפון לא נראה תקין — בדקו ונסו שוב.');
+    }
+    if (cert && cert.size > 8 * 1024 * 1024) {
+      return showErrIn(prosErr, 'קובץ התעודה גדול מדי (עד 8MB).');
+    }
+
+    const body = new FormData();
+    body.set('owner_name', name);
+    body.set('phone', phone);
+    if (city) body.set('city', city);
+    body.set('applicant_type', 'professional');
+    if (cert && cert.size > 0) body.set('certificate', cert);
+
+    prosBtn.disabled = true;
+    prosBtn.textContent = 'שולח…';
+
+    try {
+      const res = await fetch('/api/barbershops/', { method: 'POST', body });
+
+      if (res.status === 201) {
+        document.getElementById('prosFormWrap').hidden = true;
+        document.getElementById('prosSuccess').hidden = false;
+        return;
+      }
+      if (res.status === 429) {
+        showErrIn(prosErr, 'יותר מדי בקשות — נסו שוב בעוד מספר דקות.');
+      } else if (res.status === 400) {
+        showErrIn(prosErr, 'בדקו את הפרטים ונסו שוב.');
+      } else if (res.status === 413) {
+        showErrIn(prosErr, 'קובץ התעודה גדול מדי.');
+      } else {
+        showErrIn(prosErr, 'משהו השתבש — נסו שוב בעוד רגע.');
+      }
+    } catch {
+      showErrIn(prosErr, 'בעיית תקשורת — בדקו את החיבור ונסו שוב.');
+    }
+    prosBtn.disabled = false;
+    prosBtn.innerHTML = 'שליחת מועמדות <span class="arr">‹</span>';
   });
 </script>
 </body>

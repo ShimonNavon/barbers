@@ -39,6 +39,8 @@ services:
     env_file: .env
     ports:
       - "127.0.0.1:8015:8000"
+    volumes:
+      - media_data:/app/media
     depends_on:
       db:
         condition: service_healthy
@@ -47,3 +49,4 @@ services:
 
 volumes:
   postgres_data:
+  media_data:

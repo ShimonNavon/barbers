@@ -2,6 +2,10 @@ from django.db import models
 
 
 class Barbershop(models.Model):
+    class ApplicantType(models.TextChoices):
+        CLIENT = "client", "לקוח/ה — רשימת המתנה"
+        PROFESSIONAL = "professional", "מעצב/ת שיער — מועמדות לקהילה"
+
     class Sector(models.TextChoices):
         CERTIFIED = "certified", 'מוסמך — תעודת תמ"ת / אקדמיה מוכרת'
         INDEPENDENT = "independent", "עצמאי — בשלבי למידה והשתלמויות"
@@ -36,6 +40,15 @@ class Barbershop(models.Model):
     )
     education = models.CharField(
         "היכן למדת / השתלמויות", max_length=1000, blank=True
+    )
+    applicant_type = models.CharField(
+        "סוג פנייה",
+        max_length=20,
+        choices=ApplicantType.choices,
+        default=ApplicantType.PROFESSIONAL,
+    )
+    certificate = models.FileField(
+        "תעודת הסמכה", upload_to="certificates/", blank=True, null=True
     )
     created_at = models.DateTimeField("נרשם בתאריך", auto_now_add=True)
     approved = models.BooleanField("אושר", default=False)

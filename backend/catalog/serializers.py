@@ -15,6 +15,8 @@ class BarbershopSerializer(serializers.ModelSerializer):
             "description",
             "sector",
             "education",
+            "applicant_type",
+            "certificate",
         ]
         extra_kwargs = {
             # only name + phone are mandatory; everything else falls back to
@@ -28,4 +30,11 @@ class BarbershopSerializer(serializers.ModelSerializer):
             "education": {"required": False, "allow_blank": True},
             # TextField has no model-level bound — cap it here
             "description": {"required": False, "allow_blank": True, "max_length": 1000},
+            "applicant_type": {"required": False},
+            "certificate": {"required": False, "allow_null": True},
         }
+
+    def validate_certificate(self, value):
+        if value and value.size > 8 * 1024 * 1024:
+            raise serializers.ValidationError("הקובץ גדול מדי (עד 8MB).")
+        return value
