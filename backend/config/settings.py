@@ -133,3 +133,8 @@ REST_FRAMEWORK = {
         "barbershops": "20/hour",
     },
 }
+
+LOGIN_URL = "/login"
+SESSION_COOKIE_AGE = 60 * 60 * 24 * 30  # 30 days
+SESSION_COOKIE_SECURE = not DEBUG
+CSRF_COOKIE_SECURE = not DEBUG

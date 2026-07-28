@@ -1,0 +1,15 @@
+{% extends "community/base.html" %}
+{% block title %}אימות{% endblock %}
+{% block content %}
+<div class="card" style="margin-top:18vh">
+  <h1>כמעט שם</h1>
+  <p class="muted">אם המספר רשום בקהילה — נשלח אליו קוד בן 6 ספרות.</p>
+  <form method="post">{% csrf_token %}
+    {% include "community/partials/form_errors.html" %}
+    <input class="field" type="text" inputmode="numeric" name="code"
+           maxlength="6" required placeholder="••••••" autocomplete="one-time-code">
+    <button class="btn btn-coral" style="margin-top:10px" type="submit">כניסה</button>
+  </form>
+  <p class="muted"><a href="/login" style="color:var(--coral)">שליחה חוזרת</a></p>
+</div>
+{% endblock %}

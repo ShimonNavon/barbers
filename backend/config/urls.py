@@ -5,6 +5,7 @@ from django.urls import include, path, re_path
 from django.views.static import serve
 
 urlpatterns = [
+    path("", include("accounts.urls")),
     path("admin/", admin.site.urls),
     path("api/", include("catalog.urls")),
     # Uploaded certificates — staff-only (they contain personal documents),

@@ -1,0 +1,14 @@
+{% extends "community/base.html" %}
+{% block title %}כניסה{% endblock %}
+{% block content %}
+<div class="card" style="margin-top:18vh">
+  <h1>כניסת חברים</h1>
+  <p class="muted">הזינו את מספר הטלפון שאיתו נרשמתם לקהילה.</p>
+  <form method="post">{% csrf_token %}
+    {% include "community/partials/form_errors.html" %}
+    <input class="field" type="tel" name="phone" required
+           placeholder="050-000-0000" autocomplete="tel">
+    <button class="btn btn-coral" style="margin-top:10px" type="submit">שלחו לי קוד</button>
+  </form>
+</div>
+{% endblock %}
