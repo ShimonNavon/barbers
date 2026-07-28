@@ -1,0 +1,6 @@
+{% if form.errors %}
+<div class="form-errors">
+  {% for field in form %}{% for e in field.errors %}<p>{{ e }}</p>{% endfor %}{% endfor %}
+  {% for e in form.non_field_errors %}<p>{{ e }}</p>{% endfor %}
+</div>
+{% endif %}

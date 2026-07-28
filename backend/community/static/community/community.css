@@ -1,0 +1,41 @@
+/* ClickA. dark tokens. Before deploy, diff these hex values against
+   frontend/public/index.html :root and align exactly. */
+:root {
+  --bg: #140a0d;        /* deep oxblood-black */
+  --card: #221116;
+  --ink: #f5ede9;
+  --muted: #a08a8c;
+  --coral: #ff6b57;
+  --oxblood: #6d1a2a;
+  --radius: 14px;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: radial-gradient(1200px 600px at 80% -10%, #2a1218 0%, var(--bg) 60%);
+  color: var(--ink); font-family: "Heebo", sans-serif; min-height: 100dvh;
+}
+h1, h2, h3 { font-family: "Frank Ruhl Libre", serif; margin: 0 0 .5em; }
+.page { max-width: 640px; margin: 0 auto; padding: 16px 16px 84px; }
+.card { background: var(--card); border-radius: var(--radius); padding: 14px; margin-bottom: 12px; }
+.btn { display: inline-block; border: 0; border-radius: 999px; padding: 10px 22px;
+  font: inherit; cursor: pointer; background: #3a222a; color: var(--ink); }
+.btn-coral { background: var(--coral); color: #1c0a0e; font-weight: 700; }
+.field { width: 100%; font-size: 16px; padding: 12px; border-radius: 10px;
+  border: 1px solid #3a2a2e; background: #1b0f13; color: var(--ink); }
+.tabbar { position: fixed; bottom: 0; inset-inline: 0; display: flex;
+  justify-content: space-around; background: #1b0f13ee; backdrop-filter: blur(8px);
+  padding: 10px 4px calc(10px + env(safe-area-inset-bottom)); border-top: 1px solid #33222699; }
+.tabbar a { color: var(--muted); text-decoration: none; font-size: 14px; }
+.tabbar a:hover, .tabbar a:focus { color: var(--coral); }
+.chip { display: inline-block; background: var(--oxblood); color: var(--ink);
+  border-radius: 999px; padding: 2px 10px; font-size: 12px; }
+.badge { background: var(--coral); color: #1c0a0e; border-radius: 999px;
+  padding: 0 6px; font-size: 12px; font-weight: 700; }
+.flash { background: var(--oxblood); border-radius: 10px; padding: 10px 14px; margin-bottom: 10px; }
+.flash-warn { background: #4a3413; }
+.form-errors { color: var(--coral); font-size: 14px; margin: 6px 0; }
+.muted { color: var(--muted); font-size: 13px; }
+.avatar { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; background: var(--oxblood); }
+.row { display: flex; gap: 10px; align-items: center; }
+.grow { flex: 1; }
+textarea.field { resize: vertical; min-height: 72px; }

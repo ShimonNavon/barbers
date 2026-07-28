@@ -1,0 +1,29 @@
+{% load static %}
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>{% block title %}הקהילה{% endblock %} · The Craft</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@700;900&family=Heebo:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'community/community.css' %}">
+  <script src="{% static 'community/htmx.min.js' %}" defer></script>
+</head>
+<body>
+  <main class="page">
+    {% if messages %}{% for m in messages %}<div class="flash">{{ m }}</div>{% endfor %}{% endif %}
+    {% block content %}{% endblock %}
+  </main>
+  {% if user.is_authenticated %}
+  <nav class="tabbar">
+    <a href="/">פיד</a>
+    <a href="/groups">קבוצות</a>
+    <a href="/members">חברים</a>
+    <a href="/dm">הודעות <span id="dm-badge" hx-get="/dm/badge" hx-trigger="load, every 30s"></span></a>
+    <a href="/me">פרופיל</a>
+  </nav>
+  {% endif %}
+</body>
+</html>
