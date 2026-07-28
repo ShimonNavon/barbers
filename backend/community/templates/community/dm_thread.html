@@ -1,0 +1,31 @@
+{% extends "community/base.html" %}
+{% block title %}{{ other.display_name }}{% endblock %}
+{% block content %}
+<div class="row" style="margin-bottom:10px">
+  <a class="btn" href="/dm">→</a>
+  <h1 style="margin:0" class="grow">{{ other.display_name }}</h1>
+</div>
+<div id="messages"
+     hx-get="/dm/t/{{ conv.pk }}/messages"
+     hx-trigger="every 5s"
+     hx-vals='js:{"after": lastMsgId()}'
+     hx-swap="beforeend"
+     hx-on::after-swap="afterAppend()">
+  {% include "community/partials/messages_page.html" with me=request.member %}
+</div>
+<form method="post" action="/dm/t/{{ conv.pk }}/send">{% csrf_token %}
+  <div class="row" style="margin-top:10px">
+    <input class="field grow" name="text" maxlength="2000" required
+           placeholder="הודעה…" autocomplete="off">
+    <button class="btn btn-coral" type="submit">שליחה</button>
+  </div>
+</form>
+<script>
+  function lastMsgId() {
+    const items = document.querySelectorAll('#messages [data-msg-id]');
+    return items.length ? items[items.length - 1].dataset.msgId : 0;
+  }
+  function afterAppend() { window.scrollTo(0, document.body.scrollHeight); }
+  afterAppend();
+</script>
+{% endblock %}

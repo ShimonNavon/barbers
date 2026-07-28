@@ -1,6 +1,7 @@
 from django.urls import path
 
-from . import views_engage, views_feed, views_groups, views_members
+from . import (views_dm, views_engage, views_feed, views_groups,
+               views_members)
 
 app_name = "community"
 
@@ -18,4 +19,9 @@ urlpatterns = [
     path("members", views_members.directory, name="members"),
     path("members/<int:member_id>", views_members.profile, name="profile"),
     path("me", views_members.me, name="me"),
+    path("dm/with/<int:member_id>", views_dm.open_with, name="dm_with"),
+    path("dm/t/<int:conversation_id>", views_dm.thread, name="dm_thread"),
+    path("dm/t/<int:conversation_id>/send", views_dm.send, name="dm_send"),
+    path("dm/t/<int:conversation_id>/messages", views_dm.poll,
+         name="dm_poll"),
 ]

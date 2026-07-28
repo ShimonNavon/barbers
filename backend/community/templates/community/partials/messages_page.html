@@ -1,0 +1,7 @@
+{% for m in msgs %}
+<div class="card" data-msg-id="{{ m.pk }}"
+     style="max-width:85%;{% if m.sender.pk == me.pk %}margin-inline-start:auto;background:var(--oxblood){% endif %}">
+  <div>{{ m.text }}</div>
+  <div class="muted">{{ m.created_at|date:"H:i" }}</div>
+</div>
+{% endfor %}

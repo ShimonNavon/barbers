@@ -74,3 +74,45 @@ class Like(models.Model):
     class Meta:
         constraints = [models.UniqueConstraint(
             fields=["post", "member"], name="uniq_like_post_member")]
+
+
+class Conversation(models.Model):
+    # pk-ordered pair → exactly one row per pair of members
+    member_low = models.ForeignKey("accounts.Member", on_delete=models.CASCADE,
+                                   related_name="+")
+    member_high = models.ForeignKey("accounts.Member",
+                                    on_delete=models.CASCADE,
+                                    related_name="+")
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        constraints = [models.UniqueConstraint(
+            fields=["member_low", "member_high"],
+            name="uniq_conversation_pair")]
+
+    @classmethod
+    def for_pair(cls, a, b):
+        lo, hi = sorted((a, b), key=lambda m: m.pk)
+        conv, _ = cls.objects.get_or_create(member_low=lo, member_high=hi)
+        return conv
+
+    def involves(self, member):
+        return member.pk in (self.member_low_id, self.member_high_id)
+
+    def other(self, member):
+        if member.pk == self.member_low_id:
+            return self.member_high
+        return self.member_low
+
+
+class Message(models.Model):
+    conversation = models.ForeignKey(Conversation, on_delete=models.CASCADE,
+                                     related_name="messages")
+    sender = models.ForeignKey("accounts.Member", on_delete=models.CASCADE,
+                               related_name="sent_messages")
+    text = models.CharField(max_length=2000)
+    read_at = models.DateTimeField(null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["created_at", "pk"]
