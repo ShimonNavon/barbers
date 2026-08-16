@@ -4,6 +4,8 @@
 
 **Live:** [barbers.navonsimon.com](https://barbers.navonsimon.com) · Hebrew RTL · Mobile-first
 
+**Project story:** [How I built The Craft](https://simonhost.navonsimon.com/blog/building-the-craft-community) · **More work:** [16 production projects](https://simonhost.navonsimon.com/work)
+
 An application-and-vetting funnel for a closed professional community of Israeli hair & beauty professionals. Candidates apply through a dark, iOS-glass landing page; each application is reviewed and approved by hand — including a **certification-mapping step** (certified academy track vs. independent track) that keeps the community credible.
 
 ## Highlights
