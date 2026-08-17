@@ -41,6 +41,9 @@ services:
       - "127.0.0.1:8015:8000"
     volumes:
       - media_data:/app/media
+    networks:
+      - default
+      - barbers-crm   # reaches the Grist CRM (/srv/barbers-crm) as http://grist:8484
     depends_on:
       db:
         condition: service_healthy
@@ -50,3 +53,7 @@ services:
 volumes:
   postgres_data:
   media_data:
+
+networks:
+  barbers-crm:
+    external: true   # docker network create barbers-crm  (shared with /srv/barbers-crm)

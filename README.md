@@ -25,7 +25,12 @@ flowchart LR
     N -->|/api /admin| B[backend · Django + DRF]
     B --> P[(Postgres 16)]
     B --> V[(Valkey · throttle cache)]
+    B -.->|signup upsert| G[Grist CRM · crm.barbers]
 ```
+
+Signups (`POST /api/barbershops/`) are pushed asynchronously to the shop owner's
+Grist CRM (`catalog/grist.py`, matched by `django_id`; the owner's status/notes
+columns are never overwritten). Backfill/repair: `manage.py sync_grist`.
 
 ## Stack
 

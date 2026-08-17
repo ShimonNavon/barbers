@@ -147,3 +147,12 @@ LOGIN_URL = "/login"
 SESSION_COOKIE_AGE = 60 * 60 * 24 * 30  # 30 days
 SESSION_COOKIE_SECURE = not DEBUG
 CSRF_COOKIE_SECURE = not DEBUG
+
+# ── Grist CRM (crm.barbers.navonsimon.com) — landing-page signups are pushed
+# there so the shop owner sees new clients as they arrive. All three must be
+# set for the integration to be active; otherwise it is a no-op.
+GRIST_URL = os.environ.get("GRIST_URL", "")
+GRIST_API_KEY = os.environ.get("GRIST_API_KEY", "")
+GRIST_DOC_ID = os.environ.get("GRIST_DOC_ID", "")
+# used to build absolute links (e.g. uploaded certificates) inside Grist
+PUBLIC_BASE_URL = os.environ.get("PUBLIC_BASE_URL", "https://barbers.navonsimon.com")
