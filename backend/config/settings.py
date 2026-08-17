@@ -156,3 +156,9 @@ GRIST_API_KEY = os.environ.get("GRIST_API_KEY", "")
 GRIST_DOC_ID = os.environ.get("GRIST_DOC_ID", "")
 # used to build absolute links (e.g. uploaded certificates) inside Grist
 PUBLIC_BASE_URL = os.environ.get("PUBLIC_BASE_URL", "https://barbers.navonsimon.com")
+
+# ── WhatsApp "new lead" alert (self-hosted whatsmeow bridge on debian02).
+# Both must be set to activate; LEAD_ALERT_WHATSAPP_TO = "9725...,9725..." (no +).
+WHATSAPP_BRIDGE_URL = os.environ.get("WHATSAPP_BRIDGE_URL", "")
+LEAD_ALERT_WHATSAPP_TO = os.environ.get("LEAD_ALERT_WHATSAPP_TO", "")
+CRM_URL = os.environ.get("CRM_URL", "https://barbers-crm.navonsimon.com")

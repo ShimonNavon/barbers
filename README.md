@@ -31,6 +31,8 @@ flowchart LR
 Signups (`POST /api/barbershops/`) are pushed asynchronously to the shop owner's
 Grist CRM (`catalog/grist.py`, matched by `django_id`; the owner's status/notes
 columns are never overwritten). Backfill/repair: `manage.py sync_grist`.
+New signups also trigger a WhatsApp alert (`catalog/whatsapp.py`) through the self-hosted
+whatsmeow bridge to the numbers in `LEAD_ALERT_WHATSAPP_TO`.
 
 ## Stack
 
